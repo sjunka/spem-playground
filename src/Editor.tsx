@@ -1,4 +1,5 @@
-import type { Fase, Tarea } from "./modelo";
+import type { Fase, Papel, Tarea } from "./modelo";
+import { aplicarRoles } from "./roles";
 import { ListaEditable } from "./ListaEditable";
 import { mover } from "./mover";
 import { SelectorIcono } from "./SelectorIcono";
@@ -42,7 +43,9 @@ export function Editor({ fase, onChange }: Props) {
         items={fase.roles.map((texto) => ({ texto, icono: "role" as const }))}
         placeholder="Rol"
         iconoNuevo="role"
-        onChange={(items) => parche({ roles: items.map((p) => p.texto) })}
+        onChange={(items) =>
+          onChange(aplicarRoles(fase, items.map((p) => p.texto)))
+        }
       />
 
       <section className="lista">
@@ -86,13 +89,72 @@ export function Editor({ fase, onChange }: Props) {
               valor={tarea.icono}
               onChange={(icono) => parcheTarea(i, { icono })}
             />
+            <details className="detalle-tarea">
+              <summary>Roles, Entrada y Salida de la Tarea</summary>
+              <section className="lista">
+                <h3>Roles de la Tarea</h3>
+                {fase.roles.length === 0 && (
+                  <p className="vacio">
+                    Declara Roles en la Fase para poder asignarlos.
+                  </p>
+                )}
+                {fase.roles.map((rol) => {
+                  const actual = tarea.roles.find((r) => r.rol === rol)?.papel ?? "";
+                  return (
+                    <label className="papel" key={rol}>
+                      <span>{rol}</span>
+                      <select
+                        value={actual}
+                        onChange={(e) => {
+                          const papel = e.target.value as Papel | "";
+                          const otros = tarea.roles.filter((r) => r.rol !== rol);
+                          parcheTarea(i, {
+                            roles: papel === "" ? otros : [...otros, { rol, papel }],
+                          });
+                        }}
+                      >
+                        <option value="">No participa</option>
+                        <option value="perform">Ejecuta «perform»</option>
+                        <option value="assist">Asiste «assist»</option>
+                      </select>
+                    </label>
+                  );
+                })}
+              </section>
+              <ListaEditable
+                titulo="Entrada de la Tarea"
+                placeholder="Producto de Trabajo consumido"
+                items={tarea.entrada}
+                iconoNuevo="workProduct"
+                conIcono
+                onChange={(entrada) => parcheTarea(i, { entrada })}
+              />
+              <ListaEditable
+                titulo="Salida de la Tarea"
+                placeholder="Producto de Trabajo producido"
+                items={tarea.salida}
+                iconoNuevo="workProduct"
+                conIcono
+                onChange={(salida) => parcheTarea(i, { salida })}
+              />
+            </details>
           </div>
         ))}
         <button
           className="anadir"
           onClick={() =>
             parche({
-              tareas: [...fase.tareas, { id: nuevoId(), nombre: "", icono: "task" }],
+              tareas: [
+                ...fase.tareas,
+                {
+                  id: nuevoId(),
+                  nombre: "",
+                  icono: "task",
+                  roles: [],
+                  entrada: [],
+                  salida: [],
+                },
+              ],
             })
           }
         >

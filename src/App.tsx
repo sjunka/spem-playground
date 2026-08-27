@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Diagrama } from "./Diagrama";
 import { Editor } from "./Editor";
 import { layout } from "./layout";
-import type { Fase, Modelo } from "./modelo";
+import type { Fase, Modelo, Vista } from "./modelo";
+import { NOMBRE_VISTA, VISTAS } from "./modelo";
 import { seed } from "./seed";
 import { cargar, guardar } from "./almacen";
 import { exportarJSON, exportarPDF, exportarPNG } from "./exportar";
@@ -21,6 +22,9 @@ const nuevaFase = (n: number): Fase => ({
 export function App() {
   const [modelo, setModelo] = useState<Modelo>(cargar);
   const [faseId, setFaseId] = useState(() => modelo.fases[0]?.id ?? "");
+  // Fase and Vista are independent: switching Fase keeps the Vista, so the four
+  // Fases can be walked while comparing the same figure.
+  const [vista, setVista] = useState<Vista>("resumen");
   const [aviso, setAviso] = useState<string | null>(null);
   const lienzoRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +32,7 @@ export function App() {
 
   const fase: Fase | undefined =
     modelo.fases.find((f) => f.id === faseId) ?? modelo.fases[0];
-  const diagrama = useMemo(() => (fase ? layout(fase) : null), [fase]);
+  const diagrama = useMemo(() => (fase ? layout(fase, vista) : null), [fase, vista]);
 
   const actualizarFase = (cambiada: Fase) =>
     setModelo({
@@ -59,7 +63,10 @@ export function App() {
 
   const exportarImagen = () => {
     const svg = lienzoRef.current?.querySelector("svg");
-    if (svg && fase) exportarPNG(svg as SVGSVGElement, fase.nombre).catch((e) => setAviso(e.message));
+    if (svg && fase)
+      exportarPNG(svg as SVGSVGElement, fase.nombre, vista).catch((e) =>
+        setAviso(e.message),
+      );
   };
 
   return (
@@ -119,6 +126,18 @@ export function App() {
         </div>
       </header>
 
+      <nav className="vistas chrome">
+        {VISTAS.map((v) => (
+          <button
+            key={v}
+            className={v === vista ? "tab activa" : "tab"}
+            onClick={() => setVista(v)}
+          >
+            {NOMBRE_VISTA[v]}
+          </button>
+        ))}
+      </nav>
+
       {aviso && (
         <p className="aviso chrome" onClick={() => setAviso(null)}>
           {aviso}
@@ -134,7 +153,7 @@ export function App() {
           )}
         </aside>
         <div className="lienzo" ref={lienzoRef}>
-          {diagrama && fase && <Diagrama l={diagrama} faseId={fase.id} />}
+          {diagrama && fase && <Diagrama l={diagrama} faseId={`${fase.id}-${vista}`} />}
         </div>
       </main>
     </div>

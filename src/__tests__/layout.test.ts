@@ -4,6 +4,15 @@ import { seed } from "../seed";
 import type { Fase } from "../modelo";
 
 const fases = seed().fases;
+/** A Tarea with the three v3 fields empty — what most geometry tests want. */
+const tarea = (id: string, nombre: string) => ({
+  id,
+  nombre,
+  icono: "task" as const,
+  roles: [],
+  entrada: [],
+  salida: [],
+});
 const fase1 = fases[0];
 const fase4 = fases[3];
 
@@ -19,7 +28,7 @@ const puntos = (d: string) => {
 };
 
 describe("layout", () => {
-  it("only Tareas become nodes (ADR-0002)", () => {
+  it("only Tareas become nodes in the Resumen view (ADR-0002, ADR-0006)", () => {
     for (const fase of fases) {
       expect(layout(fase).nodos).toHaveLength(fase.tareas.length);
     }
@@ -28,10 +37,10 @@ describe("layout", () => {
   });
 
   it("wraps a Tarea longer than the node and grows its height", () => {
-    const corta: Fase = { ...fase1, tareas: [{ id: "a", nombre: "Corto", icono: "task" as const }] };
+    const corta: Fase = { ...fase1, tareas: [tarea("a", "Corto")] };
     const larga: Fase = {
       ...fase1,
-      tareas: [{ id: "a", nombre: "Corto ".repeat(30).trim(), icono: "task" as const }],
+      tareas: [tarea("a", "Corto ".repeat(30).trim())],
     };
     const [nc] = layout(corta).nodos;
     const [nl] = layout(larga).nodos;
@@ -83,7 +92,7 @@ describe("layout", () => {
     const nombre = "Definir contratos de integracion ok";
     const [nodo] = layout({
       ...fase1,
-      tareas: [{ id: "a", nombre, icono: "task" as const }],
+      tareas: [tarea("a", nombre)],
     }).nodos;
     expect(nodo.lineas).toHaveLength(2);
     expect(nodo.textoX - nodo.x).toBe(16 + ESCALA.icono.nodo + 8);

@@ -41,13 +41,22 @@ export function Diagrama({ l, faseId }: Props) {
       role="img"
       aria-labelledby={`${faseId}-titulo ${faseId}-desc`}
     >
-      <title id={`${faseId}-titulo`}>{l.titulo.nombre}</title>
+      <title id={`${faseId}-titulo`}>{`${l.titulo.nombre} — ${l.titulo.subtitulo}`}</title>
       <desc id={`${faseId}-desc`}>
-        {`${l.titulo.objetivo.join(" ")} Entrada: ${
-          l.paneles.find((p) => p.tipo === "entrada")?.items.length ?? 0
-        } Productos de Trabajo. ${l.nodos.length} Tareas. Salida: ${
-          l.paneles.find((p) => p.tipo === "salida")?.items.length ?? 0
-        } Productos de Trabajo. Roles: ${l.chips.map((c) => c.texto).join(", ")}.`}
+        {[
+          `Vista ${l.titulo.subtitulo}.`,
+          l.titulo.objetivo.join(" "),
+          // Los paneles y los chips solo existen en el Resumen; las demás vistas
+          // se describen por sus nodos y sus aristas.
+          ...l.paneles.map(
+            (p) =>
+              `${p.tipo === "entrada" ? "Entrada" : "Salida"}: ${p.items.length} Productos de Trabajo.`,
+          ),
+          `${l.nodos.length} nodos y ${l.flechas.length} relaciones.`,
+          l.chips.length ? `Roles: ${l.chips.map((c) => c.texto).join(", ")}.` : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       </desc>
       <defs>
         <marker
@@ -75,6 +84,13 @@ export function Diagrama({ l, faseId }: Props) {
         className="t-titulo"
       >
         {l.titulo.nombre}
+      </text>
+      <text
+        x={l.titulo.subtituloX}
+        y={l.titulo.y + T.lh * 0.75}
+        className="t-vista"
+      >
+        {l.titulo.subtitulo}
       </text>
       {l.titulo.objetivo.map((linea, i) => (
         <text
@@ -180,6 +196,20 @@ export function Diagrama({ l, faseId }: Props) {
           ))}
         </g>
       ))}
+      {/* Los estereotipos van por encima de los nodos: una caja no los tapa. */}
+      {l.flechas.map((flecha, i) =>
+        flecha.etiqueta ? (
+          <text
+            key={i}
+            className="t-estereotipo"
+            x={flecha.etiqueta.x}
+            y={flecha.etiqueta.y}
+          >
+            {flecha.etiqueta.texto}
+          </text>
+        ) : null,
+      )}
+
       <g className="leyenda">
         <line
           x1={l.leyenda.x}

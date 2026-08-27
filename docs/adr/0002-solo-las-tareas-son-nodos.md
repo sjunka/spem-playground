@@ -1,5 +1,10 @@
 # Solo las Tareas se dibujan como nodos
 
+> **Reemplazado por [ADR-0006](0006-cuatro-vistas-por-fase.md).** Sigue vigente para la
+> vista de **Resumen**, que es la figura que este ADR diseñó. Las otras tres vistas sí
+> dibujan **Roles** y **Productos de Trabajo** como nodos, cada una con un subconjunto
+> del contenido; ADR-0006 explica por qué eso no rompe el presupuesto de densidad.
+
 Un diagrama SPEM literal dibuja cada Rol, Tarea y Producto de Trabajo como un nodo
 propio. Aplicado a nuestras Fases eso da entre 15 y 24 cajas por diagrama — la Fase 4
 sola tiene 24. La guía de diseño de diagramas del proyecto fija la densidad objetivo

@@ -1,6 +1,6 @@
 import estilos from "./estilos.css?inline";
 import fuentes from "./fuentes.css?inline";
-import type { Modelo } from "./modelo";
+import type { Modelo, Vista } from "./modelo";
 
 export const slug = (texto: string) =>
   texto
@@ -35,7 +35,15 @@ function serializar(svg: SVGSVGElement) {
   return new XMLSerializer().serializeToString(copia);
 }
 
-export async function exportarPNG(svg: SVGSVGElement, nombreFase: string) {
+/** One file per Fase and Vista: sixteen in the downloads folder, all distinguishable. */
+export const nombreFigura = (nombreFase: string, vista: Vista) =>
+  `${slug(nombreFase)}-${vista}`;
+
+export async function exportarPNG(
+  svg: SVGSVGElement,
+  nombreFase: string,
+  vista: Vista,
+) {
   const escala = 3;
   const w = svg.viewBox.baseVal.width;
   const h = svg.viewBox.baseVal.height;
@@ -58,7 +66,7 @@ export async function exportarPNG(svg: SVGSVGElement, nombreFase: string) {
   ctx.fillStyle = "#f5f5f5";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  descargar(canvas.toDataURL("image/png"), `${slug(nombreFase)}.png`);
+  descargar(canvas.toDataURL("image/png"), `${nombreFigura(nombreFase, vista)}.png`);
 }
 
 export function exportarPDF() {

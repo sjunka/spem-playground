@@ -81,6 +81,44 @@ aside.chrome {
 
 .lienzo { flex: 1; overflow: auto; padding: 24px; }
 
+/* Sub-pestañas de vista: la Fase manda arriba, la vista justo debajo. */
+nav.vistas {
+  display: flex;
+  gap: 6px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--card);
+}
+
+.detalle-tarea { margin-top: 8px; }
+.detalle-tarea summary {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+.detalle-tarea .lista { margin: 12px 0; }
+.papel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--ink);
+}
+.papel span { flex: 1; min-width: 0; }
+.papel select {
+  flex: none;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--muted);
+  font: inherit;
+}
+
 .editor label { display: block; margin-bottom: 12px; font-size: 12px; color: var(--muted); }
 .editor input, .editor textarea {
   display: block;
@@ -189,3 +227,23 @@ aside.chrome {
 }
 
 .vacio { color: var(--muted); }
+
+/* Los estereotipos normativos de SPEM 2.0 sobre las aristas de las vistas
+   nuevas. El trazo del papel por debajo del texto lo despega de la línea. */
+.t-estereotipo {
+  font-family: var(--mono);
+  font-size: 11px;
+  fill: var(--muted);
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 3px;
+}
+.t-vista {
+  font-family: var(--mono);
+  font-size: 12px;
+  fill: var(--muted);
+  text-anchor: end;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
