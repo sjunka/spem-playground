@@ -1,4 +1,4 @@
-import type { IdIcono } from "./iconos";
+import { ETIQUETAS, IDS_ICONO, type IdIcono } from "./iconos";
 import type { Fase, Producto } from "./modelo";
 
 export type DiagramLayout = {
@@ -51,6 +51,24 @@ export type DiagramLayout = {
     textoX: number;
   }[];
   flechas: { d: string; tipo: "consume" | "flujo" | "produce" }[];
+  /**
+   * Decodes the glyphs the figure actually uses. ADR-0005 ruled the legend out
+   * back when a single type of node existed; fifteen types retire that premise.
+   */
+  leyenda: {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    reglaY: number;
+    entradas: {
+      icono: IdIcono;
+      texto: string;
+      x: number;
+      y: number;
+      textoX: number;
+    }[];
+  };
 };
 
 // Geometry constants. Every number the SVG draws comes from here.
@@ -73,6 +91,11 @@ const ICONO_ITEM = 12;
 const ICONO_GAP = 8;
 const ICONO_GAP_CHIP = 6;
 const ICONO_GAP_ITEM = 6;
+const ICONO_LEYENDA = 14;
+const ICONO_GAP_LEYENDA = 6;
+const LEYENDA_SEP = 36; // gap between the last row of content and the rule
+const LEYENDA_FILA = 22;
+const LEYENDA_GAP = 24;
 
 const FS_TITULO = 32;
 const FS_OBJETIVO = 16;
@@ -80,6 +103,7 @@ const FS_NODO = 16;
 const FS_DESC = 12;
 const FS_ITEM = 12;
 const FS_CHIP = 12;
+const FS_LEYENDA = 12;
 
 const LH = 1.35;
 // The style guide wants every coordinate on a 4px grid, so line heights snap to it.
@@ -94,11 +118,13 @@ export const ESCALA = {
   nodo: { fs: FS_NODO, lh: line(FS_NODO), pad: NODE_PAD, separacion: 6 },
   desc: { fs: FS_DESC, lh: line(FS_DESC) },
   item: { fs: FS_ITEM, lh: line(FS_ITEM), pad: PANEL_PAD },
+  leyenda: { fs: FS_LEYENDA, fila: LEYENDA_FILA },
   icono: {
     titulo: ICONO_TITULO,
     chip: ICONO_CHIP,
     nodo: ICONO_NODO,
     item: ICONO_ITEM,
+    leyenda: ICONO_LEYENDA,
   },
 } as const;
 
@@ -289,8 +315,47 @@ export function layout(fase: Fase): DiagramLayout {
       ),
     });
 
-  const height =
-    Math.max(filaY + nodosH, ...paneles.map((p) => p.y + p.h), filaY) + PAD;
+  const fondo = Math.max(filaY + nodosH, ...paneles.map((p) => p.y + p.h), filaY);
 
-  return { width, height, titulo, chips, paneles, nodos, flechas };
+  // --- leyenda: solo los tipos que esta Fase usa, en el orden del set
+  const usados = new Set<IdIcono>([
+    "phase",
+    ...(chips.length ? (["role"] as IdIcono[]) : []),
+    ...fase.tareas.map((t) => t.icono),
+    ...fase.entrada.map((p) => p.icono),
+    ...fase.salida.map((p) => p.icono),
+  ]);
+  const leyendaY = fondo + LEYENDA_SEP;
+  const entradas: DiagramLayout["leyenda"]["entradas"] = [];
+  let lx = PAD;
+  let ly = leyendaY;
+  for (const icono of IDS_ICONO.filter((id) => usados.has(id))) {
+    const texto = ETIQUETAS[icono];
+    const w =
+      ICONO_LEYENDA + ICONO_GAP_LEYENDA + textWidth(texto, FS_LEYENDA);
+    if (lx > PAD && lx + w > PAD + contentW) {
+      lx = PAD;
+      ly += LEYENDA_FILA;
+    }
+    entradas.push({
+      icono,
+      texto,
+      x: lx,
+      y: ly,
+      textoX: lx + ICONO_LEYENDA + ICONO_GAP_LEYENDA,
+    });
+    lx += w + LEYENDA_GAP;
+  }
+  const leyenda = {
+    x: PAD,
+    y: leyendaY,
+    w: contentW,
+    h: ly + LEYENDA_FILA - leyendaY,
+    reglaY: cuadricula(leyendaY - 16),
+    entradas,
+  };
+
+  const height = leyenda.y + leyenda.h + PAD;
+
+  return { width, height, titulo, chips, paneles, nodos, flechas, leyenda };
 }

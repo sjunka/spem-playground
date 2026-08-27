@@ -1,7 +1,15 @@
 import { CAJA, ICONOS, type IdIcono } from "./iconos";
 import { ESCALA, type DiagramLayout } from "./layout";
 
-const { titulo: T, objetivo: O, nodo: N, desc: D, item: I, icono: IC } = ESCALA;
+const {
+  titulo: T,
+  objetivo: O,
+  nodo: N,
+  desc: D,
+  item: I,
+  icono: IC,
+  leyenda: L,
+} = ESCALA;
 
 type Props = { l: DiagramLayout; faseId: string };
 
@@ -172,6 +180,27 @@ export function Diagrama({ l, faseId }: Props) {
           ))}
         </g>
       ))}
+      <g className="leyenda">
+        <line
+          x1={l.leyenda.x}
+          y1={l.leyenda.reglaY}
+          x2={l.leyenda.x + l.leyenda.w}
+          y2={l.leyenda.reglaY}
+        />
+        {l.leyenda.entradas.map((e) => (
+          <g key={e.icono}>
+            <Icono
+              id={e.icono}
+              x={e.x}
+              y={e.y + (L.fila - IC.leyenda) / 2 - 4}
+              tam={IC.leyenda}
+            />
+            <text x={e.textoX} y={e.y + L.fila / 2 + 1} className="t-leyenda">
+              {e.texto}
+            </text>
+          </g>
+        ))}
+      </g>
     </svg>
   );
 }

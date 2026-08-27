@@ -152,6 +152,47 @@ describe("layout", () => {
     expect(l.flechas.some((f) => f.tipo === "consume")).toBe(false);
   });
 
+  it("lists in the legend exactly the types the Fase uses, and no others", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      const usados = new Set<string>([
+        "phase",
+        ...(fase.roles.length ? ["role"] : []),
+        ...fase.tareas.map((t) => t.icono),
+        ...fase.entrada.map((p) => p.icono),
+        ...fase.salida.map((p) => p.icono),
+      ]);
+      expect(new Set(l.leyenda.entradas.map((e) => e.icono))).toEqual(usados);
+    }
+  });
+
+  it("names each legend entry in Spanish", () => {
+    const l = layout(fase1);
+    const fase = l.leyenda.entradas.find((e) => e.icono === "phase");
+    expect(fase?.texto).toBe("Fase");
+  });
+
+  it("keeps the legend below everything else and inside the canvas", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      const fondo = Math.max(
+        ...l.nodos.map((n) => n.y + n.h),
+        ...l.paneles.map((p) => p.y + p.h),
+      );
+      expect(l.leyenda.y).toBeGreaterThan(fondo);
+      for (const e of l.leyenda.entradas) {
+        expect(e.x).toBeGreaterThanOrEqual(0);
+        expect(e.textoX).toBeLessThanOrEqual(l.width);
+      }
+      expect(l.leyenda.y + l.leyenda.h).toBeLessThanOrEqual(l.height);
+    }
+  });
+
+  it("still shows the Fase type in the legend of an otherwise empty Fase", () => {
+    const l = layout({ ...fase1, roles: [], tareas: [], entrada: [], salida: [] });
+    expect(l.leyenda.entradas.map((e) => e.icono)).toEqual(["phase"]);
+  });
+
   it("still lays out a Fase with no Tareas", () => {
     const l = layout({ ...fase1, tareas: [] });
     expect(l.nodos).toHaveLength(0);

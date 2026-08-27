@@ -132,6 +132,9 @@ aside.chrome {
 .t-nodo { font-size: 16px; font-weight: 500; }
 .t-desc { font-size: 12.5px; fill: var(--muted); }
 .t-item { font-size: 13px; }
+.leyenda { color: var(--muted); }
+.leyenda line { stroke: var(--rule); }
+.t-leyenda { font-size: 12px; fill: var(--muted); }
 .t-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; fill: var(--muted); }
 
 .icono {
