@@ -12,14 +12,14 @@ is screen-only and must leave the exported still frame untouched.
 
 **Status:** ready-for-agent
 
-- [ ] Nodes enter with opacity and a small translate, staggered so they arrive in sequence
-- [ ] Arrows draw by animating their stroke, from unstroked to complete
-- [ ] Switching **Fase** transitions rather than cutting
-- [ ] Adding a **Tarea** animates only the new node, not the whole diagram
-- [ ] No animation library is added; the implementation is CSS
-- [ ] PNG export produces the fully-settled diagram, never a mid-animation frame
-- [ ] PDF export produces the fully-settled diagram, never a mid-animation frame
-- [ ] Motion respects `prefers-reduced-motion` and is suppressed when the user has asked
+- [x] Nodes enter with opacity and a small translate, staggered so they arrive in sequence
+- [x] Arrows draw by animating their stroke, from unstroked to complete
+- [x] Switching **Fase** transitions rather than cutting
+- [x] Adding a **Tarea** animates only the new node, not the whole diagram
+- [x] No animation library is added; the implementation is CSS
+- [x] PNG export produces the fully-settled diagram, never a mid-animation frame
+- [x] PDF export produces the fully-settled diagram, never a mid-animation frame
+- [x] Motion respects `prefers-reduced-motion` and is suppressed when the user has asked
       for reduced motion
 - [ ] Work happens on a branch named `ticket/06-animacion-css`; it is merged into `main`
       once all criteria pass and tests are green

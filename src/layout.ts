@@ -27,25 +27,28 @@ export type DiagramLayout = {
 
 // Geometry constants. Every number the SVG draws comes from here.
 const PAD = 44;
-const PANEL_W = 250;
+const PANEL_W = 248;
 const NODE_W = 340;
 const GAP_X = 76;
-const GAP_Y = 26;
-const NODE_PAD = 14;
+const GAP_Y = 24;
+const NODE_PAD = 16;
 const PANEL_PAD = 16;
 const CHIP_PAD = 12;
 const CHIP_H = 24;
 const CHIP_GAP = 8;
 
-const FS_TITULO = 34;
-const FS_OBJETIVO = 15;
+const FS_TITULO = 32;
+const FS_OBJETIVO = 16;
 const FS_NODO = 16;
-const FS_DESC = 12.5;
-const FS_ITEM = 13;
+const FS_DESC = 12;
+const FS_ITEM = 12;
 const FS_CHIP = 12;
 
 const LH = 1.35;
-const line = (fs: number) => Math.round(fs * LH);
+// The style guide wants every coordinate on a 4px grid, so line heights snap to it.
+const cuadricula = (n: number) => Math.round(n / 4) * 4;
+const line = (fs: number) => cuadricula(fs * LH);
+const RADIO = 8; // quarter-arc radius of every connector bend
 
 /** The renderer draws with these; it computes no geometry of its own. */
 export const ESCALA = {
@@ -93,7 +96,9 @@ export function layout(fase: Fase): DiagramLayout {
   let cy = y;
   for (const rol of fase.roles) {
     // Chips are set in Geist Mono, which is wider per character than Geist.
-    const w = Math.min(rol.length * FS_CHIP * 0.62 + CHIP_PAD * 2, contentW);
+    const w = cuadricula(
+      Math.min(rol.length * FS_CHIP * 0.62 + CHIP_PAD * 2, contentW),
+    );
     if (cx > PAD && cx + w > PAD + contentW) {
       cx = PAD;
       cy += CHIP_H + CHIP_GAP;
@@ -113,10 +118,11 @@ export function layout(fase: Fase): DiagramLayout {
     const descripcion = tarea.descripcion
       ? wrap(tarea.descripcion, FS_DESC, nodoTextW)
       : [];
-    const h =
+    const h = cuadricula(
       NODE_PAD * 2 +
-      lineas.length * line(FS_NODO) +
-      (descripcion.length ? 6 + descripcion.length * line(FS_DESC) : 0);
+        lineas.length * line(FS_NODO) +
+        (descripcion.length ? 8 + descripcion.length * line(FS_DESC) : 0),
+    );
     const nodo = {
       id: tarea.id,
       lineas,
@@ -141,7 +147,7 @@ export function layout(fase: Fase): DiagramLayout {
       py += lineas.length * line(FS_ITEM) + 8;
       return puesto;
     });
-    const h = py - 8 + PANEL_PAD;
+    const h = cuadricula(py - 8 + PANEL_PAD);
     return { tipo, x, y: filaY, w: PANEL_W, h, items: puestos };
   };
 
@@ -156,19 +162,31 @@ export function layout(fase: Fase): DiagramLayout {
   const primero = nodos[0];
   const ultimo = nodos[nodos.length - 1];
 
-  const curva = (x1: number, y1: number, x2: number, y2: number) => {
-    const mx = (x1 + x2) / 2;
-    return `M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`;
+  /** Rounded right-angle elbow: out, turn, across, turn, in. Never a diagonal. */
+  const codo = (x1: number, y1: number, x2: number, y2: number) => {
+    if (Math.abs(y2 - y1) < RADIO * 2) return `M ${x1} ${y1} L ${x2} ${y1}`;
+    const mx = cuadricula((x1 + x2) / 2);
+    const baja = y2 > y1 ? 1 : -1;
+    const a = `A ${RADIO} ${RADIO} 0 0 ${baja > 0 ? 1 : 0} ${mx} ${y1 + RADIO * baja}`;
+    const b = `A ${RADIO} ${RADIO} 0 0 ${baja > 0 ? 0 : 1} ${mx + RADIO} ${y2}`;
+    return [
+      `M ${x1} ${y1}`,
+      `L ${mx - RADIO} ${y1}`,
+      a,
+      `L ${mx} ${y2 - RADIO * baja}`,
+      b,
+      `L ${x2} ${y2}`,
+    ].join(" ");
   };
 
   if (entrada && primero)
     flechas.push({
       tipo: "consume",
-      d: curva(
+      d: codo(
         entrada.x + entrada.w,
-        entrada.y + entrada.h / 2,
+        cuadricula(entrada.y + entrada.h / 2),
         primero.x,
-        primero.y + primero.h / 2,
+        cuadricula(primero.y + primero.h / 2),
       ),
     });
 
@@ -177,6 +195,7 @@ export function layout(fase: Fase): DiagramLayout {
     const b = nodos[i + 1];
     flechas.push({
       tipo: "flujo",
+      // Same x on both ends: a plain straight segment is what the guide asks for.
       d: `M ${a.x + a.w / 2} ${a.y + a.h} L ${b.x + b.w / 2} ${b.y}`,
     });
   }
@@ -184,11 +203,11 @@ export function layout(fase: Fase): DiagramLayout {
   if (salida && ultimo)
     flechas.push({
       tipo: "produce",
-      d: curva(
+      d: codo(
         ultimo.x + ultimo.w,
-        ultimo.y + ultimo.h / 2,
+        cuadricula(ultimo.y + ultimo.h / 2),
         salida.x,
-        salida.y + salida.h / 2,
+        cuadricula(salida.y + salida.h / 2),
       ),
     });
 

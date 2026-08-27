@@ -16,22 +16,22 @@ Editor chrome is in Spanish throughout.
 
 **Status:** ready-for-agent
 
-- [ ] The panel shows the selected **Fase**'s nombre and objetivo as editable text, and
+- [x] The panel shows the selected **Fase**'s nombre and objetivo as editable text, and
       edits appear in the diagram title
-- [ ] **Roles** can be added, edited, removed and reordered; the chip band follows
-- [ ] **Tareas** can be added, edited, removed and reordered; the node column follows and
+- [x] **Roles** can be added, edited, removed and reordered; the chip band follows
+- [x] **Tareas** can be added, edited, removed and reordered; the node column follows and
       reordering changes the visual sequence
-- [ ] A **Tarea** can be given an optional descripción, which renders under its name in the
+- [x] A **Tarea** can be given an optional descripción, which renders under its name in the
       node
-- [ ] **Entrada** items can be added, edited, removed and reordered; the panel follows
-- [ ] **Salida** items can be added, edited, removed and reordered; the panel follows
-- [ ] A new **Fase** can be added and an existing one deleted
-- [ ] The diagram redraws on every keystroke without a visible stall
-- [ ] All editor labels and buttons are in Spanish
-- [ ] A **Fase** with an empty **Entrada** renders no **Entrada** panel and no dangling
+- [x] **Entrada** items can be added, edited, removed and reordered; the panel follows
+- [x] **Salida** items can be added, edited, removed and reordered; the panel follows
+- [x] A new **Fase** can be added and an existing one deleted
+- [x] The diagram redraws on every keystroke without a visible stall
+- [x] All editor labels and buttons are in Spanish
+- [x] A **Fase** with an empty **Entrada** renders no **Entrada** panel and no dangling
       arrow, rather than a zero-height box
-- [ ] Layout test: a **Fase** with an empty **Entrada** produces no **Entrada** panel and no
+- [x] Layout test: a **Fase** with an empty **Entrada** produces no **Entrada** panel and no
       orphan arrow
-- [ ] Layout test: a **Fase** with no **Tareas** still produces a valid layout
+- [x] Layout test: a **Fase** with no **Tareas** still produces a valid layout
 - [ ] Work happens on a branch named `ticket/03-panel-de-edicion`; it is merged into `main`
       once all criteria pass and tests are green

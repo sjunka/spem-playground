@@ -73,3 +73,6 @@ hardware real en el bucle.
 **Gemelo digital**:
 Réplica simulada del terreno y sus dispositivos, usada para verificar incrementos
 antes de desplegar en campo.
+
+Los defaults tipográficos y de color del skill `diagram-design` se aceptan sin
+personalizar. Ver ADR-0005.

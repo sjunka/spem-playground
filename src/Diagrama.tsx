@@ -15,8 +15,16 @@ export function Diagrama({ l, faseId }: Props) {
       width={l.width}
       height={l.height}
       role="img"
-      aria-label={l.titulo.nombre}
+      aria-labelledby={`${faseId}-titulo ${faseId}-desc`}
     >
+      <title id={`${faseId}-titulo`}>{l.titulo.nombre}</title>
+      <desc id={`${faseId}-desc`}>
+        {`${l.titulo.objetivo.join(" ")} Entrada: ${
+          l.paneles.find((p) => p.tipo === "entrada")?.items.length ?? 0
+        } Productos de Trabajo. ${l.nodos.length} Tareas. Salida: ${
+          l.paneles.find((p) => p.tipo === "salida")?.items.length ?? 0
+        } Productos de Trabajo. Roles: ${l.chips.map((c) => c.texto).join(", ")}.`}
+      </desc>
       <defs>
         <marker
           id="punta"

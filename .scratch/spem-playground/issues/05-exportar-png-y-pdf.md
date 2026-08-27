@@ -16,16 +16,16 @@ directly.
 
 **Status:** ready-for-agent
 
-- [ ] "Exportar PNG" downloads a PNG of the current **Fase**
-- [ ] The PNG is rendered at 3× the layout dimensions and stays sharp when printed
-- [ ] Fonts are inlined into the serialised diagram so the PNG does not fall back to a
+- [x] "Exportar PNG" downloads a PNG of the current **Fase**
+- [x] The PNG is rendered at 3× the layout dimensions and stays sharp when printed
+- [x] Fonts are inlined into the serialised diagram so the PNG does not fall back to a
       system typeface
-- [ ] "Exportar PDF" opens the print dialog showing only the diagram, at page size
-- [ ] Neither export includes the editing panel, the phase tabs, or any button
-- [ ] Exported filenames derive from the **Fase** name, slugified, so four exports do not
+- [x] "Exportar PDF" opens the print dialog showing only the diagram, at page size
+- [x] Neither export includes the editing panel, the phase tabs, or any button
+- [x] Exported filenames derive from the **Fase** name, slugified, so four exports do not
       collide
-- [ ] The exported image is visually identical to the on-screen preview
-- [ ] No new runtime dependency is added for either path
-- [ ] All four **Fases** export successfully, **Fase 4** included
+- [x] The exported image is visually identical to the on-screen preview
+- [x] No new runtime dependency is added for either path
+- [x] All four **Fases** export successfully, **Fase 4** included
 - [ ] Work happens on a branch named `ticket/05-exportar-png-y-pdf`; it is merged into
       `main` once all criteria pass and tests are green
