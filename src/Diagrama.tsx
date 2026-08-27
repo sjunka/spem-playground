@@ -104,18 +104,26 @@ export function Diagrama({ l, faseId }: Props) {
           >
             {panel.tipo === "entrada" ? "ENTRADA" : "SALIDA"}
           </text>
-          {panel.items.map((item, i) =>
-            item.lineas.map((linea, j) => (
-              <text
-                key={`${i}-${j}`}
-                x={panel.x + I.pad}
-                y={panel.y + item.y + I.lh * (j + 0.7)}
-                className="t-item"
-              >
-                {linea}
-              </text>
-            )),
-          )}
+          {panel.items.map((item, i) => (
+            <g key={i}>
+              <Icono
+                id={item.icono}
+                x={item.iconoX}
+                y={panel.y + item.y + item.iconoDy}
+                tam={IC.item}
+              />
+              {item.lineas.map((linea, j) => (
+                <text
+                  key={j}
+                  x={item.textoX}
+                  y={panel.y + item.y + I.lh * (j + 0.7)}
+                  className="t-item"
+                >
+                  {linea}
+                </text>
+              ))}
+            </g>
+          ))}
         </g>
       ))}
 
@@ -135,10 +143,11 @@ export function Diagrama({ l, faseId }: Props) {
           style={{ "--i": i } as React.CSSProperties}
         >
           <rect x={nodo.x} y={nodo.y} width={nodo.w} height={nodo.h} rx={4} />
+          <Icono id={nodo.icono} x={nodo.iconoX} y={nodo.iconoY} tam={IC.nodo} />
           {nodo.lineas.map((linea, j) => (
             <text
               key={j}
-              x={nodo.x + N.pad}
+              x={nodo.textoX}
               y={nodo.y + N.pad + N.lh * (j + 0.75)}
               className="t-nodo"
             >
@@ -148,7 +157,7 @@ export function Diagrama({ l, faseId }: Props) {
           {nodo.descripcion.map((linea, j) => (
             <text
               key={`d${j}`}
-              x={nodo.x + N.pad}
+              x={nodo.textoX}
               y={
                 nodo.y +
                 N.pad +

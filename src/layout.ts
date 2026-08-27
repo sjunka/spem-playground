@@ -1,3 +1,4 @@
+import type { IdIcono } from "./iconos";
 import type { Fase, Producto } from "./modelo";
 
 export type DiagramLayout = {
@@ -26,7 +27,15 @@ export type DiagramLayout = {
     y: number;
     w: number;
     h: number;
-    items: { lineas: string[]; y: number }[];
+    items: {
+      lineas: string[];
+      /** Relative to the panel's own y, as is `iconoDy`. */
+      y: number;
+      icono: IdIcono;
+      iconoX: number;
+      iconoDy: number;
+      textoX: number;
+    }[];
   }[];
   nodos: {
     id: string;
@@ -36,6 +45,10 @@ export type DiagramLayout = {
     y: number;
     w: number;
     h: number;
+    icono: IdIcono;
+    iconoX: number;
+    iconoY: number;
+    textoX: number;
   }[];
   flechas: { d: string; tipo: "consume" | "flujo" | "produce" }[];
 };
@@ -55,8 +68,11 @@ const CHIP_GAP = 8;
 // Icon channel: the glyph box plus the gap before the text it labels.
 const ICONO_TITULO = 26;
 const ICONO_CHIP = 12;
+const ICONO_NODO = 16;
+const ICONO_ITEM = 12;
 const ICONO_GAP = 8;
 const ICONO_GAP_CHIP = 6;
+const ICONO_GAP_ITEM = 6;
 
 const FS_TITULO = 32;
 const FS_OBJETIVO = 16;
@@ -78,7 +94,12 @@ export const ESCALA = {
   nodo: { fs: FS_NODO, lh: line(FS_NODO), pad: NODE_PAD, separacion: 6 },
   desc: { fs: FS_DESC, lh: line(FS_DESC) },
   item: { fs: FS_ITEM, lh: line(FS_ITEM), pad: PANEL_PAD },
-  icono: { titulo: ICONO_TITULO, chip: ICONO_CHIP },
+  icono: {
+    titulo: ICONO_TITULO,
+    chip: ICONO_CHIP,
+    nodo: ICONO_NODO,
+    item: ICONO_ITEM,
+  },
 } as const;
 
 // Character-width approximation — keeps layout pure (no DOM measurement).
@@ -153,7 +174,8 @@ export function layout(fase: Fase): DiagramLayout {
   const filaY = y;
 
   // --- nodos de Tarea
-  const nodoTextW = NODE_W - NODE_PAD * 2;
+  const canalNodo = ICONO_NODO + ICONO_GAP;
+  const nodoTextW = NODE_W - NODE_PAD * 2 - canalNodo;
   let ny = filaY;
   const nodos = fase.tareas.map((tarea) => {
     const lineas = wrap(tarea.nombre, FS_NODO, nodoTextW);
@@ -173,6 +195,11 @@ export function layout(fase: Fase): DiagramLayout {
       y: ny,
       w: NODE_W,
       h,
+      icono: tarea.icono,
+      iconoX: tareasX + NODE_PAD,
+      // Sits on the first line of the name, not on the top edge of the box.
+      iconoY: ny + NODE_PAD + cuadricula((line(FS_NODO) - ICONO_NODO) / 2),
+      textoX: tareasX + NODE_PAD + canalNodo,
     };
     ny += h + GAP_Y;
     return nodo;
@@ -181,11 +208,20 @@ export function layout(fase: Fase): DiagramLayout {
 
   // --- paneles de Entrada y Salida
   const panel = (tipo: "entrada" | "salida", items: Producto[], x: number) => {
-    const textW = PANEL_W - PANEL_PAD * 2;
+    const canalItem = ICONO_ITEM + ICONO_GAP_ITEM;
+    const textW = PANEL_W - PANEL_PAD * 2 - canalItem;
     let py = PANEL_PAD + line(FS_ITEM);
     const puestos = items.map((item) => {
-      const lineas = wrap(`— ${item.texto}`, FS_ITEM, textW);
-      const puesto = { lineas, y: py };
+      // The glyph replaces the em dash that used to introduce each line.
+      const lineas = wrap(item.texto, FS_ITEM, textW);
+      const puesto = {
+        lineas,
+        y: py,
+        icono: item.icono,
+        iconoX: x + PANEL_PAD,
+        iconoDy: Math.round((line(FS_ITEM) - ICONO_ITEM) / 2),
+        textoX: x + PANEL_PAD + canalItem,
+      };
       py += lineas.length * line(FS_ITEM) + 8;
       return puesto;
     });

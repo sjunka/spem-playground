@@ -133,9 +133,11 @@ aside.chrome {
 .chip rect { fill: none; stroke: var(--rule); }
 .chip text { font-family: var(--mono); font-size: 12px; fill: var(--muted); text-anchor: middle; }
 
+.panel { color: var(--muted); }
 .panel rect { fill: var(--card); stroke: var(--rule); }
 .panel-salida rect { stroke: var(--accent); }
 
+.nodo { color: var(--ink); }
 .nodo rect { fill: var(--card); stroke: var(--ink); }
 .flecha { fill: none; stroke: var(--muted); stroke-width: 1.5; }
 

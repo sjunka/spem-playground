@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { layout } from "../layout";
+import { ESCALA, layout } from "../layout";
 import { seed } from "../seed";
 import type { Fase } from "../modelo";
 
@@ -47,6 +47,46 @@ describe("layout", () => {
         expect(nodos[i].y + nodos[i].h).toBeLessThanOrEqual(nodos[i + 1].y);
       }
     }
+  });
+
+  it("gives every Tarea node an icon channel that the text never crosses", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      for (const [i, nodo] of l.nodos.entries()) {
+        expect(nodo.icono).toBe(fase.tareas[i].icono);
+        expect(nodo.iconoX).toBeGreaterThanOrEqual(nodo.x);
+        expect(nodo.iconoX + ESCALA.icono.nodo).toBeLessThanOrEqual(nodo.textoX);
+        expect(nodo.textoX).toBeLessThan(nodo.x + nodo.w);
+        expect(nodo.iconoY).toBeGreaterThanOrEqual(nodo.y);
+        expect(nodo.iconoY + ESCALA.icono.nodo).toBeLessThanOrEqual(nodo.y + nodo.h);
+      }
+    }
+  });
+
+  it("gives every Entrada and Salida item an icon channel of its own", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      for (const panel of l.paneles) {
+        const origen = panel.tipo === "entrada" ? fase.entrada : fase.salida;
+        for (const [i, item] of panel.items.entries()) {
+          expect(item.icono).toBe(origen[i].icono);
+          expect(item.iconoX).toBeGreaterThanOrEqual(panel.x);
+          expect(item.iconoX + ESCALA.icono.item).toBeLessThanOrEqual(item.textoX);
+          expect(item.textoX).toBeLessThan(panel.x + panel.w);
+        }
+      }
+    }
+  });
+
+  it("wraps a Tarea name that only fit while the icon had no channel", () => {
+    // 35 characters: inside the old text width of the box, past the narrowed one.
+    const nombre = "Definir contratos de integracion ok";
+    const [nodo] = layout({
+      ...fase1,
+      tareas: [{ id: "a", nombre, icono: "task" as const }],
+    }).nodos;
+    expect(nodo.lineas).toHaveLength(2);
+    expect(nodo.textoX - nodo.x).toBe(16 + ESCALA.icono.nodo + 8);
   });
 
   it("puts Entrada left of the Tareas column and Salida right of it", () => {
