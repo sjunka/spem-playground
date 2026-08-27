@@ -1,0 +1,160 @@
+:root {
+  --paper: #f5f5f5;
+  --ink: #2d3142;
+  --accent: #eb6c36;
+  --muted: #6b6f80;
+  --rule: #d6d7de;
+  --card: #ffffff;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: Geist, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+}
+
+.app { display: flex; flex-direction: column; height: 100vh; }
+
+header.chrome {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--card);
+}
+
+.fases, .acciones { display: flex; flex-wrap: wrap; gap: 6px; }
+
+button, .boton-archivo {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled), .boton-archivo:hover { border-color: var(--ink); }
+button:disabled { opacity: 0.35; cursor: default; }
+
+.tab.activa {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  font-weight: 500;
+}
+
+.boton-archivo input { display: none; }
+button.peligro:hover { border-color: var(--accent); color: var(--accent); }
+
+.aviso {
+  margin: 0;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: #fdf0ea;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+main { display: flex; flex: 1; min-height: 0; }
+
+aside.chrome {
+  width: 360px;
+  flex: none;
+  overflow-y: auto;
+  padding: 16px;
+  border-right: 1px solid var(--rule);
+  background: var(--card);
+}
+
+.lienzo { flex: 1; overflow: auto; padding: 24px; }
+
+.editor label { display: block; margin-bottom: 12px; font-size: 12px; color: var(--muted); }
+.editor input, .editor textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+}
+.editor input:focus, .editor textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+.lista { margin: 18px 0; }
+.lista h3 {
+  margin: 0 0 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.fila { display: flex; gap: 4px; margin-bottom: 4px; }
+.fila input { flex: 1; min-width: 0; }
+.fila button { padding: 4px 7px; }
+.tarea { margin-bottom: 10px; }
+.tarea .descripcion { font-size: 12px; color: var(--muted); }
+.anadir { margin-top: 4px; color: var(--muted); }
+
+/* --- diagrama --- */
+.diagrama { max-width: 100%; height: auto; font-family: var(--sans); fill: var(--ink); }
+.t-titulo { font-family: var(--serif); font-size: 34px; fill: var(--accent); }
+.t-objetivo { font-size: 15px; fill: var(--muted); }
+.t-nodo { font-size: 16px; font-weight: 500; }
+.t-desc { font-size: 12.5px; fill: var(--muted); }
+.t-item { font-size: 13px; }
+.t-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; fill: var(--muted); }
+
+.chip rect { fill: none; stroke: var(--rule); }
+.chip text { font-family: var(--mono); font-size: 12px; fill: var(--muted); text-anchor: middle; }
+
+.panel rect { fill: var(--card); stroke: var(--rule); }
+.panel-salida rect { stroke: var(--accent); }
+
+.nodo rect { fill: var(--card); stroke: var(--ink); }
+.flecha { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+
+/* Entry motion: nodes settle in sequence, arrows draw themselves. */
+@media (prefers-reduced-motion: no-preference) {
+  .nodo {
+    animation: entrar 0.34s ease-out backwards;
+    animation-delay: calc(var(--i) * 60ms);
+  }
+  .flecha {
+    stroke-dasharray: 900;
+    animation: trazar 0.7s ease-out backwards;
+  }
+  @keyframes entrar {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes trazar {
+    from { stroke-dashoffset: 900; }
+    to { stroke-dashoffset: 0; }
+  }
+}
+
+/* Print / PDF: only the diagram, at page size. */
+@media print {
+  @page { size: landscape; margin: 12mm; }
+  .chrome { display: none !important; }
+  body, .app, main, .lienzo { display: block; height: auto; overflow: visible; padding: 0; }
+  .lienzo { padding: 0; }
+  .diagrama { width: 100%; height: auto; }
+  .nodo, .flecha { animation: none !important; stroke-dashoffset: 0; opacity: 1; }
+}
