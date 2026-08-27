@@ -1,1 +1,0 @@
-{"root":["./src/app.tsx","./src/diagrama.tsx","./src/editor.tsx","./src/listaeditable.tsx","./src/almacen.ts","./src/exportar.ts","./src/layout.ts","./src/main.tsx","./src/modelo.ts","./src/seed.ts","./src/validacion.ts","./src/__tests__/exportar.test.ts","./src/__tests__/layout.test.ts","./src/__tests__/validacion.test.ts","./vite.config.ts"],"version":"5.9.3"}

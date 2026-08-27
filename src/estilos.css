@@ -158,3 +158,5 @@ aside.chrome {
   .diagrama { width: 100%; height: auto; }
   .nodo, .flecha { animation: none !important; stroke-dashoffset: 0; opacity: 1; }
 }
+
+.vacio { color: var(--muted); }

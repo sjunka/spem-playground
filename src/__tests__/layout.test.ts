@@ -8,7 +8,7 @@ const fase1 = fases[0];
 const fase4 = fases[3];
 
 const panel = (f: Fase, rol: "entrada" | "salida") =>
-  layout(f).paneles.find((p) => p.rol === rol);
+  layout(f).paneles.find((p) => p.tipo === rol);
 
 const puntos = (d: string) => {
   const nums = d.match(/-?\d+(\.\d+)?/g)!.map(Number);
@@ -91,8 +91,8 @@ describe("layout", () => {
   it("anchors consume and produce arrows on a panel edge and a node edge", () => {
     for (const fase of fases) {
       const l = layout(fase);
-      const entrada = l.paneles.find((p) => p.rol === "entrada")!;
-      const salida = l.paneles.find((p) => p.rol === "salida")!;
+      const entrada = l.paneles.find((p) => p.tipo === "entrada")!;
+      const salida = l.paneles.find((p) => p.tipo === "salida")!;
       const primero = l.nodos[0];
       const ultimo = l.nodos[l.nodos.length - 1];
 
@@ -108,7 +108,7 @@ describe("layout", () => {
 
   it("drops the Entrada panel and its arrow when Entrada is empty", () => {
     const l = layout({ ...fase1, entrada: [] });
-    expect(l.paneles.find((p) => p.rol === "entrada")).toBeUndefined();
+    expect(l.paneles.find((p) => p.tipo === "entrada")).toBeUndefined();
     expect(l.flechas.some((f) => f.tipo === "consume")).toBe(false);
   });
 

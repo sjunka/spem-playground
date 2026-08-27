@@ -1,5 +1,6 @@
 import type { Fase, Tarea } from "./modelo";
 import { ListaEditable } from "./ListaEditable";
+import { mover } from "./mover";
 
 type Props = { fase: Fase; onChange: (fase: Fase) => void };
 
@@ -13,13 +14,8 @@ export function Editor({ fase, onChange }: Props) {
       tareas: fase.tareas.map((t, j) => (j === i ? { ...t, ...cambio } : t)),
     });
 
-  const moverTarea = (i: number, delta: number) => {
-    const destino = i + delta;
-    if (destino < 0 || destino >= fase.tareas.length) return;
-    const copia = [...fase.tareas];
-    [copia[i], copia[destino]] = [copia[destino], copia[i]];
-    parche({ tareas: copia });
-  };
+  const moverTarea = (i: number, delta: number) =>
+    parche({ tareas: mover(fase.tareas, i, delta) });
 
   return (
     <div className="editor">

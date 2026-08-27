@@ -22,12 +22,13 @@ export function App() {
   const [modelo, setModelo] = useState<Modelo>(cargar);
   const [faseId, setFaseId] = useState(() => modelo.fases[0]?.id ?? "");
   const [aviso, setAviso] = useState<string | null>(null);
-  const svgRef = useRef<HTMLDivElement>(null);
+  const lienzoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => guardar(modelo), [modelo]);
 
-  const fase = modelo.fases.find((f) => f.id === faseId) ?? modelo.fases[0];
-  const l = useMemo(() => (fase ? layout(fase) : null), [fase]);
+  const fase: Fase | undefined =
+    modelo.fases.find((f) => f.id === faseId) ?? modelo.fases[0];
+  const diagrama = useMemo(() => (fase ? layout(fase) : null), [fase]);
 
   const actualizarFase = (cambiada: Fase) =>
     setModelo({
@@ -57,7 +58,7 @@ export function App() {
   };
 
   const exportarImagen = () => {
-    const svg = svgRef.current?.querySelector("svg");
+    const svg = lienzoRef.current?.querySelector("svg");
     if (svg && fase) exportarPNG(svg as SVGSVGElement, fase.nombre).catch((e) => setAviso(e.message));
   };
 
@@ -104,13 +105,13 @@ export function App() {
           <button onClick={restablecer}>Restablecer</button>
           <button
             className="peligro"
-            disabled={!fase || modelo.fases.length <= 1}
+            disabled={!fase}
             onClick={() => {
               if (!fase) return;
               if (!confirm(`¿Eliminar "${fase.nombre}"?`)) return;
               const fases = modelo.fases.filter((f) => f.id !== fase.id);
               setModelo({ ...modelo, fases });
-              setFaseId(fases[0].id);
+              setFaseId(fases[0]?.id ?? "");
             }}
           >
             Eliminar Fase
@@ -126,10 +127,14 @@ export function App() {
 
       <main>
         <aside className="chrome">
-          {fase && <Editor fase={fase} onChange={actualizarFase} />}
+          {fase ? (
+            <Editor fase={fase} onChange={actualizarFase} />
+          ) : (
+            <p className="vacio">No hay Fases. Añade una o pulsa «Restablecer».</p>
+          )}
         </aside>
-        <div className="lienzo" ref={svgRef}>
-          {l && fase && <Diagrama l={l} faseId={fase.id} />}
+        <div className="lienzo" ref={lienzoRef}>
+          {diagrama && fase && <Diagrama l={diagrama} faseId={fase.id} />}
         </div>
       </main>
     </div>

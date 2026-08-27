@@ -6,7 +6,7 @@ export type DiagramLayout = {
   titulo: { nombre: string; objetivo: string[]; x: number; y: number };
   chips: { texto: string; x: number; y: number; w: number; h: number }[];
   paneles: {
-    rol: "entrada" | "salida";
+    tipo: "entrada" | "salida";
     x: number;
     y: number;
     w: number;
@@ -21,7 +21,6 @@ export type DiagramLayout = {
     y: number;
     w: number;
     h: number;
-    focal: boolean;
   }[];
   flechas: { d: string; tipo: "consume" | "flujo" | "produce" }[];
 };
@@ -47,6 +46,15 @@ const FS_CHIP = 12;
 
 const LH = 1.35;
 const line = (fs: number) => Math.round(fs * LH);
+
+/** The renderer draws with these; it computes no geometry of its own. */
+export const ESCALA = {
+  titulo: { fs: FS_TITULO, lh: line(FS_TITULO) },
+  objetivo: { fs: FS_OBJETIVO, lh: line(FS_OBJETIVO) },
+  nodo: { fs: FS_NODO, lh: line(FS_NODO), pad: NODE_PAD, separacion: 6 },
+  desc: { fs: FS_DESC, lh: line(FS_DESC) },
+  item: { fs: FS_ITEM, lh: line(FS_ITEM), pad: PANEL_PAD },
+} as const;
 
 // Character-width approximation — keeps layout pure (no DOM measurement).
 const textWidth = (texto: string, fs: number) => texto.length * fs * 0.53;
@@ -117,7 +125,6 @@ export function layout(fase: Fase): DiagramLayout {
       y: ny,
       w: NODE_W,
       h,
-      focal: false,
     };
     ny += h + GAP_Y;
     return nodo;
@@ -125,7 +132,7 @@ export function layout(fase: Fase): DiagramLayout {
   const nodosH = nodos.length ? ny - GAP_Y - filaY : 0;
 
   // --- paneles de Entrada y Salida
-  const panel = (rol: "entrada" | "salida", items: string[], x: number) => {
+  const panel = (tipo: "entrada" | "salida", items: string[], x: number) => {
     const textW = PANEL_W - PANEL_PAD * 2;
     let py = PANEL_PAD + line(FS_ITEM);
     const puestos = items.map((item) => {
@@ -135,7 +142,7 @@ export function layout(fase: Fase): DiagramLayout {
       return puesto;
     });
     const h = py - 8 + PANEL_PAD;
-    return { rol, x, y: filaY, w: PANEL_W, h, items: puestos };
+    return { tipo, x, y: filaY, w: PANEL_W, h, items: puestos };
   };
 
   const paneles: DiagramLayout["paneles"] = [];
@@ -144,8 +151,8 @@ export function layout(fase: Fase): DiagramLayout {
 
   // --- flechas
   const flechas: DiagramLayout["flechas"] = [];
-  const entrada = paneles.find((p) => p.rol === "entrada");
-  const salida = paneles.find((p) => p.rol === "salida");
+  const entrada = paneles.find((p) => p.tipo === "entrada");
+  const salida = paneles.find((p) => p.tipo === "salida");
   const primero = nodos[0];
   const ultimo = nodos[nodos.length - 1];
 

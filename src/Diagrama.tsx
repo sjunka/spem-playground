@@ -1,10 +1,6 @@
-import type { DiagramLayout } from "./layout";
+import { ESCALA, type DiagramLayout } from "./layout";
 
-const LH_TITULO = 46;
-const LH_OBJETIVO = 20;
-const LH_NODO = 22;
-const LH_DESC = 17;
-const LH_ITEM = 18;
+const { titulo: T, objetivo: O, nodo: N, desc: D, item: I } = ESCALA;
 
 type Props = { l: DiagramLayout; faseId: string };
 
@@ -39,7 +35,7 @@ export function Diagrama({ l, faseId }: Props) {
 
       <text
         x={l.titulo.x}
-        y={l.titulo.y + LH_TITULO * 0.75}
+        y={l.titulo.y + T.lh * 0.75}
         className="t-titulo"
       >
         {l.titulo.nombre}
@@ -48,7 +44,7 @@ export function Diagrama({ l, faseId }: Props) {
         <text
           key={i}
           x={l.titulo.x}
-          y={l.titulo.y + LH_TITULO + LH_OBJETIVO * (i + 0.75)}
+          y={l.titulo.y + T.lh + O.lh * (i + 0.75)}
           className="t-objetivo"
         >
           {linea}
@@ -65,17 +61,21 @@ export function Diagrama({ l, faseId }: Props) {
       ))}
 
       {l.paneles.map((panel) => (
-        <g key={panel.rol} className={`panel panel-${panel.rol}`}>
+        <g key={panel.tipo} className={`panel panel-${panel.tipo}`}>
           <rect x={panel.x} y={panel.y} width={panel.w} height={panel.h} rx={4} />
-          <text x={panel.x + 16} y={panel.y + 16 + LH_ITEM * 0.6} className="t-eyebrow">
-            {panel.rol === "entrada" ? "ENTRADA" : "SALIDA"}
+          <text
+            x={panel.x + I.pad}
+            y={panel.y + I.pad + I.lh * 0.6}
+            className="t-eyebrow"
+          >
+            {panel.tipo === "entrada" ? "ENTRADA" : "SALIDA"}
           </text>
           {panel.items.map((item, i) =>
             item.lineas.map((linea, j) => (
               <text
                 key={`${i}-${j}`}
-                x={panel.x + 16}
-                y={panel.y + item.y + LH_ITEM * (j + 0.7)}
+                x={panel.x + I.pad}
+                y={panel.y + item.y + I.lh * (j + 0.7)}
                 className="t-item"
               >
                 {linea}
@@ -104,8 +104,8 @@ export function Diagrama({ l, faseId }: Props) {
           {nodo.lineas.map((linea, j) => (
             <text
               key={j}
-              x={nodo.x + 14}
-              y={nodo.y + 14 + LH_NODO * (j + 0.75)}
+              x={nodo.x + N.pad}
+              y={nodo.y + N.pad + N.lh * (j + 0.75)}
               className="t-nodo"
             >
               {linea}
@@ -114,13 +114,13 @@ export function Diagrama({ l, faseId }: Props) {
           {nodo.descripcion.map((linea, j) => (
             <text
               key={`d${j}`}
-              x={nodo.x + 14}
+              x={nodo.x + N.pad}
               y={
                 nodo.y +
-                14 +
-                LH_NODO * nodo.lineas.length +
-                6 +
-                LH_DESC * (j + 0.75)
+                N.pad +
+                N.lh * nodo.lineas.length +
+                N.separacion +
+                D.lh * (j + 0.75)
               }
               className="t-desc"
             >
