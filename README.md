@@ -20,13 +20,18 @@ npm run dev        # editor en http://localhost:5173
 |---|---|
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` | Build de producción en `dist/` |
-| `npm test` | Los 20 tests (layout, validación, mover, slug) |
+| `npm test` | Los 32 tests (layout, validación, mover, slug) |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run figuras` | Regenera `figuras/*.png` a 3x con Chrome headless (macOS) |
 | `npm run fuentes` | Regenera `src/fuentes.css`, las tres tipografías en base64 |
 
+Cada **Tarea** y cada ítem de **Entrada** y **Salida** lleva uno de los quince iconos de
+la notación SPEM 2.0, elegido desde el editor. Los **Roles** llevan el icono Role y el
+título de la **Fase** el icono Phase, ambos fijos. Cada figura cierra con una leyenda de
+los tipos que esa **Fase** usa.
+
 En el editor: pestañas para cambiar de **Fase**, panel izquierdo para editar **Roles**,
-**Tareas**, **Entrada** y **Salida**, y en la barra superior **Exportar PNG**,
+**Tareas**, **Entrada** y **Salida** —con un selector de tipo SPEM por elemento—, y en la barra superior **Exportar PNG**,
 **Exportar PDF**, **Exportar JSON**, **Importar JSON** y **Restablecer**.
 
 El PDF abre el diálogo de impresión del navegador; ahí se elige «Guardar como PDF».
@@ -35,9 +40,11 @@ El PDF abre el diálogo de impresión del navegador; ahí se elige «Guardar com
 
 ```
 src/
+  iconos.ts       Los quince tipos de SPEM 2.0 como paths, con sus etiquetas.
   layout.ts       Función pura: una Fase → coordenadas absolutas. Toda la geometría.
   Diagrama.tsx    Dibuja ese layout como un <svg>. No calcula ningún número.
   Editor.tsx      Panel de edición; ListaEditable.tsx para las cuatro listas.
+  SelectorIcono.tsx  <select> nativo de los quince tipos, con preview del glifo.
   validacion.ts   Frontera de confianza: valida JSON importado y localStorage.
   almacen.ts      Autoguardado; un valor corrupto cae al seed.
   exportar.ts     PNG (canvas 3x) y PDF (print), sin dependencias.

@@ -36,8 +36,11 @@ documento no tiene, y cuatro figuras no justifican ese trabajo.
 - **Cuadrícula de 4px:** las constantes libres y las alturas de línea van a múltiplos
   de 4, pero las alturas de nodo y panel derivan del texto envuelto y se redondean a la
   cuadrícula al final, no por construcción.
-- **Sin leyenda:** la guía pide que la leyenda cubra cada tipo usado. Aquí hay un solo
-  tipo de nodo (**Tarea**) y dos paneles rotulados en sitio, así que una leyenda sería
-  ruido.
+- ~~**Sin leyenda:**~~ *revertida.* Se registró que la guía pide leyenda de cada tipo
+  usado y que aquí sobraba, porque había un solo tipo de nodo (**Tarea**) y dos paneles
+  rotulados en sitio. Al incorporar los quince iconos de SPEM 2.0 esa premisa dejó de
+  valer: una **Fase** puede mostrar hoy varios tipos a la vez y ninguno se explica solo.
+  Cada figura lleva ahora una banda de leyenda con los tipos que esa **Fase** usa, y solo
+  esos. El resto de este ADR sigue vigente.
 - **Sin etiquetas en las flechas:** el orden Entrada → Tareas → Salida ya dice qué es
   cada flecha; las reglas de máscara y separación de etiquetas no aplican.

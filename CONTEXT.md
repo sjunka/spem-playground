@@ -38,6 +38,13 @@ Los Productos de Trabajo que una Fase produce. La Salida de una Fase es típicam
 la Entrada de la siguiente.
 _Avoid_: Output, entregable, resultado
 
+**Tipo SPEM**:
+El elemento de la notación SPEM 2.0 que un ítem representa: **Producto de Trabajo**,
+Herramienta, Hito, Actividad, Proceso… Cada **Tarea** y cada ítem de **Entrada** o
+**Salida** lleva uno, y de él sale el icono que se dibuja. Los quince están en
+`src/iconos.ts`.
+_Avoid_: Icono, glifo, símbolo, categoría
+
 ### Términos de SPEM 2.0 deliberadamente ausentes
 
 **Method Content**:
@@ -76,3 +83,12 @@ antes de desplegar en campo.
 
 Los defaults tipográficos y de color del skill `diagram-design` se aceptan sin
 personalizar. Ver ADR-0005.
+
+### Excepción: los identificadores de **Tipo SPEM** van en inglés
+
+Las claves de `src/iconos.ts` son `task`, `phase`, `workProduct`, `roleUse` y así, pese
+a que este glosario marca `Task`, `Phase` y `work product` como términos a evitar. El
+veto aplica a la prosa de la interfaz, no a los identificadores normativos de OMG: son
+los nombres con los que la especificación de SPEM 2.0 llama a sus elementos. Lo que el
+editor muestra —y lo que dice la leyenda de cada figura— sigue en español, desde
+`ETIQUETAS`.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { layout } from "../layout";
+import { ESCALA, layout } from "../layout";
 import { seed } from "../seed";
 import type { Fase } from "../modelo";
 
@@ -28,10 +28,10 @@ describe("layout", () => {
   });
 
   it("wraps a Tarea longer than the node and grows its height", () => {
-    const corta: Fase = { ...fase1, tareas: [{ id: "a", nombre: "Corto" }] };
+    const corta: Fase = { ...fase1, tareas: [{ id: "a", nombre: "Corto", icono: "task" as const }] };
     const larga: Fase = {
       ...fase1,
-      tareas: [{ id: "a", nombre: "Corto ".repeat(30).trim() }],
+      tareas: [{ id: "a", nombre: "Corto ".repeat(30).trim(), icono: "task" as const }],
     };
     const [nc] = layout(corta).nodos;
     const [nl] = layout(larga).nodos;
@@ -47,6 +47,46 @@ describe("layout", () => {
         expect(nodos[i].y + nodos[i].h).toBeLessThanOrEqual(nodos[i + 1].y);
       }
     }
+  });
+
+  it("gives every Tarea node an icon channel that the text never crosses", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      for (const [i, nodo] of l.nodos.entries()) {
+        expect(nodo.icono).toBe(fase.tareas[i].icono);
+        expect(nodo.iconoX).toBeGreaterThanOrEqual(nodo.x);
+        expect(nodo.iconoX + ESCALA.icono.nodo).toBeLessThanOrEqual(nodo.textoX);
+        expect(nodo.textoX).toBeLessThan(nodo.x + nodo.w);
+        expect(nodo.iconoY).toBeGreaterThanOrEqual(nodo.y);
+        expect(nodo.iconoY + ESCALA.icono.nodo).toBeLessThanOrEqual(nodo.y + nodo.h);
+      }
+    }
+  });
+
+  it("gives every Entrada and Salida item an icon channel of its own", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      for (const panel of l.paneles) {
+        const origen = panel.tipo === "entrada" ? fase.entrada : fase.salida;
+        for (const [i, item] of panel.items.entries()) {
+          expect(item.icono).toBe(origen[i].icono);
+          expect(item.iconoX).toBeGreaterThanOrEqual(panel.x);
+          expect(item.iconoX + ESCALA.icono.item).toBeLessThanOrEqual(item.textoX);
+          expect(item.textoX).toBeLessThan(panel.x + panel.w);
+        }
+      }
+    }
+  });
+
+  it("wraps a Tarea name that only fit while the icon had no channel", () => {
+    // 35 characters: inside the old text width of the box, past the narrowed one.
+    const nombre = "Definir contratos de integracion ok";
+    const [nodo] = layout({
+      ...fase1,
+      tareas: [{ id: "a", nombre, icono: "task" as const }],
+    }).nodos;
+    expect(nodo.lineas).toHaveLength(2);
+    expect(nodo.textoX - nodo.x).toBe(16 + ESCALA.icono.nodo + 8);
   });
 
   it("puts Entrada left of the Tareas column and Salida right of it", () => {
@@ -110,6 +150,47 @@ describe("layout", () => {
     const l = layout({ ...fase1, entrada: [] });
     expect(l.paneles.find((p) => p.tipo === "entrada")).toBeUndefined();
     expect(l.flechas.some((f) => f.tipo === "consume")).toBe(false);
+  });
+
+  it("lists in the legend exactly the types the Fase uses, and no others", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      const usados = new Set<string>([
+        "phase",
+        ...(fase.roles.length ? ["role"] : []),
+        ...fase.tareas.map((t) => t.icono),
+        ...fase.entrada.map((p) => p.icono),
+        ...fase.salida.map((p) => p.icono),
+      ]);
+      expect(new Set(l.leyenda.entradas.map((e) => e.icono))).toEqual(usados);
+    }
+  });
+
+  it("names each legend entry in Spanish", () => {
+    const l = layout(fase1);
+    const fase = l.leyenda.entradas.find((e) => e.icono === "phase");
+    expect(fase?.texto).toBe("Fase");
+  });
+
+  it("keeps the legend below everything else and inside the canvas", () => {
+    for (const fase of fases) {
+      const l = layout(fase);
+      const fondo = Math.max(
+        ...l.nodos.map((n) => n.y + n.h),
+        ...l.paneles.map((p) => p.y + p.h),
+      );
+      expect(l.leyenda.y).toBeGreaterThan(fondo);
+      for (const e of l.leyenda.entradas) {
+        expect(e.x).toBeGreaterThanOrEqual(0);
+        expect(e.textoX).toBeLessThanOrEqual(l.width);
+      }
+      expect(l.leyenda.y + l.leyenda.h).toBeLessThanOrEqual(l.height);
+    }
+  });
+
+  it("still shows the Fase type in the legend of an otherwise empty Fase", () => {
+    const l = layout({ ...fase1, roles: [], tareas: [], entrada: [], salida: [] });
+    expect(l.leyenda.entradas.map((e) => e.icono)).toEqual(["phase"]);
   });
 
   it("still lays out a Fase with no Tareas", () => {

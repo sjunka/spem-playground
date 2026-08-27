@@ -1,6 +1,7 @@
 import type { Fase, Tarea } from "./modelo";
 import { ListaEditable } from "./ListaEditable";
 import { mover } from "./mover";
+import { SelectorIcono } from "./SelectorIcono";
 
 type Props = { fase: Fase; onChange: (fase: Fase) => void };
 
@@ -16,6 +17,7 @@ export function Editor({ fase, onChange }: Props) {
 
   const moverTarea = (i: number, delta: number) =>
     parche({ tareas: mover(fase.tareas, i, delta) });
+
 
   return (
     <div className="editor">
@@ -37,9 +39,10 @@ export function Editor({ fase, onChange }: Props) {
 
       <ListaEditable
         titulo="Roles participantes"
-        items={fase.roles}
+        items={fase.roles.map((texto) => ({ texto, icono: "role" as const }))}
         placeholder="Rol"
-        onChange={(roles) => parche({ roles })}
+        iconoNuevo="role"
+        onChange={(items) => parche({ roles: items.map((p) => p.texto) })}
       />
 
       <section className="lista">
@@ -79,12 +82,18 @@ export function Editor({ fase, onChange }: Props) {
                 parcheTarea(i, { descripcion: e.target.value || undefined })
               }
             />
+            <SelectorIcono
+              valor={tarea.icono}
+              onChange={(icono) => parcheTarea(i, { icono })}
+            />
           </div>
         ))}
         <button
           className="anadir"
           onClick={() =>
-            parche({ tareas: [...fase.tareas, { id: nuevoId(), nombre: "" }] })
+            parche({
+              tareas: [...fase.tareas, { id: nuevoId(), nombre: "", icono: "task" }],
+            })
           }
         >
           + Añadir Tarea
@@ -93,14 +102,18 @@ export function Editor({ fase, onChange }: Props) {
 
       <ListaEditable
         titulo="Entrada"
-        items={fase.entrada}
         placeholder="Producto de Trabajo consumido"
+        items={fase.entrada}
+        iconoNuevo="workProduct"
+        conIcono
         onChange={(entrada) => parche({ entrada })}
       />
       <ListaEditable
         titulo="Salida"
-        items={fase.salida}
         placeholder="Producto de Trabajo producido"
+        items={fase.salida}
+        iconoNuevo="workProduct"
+        conIcono
         onChange={(salida) => parche({ salida })}
       />
     </div>
