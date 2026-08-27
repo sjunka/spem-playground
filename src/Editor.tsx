@@ -1,6 +1,8 @@
-import type { Fase, Tarea } from "./modelo";
+import type { IdIcono } from "./iconos";
+import type { Fase, Producto, Tarea } from "./modelo";
 import { ListaEditable } from "./ListaEditable";
 import { mover } from "./mover";
+import { SelectorIcono } from "./SelectorIcono";
 
 type Props = { fase: Fase; onChange: (fase: Fase) => void };
 
@@ -16,6 +18,25 @@ export function Editor({ fase, onChange }: Props) {
 
   const moverTarea = (i: number, delta: number) =>
     parche({ tareas: mover(fase.tareas, i, delta) });
+
+  /** Keeps each item's icon while the list component works in plain text. */
+  const productos = (campo: "entrada" | "salida") => ({
+    items: fase[campo].map((p) => p.texto),
+    iconos: fase[campo].map((p) => p.icono),
+    onChange: (textos: string[]) =>
+      parche({
+        [campo]: textos.map(
+          (texto, i): Producto => ({
+            texto,
+            icono: fase[campo][i]?.icono ?? "workProduct",
+          }),
+        ),
+      }),
+    onIcono: (i: number, icono: IdIcono) =>
+      parche({
+        [campo]: fase[campo].map((p, j) => (j === i ? { ...p, icono } : p)),
+      }),
+  });
 
   return (
     <div className="editor">
@@ -79,6 +100,10 @@ export function Editor({ fase, onChange }: Props) {
                 parcheTarea(i, { descripcion: e.target.value || undefined })
               }
             />
+            <SelectorIcono
+              valor={tarea.icono}
+              onChange={(icono) => parcheTarea(i, { icono })}
+            />
           </div>
         ))}
         <button
@@ -95,29 +120,13 @@ export function Editor({ fase, onChange }: Props) {
 
       <ListaEditable
         titulo="Entrada"
-        items={fase.entrada.map((p) => p.texto)}
         placeholder="Producto de Trabajo consumido"
-        onChange={(textos) =>
-          parche({
-            entrada: textos.map((texto, i) => ({
-              texto,
-              icono: fase.entrada[i]?.icono ?? "workProduct",
-            })),
-          })
-        }
+        {...productos("entrada")}
       />
       <ListaEditable
         titulo="Salida"
-        items={fase.salida.map((p) => p.texto)}
         placeholder="Producto de Trabajo producido"
-        onChange={(textos) =>
-          parche({
-            salida: textos.map((texto, i) => ({
-              texto,
-              icono: fase.salida[i]?.icono ?? "workProduct",
-            })),
-          })
-        }
+        {...productos("salida")}
       />
     </div>
   );

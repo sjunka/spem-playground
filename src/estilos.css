@@ -107,7 +107,21 @@ aside.chrome {
 .fila { display: flex; gap: 4px; margin-bottom: 4px; }
 .fila input { flex: 1; min-width: 0; }
 .fila button { padding: 4px 7px; }
-.tarea { margin-bottom: 10px; }
+.item, .tarea { margin-bottom: 10px; }
+.selector-icono { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.selector-icono svg { flex: none; color: var(--muted); }
+.selector-icono select {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+}
+.selector-icono select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
 .tarea .descripcion { font-size: 12px; color: var(--muted); }
 .anadir { margin-top: 4px; color: var(--muted); }
 
