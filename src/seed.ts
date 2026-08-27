@@ -37,14 +37,14 @@ export const seed = (): Modelo => ({
         },
       ],
       entrada: [
-        { texto: "Conocimiento del experto del dominio (caficultor)", icono: "workProduct" },
+        { texto: "Conocimiento del experto del dominio (caficultor)", icono: "roleUse" },
         { texto: "Planos del terreno", icono: "workProduct" },
-        { texto: "Normatividad vigente", icono: "workProduct" },
+        { texto: "Normatividad vigente", icono: "metric" },
       ],
       salida: [
         { texto: "Constitution.md", icono: "workProduct" },
-        { texto: "Políticas y límites de operación", icono: "workProduct" },
-        { texto: "Reglas de negocio", icono: "workProduct" },
+        { texto: "Políticas y límites de operación", icono: "metric" },
+        { texto: "Reglas de negocio", icono: "metric" },
         { texto: "Contratos globales", icono: "workProduct" },
         { texto: "Contratos de integración entre dominios", icono: "workProduct" },
       ],
@@ -77,7 +77,7 @@ export const seed = (): Modelo => ({
         },
         {
           id: "t2-3",
-          icono: "task",
+          icono: "activity",
           nombre: "Traducir esquemas técnicos y disponer entornos SIL, HIL y gemelos digitales",
           descripcion:
             "Preparar la infraestructura de simulación y los archivos base (spec.md, plan.md, task.md).",
@@ -100,13 +100,13 @@ export const seed = (): Modelo => ({
       entrada: [
         { texto: "Planos del terreno", icono: "workProduct" },
         { texto: "Constitution.md", icono: "workProduct" },
-        { texto: "Políticas y límites de operación", icono: "workProduct" },
-        { texto: "Reglas de negocio", icono: "workProduct" },
+        { texto: "Políticas y límites de operación", icono: "metric" },
+        { texto: "Reglas de negocio", icono: "metric" },
         { texto: "Contratos globales y de integración entre dominios", icono: "workProduct" },
       ],
       salida: [
         { texto: "spec.md, plan.md, task.md", icono: "workProduct" },
-        { texto: "Entornos de simulación SIL y HIL configurados", icono: "workProduct" },
+        { texto: "Entornos de simulación SIL y HIL configurados", icono: "tool" },
         { texto: "Modelo de arquitectura del sistema", icono: "workProduct" },
         { texto: "Especificaciones de la lógica de adaptación", icono: "workProduct" },
       ],
@@ -134,7 +134,7 @@ export const seed = (): Modelo => ({
         },
         {
           id: "t3-2",
-          icono: "task",
+          icono: "milestone",
           nombre: "Validar el prototipo en entorno simulado (SIL/HIL)",
           descripcion:
             "Probar la traza mínima para verificar que la lógica de control responde antes de tocar hardware real.",
@@ -148,20 +148,20 @@ export const seed = (): Modelo => ({
         },
         {
           id: "t3-4",
-          icono: "task",
+          icono: "milestone",
           nombre: "Validar reglas de negocio y condiciones agronómicas",
         },
       ],
       entrada: [
         { texto: "spec.md, plan.md, task.md", icono: "workProduct" },
-        { texto: "Entornos de simulación SIL y HIL configurados", icono: "workProduct" },
+        { texto: "Entornos de simulación SIL y HIL configurados", icono: "tool" },
         { texto: "Modelo de arquitectura del sistema", icono: "workProduct" },
         { texto: "Especificaciones de la lógica de adaptación", icono: "workProduct" },
       ],
       salida: [
         { texto: "Prototipo vertical funcional", icono: "workProduct" },
         { texto: "Informes de validación de control", icono: "workProduct" },
-        { texto: "Pipeline de CI/CD base", icono: "workProduct" },
+        { texto: "Pipeline de CI/CD base", icono: "tool" },
       ],
     },
     {
@@ -180,35 +180,35 @@ export const seed = (): Modelo => ({
       tareas: [
         {
           id: "t4-1",
-          icono: "task",
+          icono: "activity",
           nombre: "Sincronización inter dominio",
           descripcion:
             "Acordar backlogs compartidos entre el gerente de proyecto y los equipos.",
         },
         {
           id: "t4-2",
-          icono: "task",
+          icono: "activity",
           nombre: "Construcción en paralelo (contrato primero)",
           descripcion:
             "Desarrollo concurrente de componentes de datos, plataforma, seguridad de vuelo y adaptación.",
         },
         {
           id: "t4-3",
-          icono: "task",
+          icono: "process",
           nombre: "Verificación e integración continua",
           descripcion:
             "Ejecución de pruebas automatizadas mediante CI/CD, SIL/HIL y gemelos digitales.",
         },
         {
           id: "t4-4",
-          icono: "task",
+          icono: "milestone",
           nombre: "Despliegue en campo y validación fenológica global",
           descripcion:
             "Llevar los releases al terreno real, calibrar dispositivos y evaluar el impacto del riego con el caficultor.",
         },
         {
           id: "t4-5",
-          icono: "task",
+          icono: "milestone",
           nombre: "Auditoría de cumplimiento de la Constitución",
           descripcion:
             "Revisar que los incrementos no rompan las reglas globales establecidas en la Fase 1.",
@@ -224,19 +224,19 @@ export const seed = (): Modelo => ({
       entrada: [
         { texto: "Prototipo vertical funcional", icono: "workProduct" },
         { texto: "Informes de validación de control", icono: "workProduct" },
-        { texto: "Pipeline de CI/CD base", icono: "workProduct" },
-        { texto: "Monitoreo y operación del dron", icono: "workProduct" },
-        { texto: "Sistema de riego y variables climáticas", icono: "workProduct" },
-        { texto: "Coordinación múltiple de drones", icono: "workProduct" },
+        { texto: "Pipeline de CI/CD base", icono: "tool" },
+        { texto: "Monitoreo y operación del dron", icono: "tool" },
+        { texto: "Sistema de riego y variables climáticas", icono: "tool" },
+        { texto: "Coordinación múltiple de drones", icono: "tool" },
       ],
       salida: [
         { texto: "Código fuente", icono: "workProduct" },
         { texto: "Archivos spec.md / task.md", icono: "workProduct" },
-        { texto: "Pipeline de CI/CD ejecutado", icono: "workProduct" },
-        { texto: "Entornos SIL/HIL validados", icono: "workProduct" },
+        { texto: "Pipeline de CI/CD ejecutado", icono: "tool" },
+        { texto: "Entornos SIL/HIL validados", icono: "tool" },
         { texto: "Paquete de calibración de sensores y actuadores", icono: "workProduct" },
         { texto: "Releases de software", icono: "workProduct" },
-        { texto: "Manual de operación actualizado", icono: "workProduct" },
+        { texto: "Manual de operación actualizado", icono: "metric" },
       ],
     },
   ],
