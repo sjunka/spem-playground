@@ -1,6 +1,6 @@
 # SPEM 2.0 Playground — editor de Modelo de Procesos
 
-Status: ready-for-agent
+Status: done
 
 Domain vocabulary in this spec follows `CONTEXT.md`. The Spanish terms **Fase**,
 **Tarea**, **Rol**, **Producto de Trabajo**, **Entrada** and **Salida** are used verbatim

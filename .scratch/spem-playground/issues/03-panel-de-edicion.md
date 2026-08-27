@@ -14,7 +14,7 @@ Editor chrome is in Spanish throughout.
 
 **Blocked by:** 02.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] The panel shows the selected **Fase**'s nombre and objetivo as editable text, and
       edits appear in the diagram title
@@ -35,3 +35,8 @@ Editor chrome is in Spanish throughout.
 - [x] Layout test: a **Fase** with no **Tareas** still produces a valid layout
 - [ ] Work happens on a branch named `ticket/03-panel-de-edicion`; it is merged into `main`
       once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

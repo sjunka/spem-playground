@@ -12,7 +12,7 @@ value are untrusted input and go through the same validation.
 
 **Blocked by:** 03.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] Every change autosaves; reloading the page restores the model exactly
 - [x] "Exportar JSON" downloads the whole model as a file
@@ -33,3 +33,8 @@ value are untrusted input and go through the same validation.
 - [x] Validation test: rejection returns a message, it does not throw
 - [ ] Work happens on a branch named `ticket/04-persistencia-y-json`; it is merged into
       `main` once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

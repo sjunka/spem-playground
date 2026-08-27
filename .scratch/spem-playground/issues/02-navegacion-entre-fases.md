@@ -12,7 +12,7 @@ a long role list.
 
 **Blocked by:** 01.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] A tab or selector lists all four **Fases** and switching redraws the diagram
 - [x] The selected **Fase** is visually distinct from the unselected ones
@@ -30,3 +30,8 @@ a long role list.
       starts or ends in empty space
 - [ ] Work happens on a branch named `ticket/02-navegacion-entre-fases`; it is merged into
       `main` once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

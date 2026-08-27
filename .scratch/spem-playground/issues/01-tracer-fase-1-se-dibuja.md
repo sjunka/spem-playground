@@ -15,7 +15,7 @@ lines inside one panel each; **Roles** are chips, not boxes.
 
 **Blocked by:** None — can start immediately.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] `git init` in the project, first commit on `main`, with a `.gitignore` covering
       `node_modules` and build output
@@ -41,3 +41,8 @@ lines inside one panel each; **Roles** are chips, not boxes.
       and the node height grows to contain them
 - [ ] Work happens on a branch named `ticket/01-tracer-fase-1-se-dibuja`; it is merged into
       `main` once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

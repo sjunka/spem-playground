@@ -10,7 +10,7 @@ is screen-only and must leave the exported still frame untouched.
 
 **Blocked by:** 02, 05.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] Nodes enter with opacity and a small translate, staggered so they arrive in sequence
 - [x] Arrows draw by animating their stroke, from unstroked to complete
@@ -23,3 +23,8 @@ is screen-only and must leave the exported still frame untouched.
       for reduced motion
 - [ ] Work happens on a branch named `ticket/06-animacion-css`; it is merged into `main`
       once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

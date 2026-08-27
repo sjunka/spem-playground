@@ -14,7 +14,7 @@ directly.
 
 **Blocked by:** 02.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] "Exportar PNG" downloads a PNG of the current **Fase**
 - [x] The PNG is rendered at 3× the layout dimensions and stays sharp when printed
@@ -29,3 +29,8 @@ directly.
 - [x] All four **Fases** export successfully, **Fase 4** included
 - [ ] Work happens on a branch named `ticket/05-exportar-png-y-pdf`; it is merged into
       `main` once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.

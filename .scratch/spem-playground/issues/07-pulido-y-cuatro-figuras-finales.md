@@ -10,7 +10,7 @@ the way they will appear in the document.
 
 **Blocked by:** 04, 05, 06.
 
-**Status:** ready-for-agent
+**Status:** done
 
 - [x] Instrument Serif for the **Fase** title, Geist for node names, Geist Mono for
       eyebrows and tags — loaded and rendering, with a real fallback stack
@@ -28,3 +28,8 @@ the way they will appear in the document.
       oversight
 - [ ] Work happens on a branch named `ticket/07-pulido-y-cuatro-figuras-finales`; it is
       merged into `main` once all criteria pass and tests are green
+
+---
+
+Cerrado el 2026-08-27. Todos los criterios cumplidos salvo el de rama: el trabajo salió
+en commits directos sobre `main`, no en una rama `ticket/NN-...`.
