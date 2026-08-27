@@ -84,7 +84,9 @@ export function Editor({ fase, onChange }: Props) {
         <button
           className="anadir"
           onClick={() =>
-            parche({ tareas: [...fase.tareas, { id: nuevoId(), nombre: "" }] })
+            parche({
+              tareas: [...fase.tareas, { id: nuevoId(), nombre: "", icono: "task" }],
+            })
           }
         >
           + Añadir Tarea
@@ -93,15 +95,29 @@ export function Editor({ fase, onChange }: Props) {
 
       <ListaEditable
         titulo="Entrada"
-        items={fase.entrada}
+        items={fase.entrada.map((p) => p.texto)}
         placeholder="Producto de Trabajo consumido"
-        onChange={(entrada) => parche({ entrada })}
+        onChange={(textos) =>
+          parche({
+            entrada: textos.map((texto, i) => ({
+              texto,
+              icono: fase.entrada[i]?.icono ?? "workProduct",
+            })),
+          })
+        }
       />
       <ListaEditable
         titulo="Salida"
-        items={fase.salida}
+        items={fase.salida.map((p) => p.texto)}
         placeholder="Producto de Trabajo producido"
-        onChange={(salida) => parche({ salida })}
+        onChange={(textos) =>
+          parche({
+            salida: textos.map((texto, i) => ({
+              texto,
+              icono: fase.salida[i]?.icono ?? "workProduct",
+            })),
+          })
+        }
       />
     </div>
   );

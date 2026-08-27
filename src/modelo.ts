@@ -1,4 +1,14 @@
-export type Tarea = { id: string; nombre: string; descripcion?: string };
+import type { IdIcono } from "./iconos";
+
+export type Tarea = {
+  id: string;
+  nombre: string;
+  descripcion?: string;
+  icono: IdIcono;
+};
+
+/** A Producto de Trabajo as it appears in Entrada or Salida: text plus its SPEM type. */
+export type Producto = { texto: string; icono: IdIcono };
 
 export type Fase = {
   id: string;
@@ -6,10 +16,10 @@ export type Fase = {
   objetivo: string;
   roles: string[];
   tareas: Tarea[];
-  entrada: string[];
-  salida: string[];
+  entrada: Producto[];
+  salida: Producto[];
 };
 
-export type Modelo = { version: 1; fases: Fase[] };
+export type Modelo = { version: 2; fases: Fase[] };
 
-export const VERSION = 1;
+export const VERSION = 2;

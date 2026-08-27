@@ -1,4 +1,4 @@
-import type { Fase } from "./modelo";
+import type { Fase, Producto } from "./modelo";
 
 export type DiagramLayout = {
   width: number;
@@ -180,11 +180,11 @@ export function layout(fase: Fase): DiagramLayout {
   const nodosH = nodos.length ? ny - GAP_Y - filaY : 0;
 
   // --- paneles de Entrada y Salida
-  const panel = (tipo: "entrada" | "salida", items: string[], x: number) => {
+  const panel = (tipo: "entrada" | "salida", items: Producto[], x: number) => {
     const textW = PANEL_W - PANEL_PAD * 2;
     let py = PANEL_PAD + line(FS_ITEM);
     const puestos = items.map((item) => {
-      const lineas = wrap(`— ${item}`, FS_ITEM, textW);
+      const lineas = wrap(`— ${item.texto}`, FS_ITEM, textW);
       const puesto = { lineas, y: py };
       py += lineas.length * line(FS_ITEM) + 8;
       return puesto;

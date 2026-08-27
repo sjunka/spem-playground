@@ -28,10 +28,10 @@ describe("layout", () => {
   });
 
   it("wraps a Tarea longer than the node and grows its height", () => {
-    const corta: Fase = { ...fase1, tareas: [{ id: "a", nombre: "Corto" }] };
+    const corta: Fase = { ...fase1, tareas: [{ id: "a", nombre: "Corto", icono: "task" as const }] };
     const larga: Fase = {
       ...fase1,
-      tareas: [{ id: "a", nombre: "Corto ".repeat(30).trim() }],
+      tareas: [{ id: "a", nombre: "Corto ".repeat(30).trim(), icono: "task" as const }],
     };
     const [nc] = layout(corta).nodos;
     const [nl] = layout(larga).nodos;
