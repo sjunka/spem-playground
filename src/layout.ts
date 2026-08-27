@@ -3,8 +3,23 @@ import type { Fase } from "./modelo";
 export type DiagramLayout = {
   width: number;
   height: number;
-  titulo: { nombre: string; objetivo: string[]; x: number; y: number };
-  chips: { texto: string; x: number; y: number; w: number; h: number }[];
+  titulo: {
+    nombre: string;
+    objetivo: string[];
+    x: number;
+    y: number;
+    iconoX: number;
+    iconoY: number;
+  };
+  chips: {
+    texto: string;
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    iconoX: number;
+    textoX: number;
+  }[];
   paneles: {
     tipo: "entrada" | "salida";
     x: number;
@@ -37,6 +52,12 @@ const CHIP_PAD = 12;
 const CHIP_H = 24;
 const CHIP_GAP = 8;
 
+// Icon channel: the glyph box plus the gap before the text it labels.
+const ICONO_TITULO = 26;
+const ICONO_CHIP = 12;
+const ICONO_GAP = 8;
+const ICONO_GAP_CHIP = 6;
+
 const FS_TITULO = 32;
 const FS_OBJETIVO = 16;
 const FS_NODO = 16;
@@ -57,6 +78,7 @@ export const ESCALA = {
   nodo: { fs: FS_NODO, lh: line(FS_NODO), pad: NODE_PAD, separacion: 6 },
   desc: { fs: FS_DESC, lh: line(FS_DESC) },
   item: { fs: FS_ITEM, lh: line(FS_ITEM), pad: PANEL_PAD },
+  icono: { titulo: ICONO_TITULO, chip: ICONO_CHIP },
 } as const;
 
 // Character-width approximation — keeps layout pure (no DOM measurement).
@@ -86,8 +108,18 @@ export function layout(fase: Fase): DiagramLayout {
   const contentW = width - PAD * 2;
 
   // --- título
-  const objetivo = wrap(fase.objetivo, FS_OBJETIVO, contentW * 0.72);
-  const titulo = { nombre: fase.nombre, objetivo, x: PAD, y: PAD };
+  // The Phase glyph sits in the margin and both the name and the objetivo indent
+  // past it, so the two text blocks stay flush with each other.
+  const tituloX = PAD + ICONO_TITULO + ICONO_GAP;
+  const objetivo = wrap(fase.objetivo, FS_OBJETIVO, contentW * 0.72 - ICONO_TITULO);
+  const titulo = {
+    nombre: fase.nombre,
+    objetivo,
+    x: tituloX,
+    y: PAD,
+    iconoX: PAD,
+    iconoY: PAD + cuadricula(line(FS_TITULO) / 2 - ICONO_TITULO / 2),
+  };
   let y = PAD + line(FS_TITULO) + objetivo.length * line(FS_OBJETIVO) + 20;
 
   // --- banda de chips de Roles, envuelve a varias filas
@@ -96,14 +128,24 @@ export function layout(fase: Fase): DiagramLayout {
   let cy = y;
   for (const rol of fase.roles) {
     // Chips are set in Geist Mono, which is wider per character than Geist.
+    const canal = ICONO_CHIP + ICONO_GAP_CHIP;
     const w = cuadricula(
-      Math.min(rol.length * FS_CHIP * 0.62 + CHIP_PAD * 2, contentW),
+      Math.min(rol.length * FS_CHIP * 0.62 + CHIP_PAD * 2 + canal, contentW),
     );
     if (cx > PAD && cx + w > PAD + contentW) {
       cx = PAD;
       cy += CHIP_H + CHIP_GAP;
     }
-    chips.push({ texto: rol, x: cx, y: cy, w, h: CHIP_H });
+    chips.push({
+      texto: rol,
+      x: cx,
+      y: cy,
+      w,
+      h: CHIP_H,
+      iconoX: cx + CHIP_PAD,
+      // Centred in what is left of the pill once the glyph has its channel.
+      textoX: cx + CHIP_PAD + canal + (w - CHIP_PAD * 2 - canal) / 2,
+    });
     cx += w + CHIP_GAP;
   }
   if (chips.length > 0) y = cy + CHIP_H + 34;

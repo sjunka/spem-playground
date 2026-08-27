@@ -1,8 +1,24 @@
+import { CAJA, ICONOS, type IdIcono } from "./iconos";
 import { ESCALA, type DiagramLayout } from "./layout";
 
-const { titulo: T, objetivo: O, nodo: N, desc: D, item: I } = ESCALA;
+const { titulo: T, objetivo: O, nodo: N, desc: D, item: I, icono: IC } = ESCALA;
 
 type Props = { l: DiagramLayout; faseId: string };
+
+/**
+ * One SPEM glyph, scaled from its 24x24 box to `tam`. Hidden from assistive tech:
+ * the text beside it already names the element, and announcing both reads double.
+ */
+function Icono({ id, x, y, tam }: { id: IdIcono; x: number; y: number; tam: number }) {
+  return (
+    <path
+      className="icono"
+      aria-hidden="true"
+      transform={`translate(${x} ${y}) scale(${tam / CAJA})`}
+      d={ICONOS[id]}
+    />
+  );
+}
 
 export function Diagrama({ l, faseId }: Props) {
   return (
@@ -41,6 +57,10 @@ export function Diagrama({ l, faseId }: Props) {
 
       <rect width={l.width} height={l.height} fill="var(--paper)" />
 
+      <g className="icono-titulo">
+        <Icono id="phase" x={l.titulo.iconoX} y={l.titulo.iconoY} tam={IC.titulo} />
+      </g>
+
       <text
         x={l.titulo.x}
         y={l.titulo.y + T.lh * 0.75}
@@ -62,7 +82,13 @@ export function Diagrama({ l, faseId }: Props) {
       {l.chips.map((chip, i) => (
         <g key={i} className="chip">
           <rect x={chip.x} y={chip.y} width={chip.w} height={chip.h} rx={chip.h / 2} />
-          <text x={chip.x + chip.w / 2} y={chip.y + chip.h * 0.68}>
+          <Icono
+            id="role"
+            x={chip.iconoX}
+            y={chip.y + (chip.h - IC.chip) / 2}
+            tam={IC.chip}
+          />
+          <text x={chip.textoX} y={chip.y + chip.h * 0.68}>
             {chip.texto}
           </text>
         </g>

@@ -120,6 +120,16 @@ aside.chrome {
 .t-item { font-size: 13px; }
 .t-eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; fill: var(--muted); }
 
+.icono {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.icono-titulo { color: var(--accent); }
+
+.chip { color: var(--muted); }
 .chip rect { fill: none; stroke: var(--rule); }
 .chip text { font-family: var(--mono); font-size: 12px; fill: var(--muted); text-anchor: middle; }
 
