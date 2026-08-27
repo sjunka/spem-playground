@@ -64,7 +64,8 @@ src/
   Editor.tsx      Panel de edición; ListaEditable.tsx para las cuatro listas.
   SelectorIcono.tsx  <select> nativo de los quince tipos, con preview del glifo.
   validacion.ts   Frontera de confianza: valida JSON importado y localStorage.
-  almacen.ts      Autoguardado; un valor corrupto cae al seed.
+  almacen.ts      Autoguardado; la clave lleva la versión y un sello del seed,
+                  así un deploy que cambie las Fases arranca de ellas.
   exportar.ts     PNG (canvas 3x) y PDF (print), sin dependencias.
   fuentes.css     Las tres caras en base64, para que el PNG no caiga a fuente del sistema.
   seed.ts         Las cuatro Fases del documento fuente.
