@@ -1,15 +1,17 @@
 import type { IdIcono } from "./iconos";
+import type { Producto } from "./modelo";
 import { mover } from "./mover";
 import { SelectorIcono } from "./SelectorIcono";
 
 type Props = {
   titulo: string;
-  items: string[];
-  onChange: (items: string[]) => void;
+  /** Whole items, never text alone: reordering and deleting must carry the icon. */
+  items: Producto[];
+  onChange: (items: Producto[]) => void;
   placeholder: string;
-  /** Both are given together, or neither: a list of Roles carries no icon. */
-  iconos?: IdIcono[];
-  onIcono?: (i: number, icono: IdIcono) => void;
+  /** A list of Roles is always Role, so it shows no selector. */
+  conIcono?: boolean;
+  iconoNuevo: IdIcono;
 };
 
 export function ListaEditable({
@@ -17,11 +19,11 @@ export function ListaEditable({
   items,
   onChange,
   placeholder,
-  iconos,
-  onIcono,
+  conIcono,
+  iconoNuevo,
 }: Props) {
-  const reemplazar = (i: number, valor: string) =>
-    onChange(items.map((item, j) => (j === i ? valor : item)));
+  const parche = (i: number, cambio: Partial<Producto>) =>
+    onChange(items.map((item, j) => (j === i ? { ...item, ...cambio } : item)));
 
   return (
     <section className="lista">
@@ -30,9 +32,9 @@ export function ListaEditable({
         <div className="item" key={i}>
           <div className="fila">
             <input
-              value={item}
+              value={item.texto}
               placeholder={placeholder}
-              onChange={(e) => reemplazar(i, e.target.value)}
+              onChange={(e) => parche(i, { texto: e.target.value })}
             />
             <button onClick={() => onChange(mover(items, i, -1))} disabled={i === 0} title="Subir">
               ↑
@@ -51,12 +53,18 @@ export function ListaEditable({
               ✕
             </button>
           </div>
-          {iconos && onIcono && (
-            <SelectorIcono valor={iconos[i]} onChange={(icono) => onIcono(i, icono)} />
+          {conIcono && (
+            <SelectorIcono
+              valor={item.icono}
+              onChange={(icono) => parche(i, { icono })}
+            />
           )}
         </div>
       ))}
-      <button className="anadir" onClick={() => onChange([...items, ""])}>
+      <button
+        className="anadir"
+        onClick={() => onChange([...items, { texto: "", icono: iconoNuevo }])}
+      >
         + Añadir
       </button>
     </section>

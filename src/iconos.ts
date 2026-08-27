@@ -66,8 +66,7 @@ export const ETIQUETAS: Record<IdIcono, string> = {
   task: "Tarea",
   category: "Categoría",
   role: "Rol",
-  roleUse:
-    "M8.4 4.2 a2.8 2.8 0 1 1 0 5.6 a2.8 2.8 0 1 1 0 -5.6 M2.4 20.4 v-1.2 a6 6 0 0 1 12 0 v1.2 M 20.2 3.8 A 3.4 3.4 0 1 1 16.3 3.5 M 20.2 3.8 L 17.0 3.2 M 20.2 3.8 L 19.1 0.8",
+  roleUse: "Uso de Rol",
   workProduct: "Producto de Trabajo",
   step: "Paso",
   milestone: "Hito",
@@ -75,10 +74,8 @@ export const ETIQUETAS: Record<IdIcono, string> = {
   metric: "Métrica / Guía",
   process: "Proceso",
   phase: "Fase",
-  iteration:
-    "M2.6 11 l4 -4 3.2 2.2 4.2 -5.6 M2.6 15 h8 M 20.2 14.3 A 4.0 4.0 0 1 1 15.6 13.9 M 20.2 14.3 L 17.0 13.7 M 20.2 14.3 L 19.1 11.3",
-  teamProfile:
-    "M9 5.6 a3 3 0 1 1 0 6 a3 3 0 1 1 0 -6 M2 20.6 v-1.2 a7 7 0 0 1 14 0 v1.2 M17 3.8 a2.6 2.6 0 1 1 0 5.2 a2.6 2.6 0 1 1 0 -5.2 M17.4 12.4 a6 6 0 0 1 4.6 5.8 v1.4",
+  iteration: "Iteración",
+  teamProfile: "Perfil de equipo",
 };
 
 /** Stable order for anything that lists the whole set: the selector, the legend. */
