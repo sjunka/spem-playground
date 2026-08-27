@@ -98,10 +98,12 @@ export function Editor({ fase, onChange }: Props) {
                     Declara Roles en la Fase para poder asignarlos.
                   </p>
                 )}
-                {fase.roles.map((rol) => {
+                {fase.roles.map((rol, k) => {
                   const actual = tarea.roles.find((r) => r.rol === rol)?.papel ?? "";
                   return (
-                    <label className="papel" key={rol}>
+                    // Dos Roles recién añadidos comparten el nombre vacío: la
+                    // posición es lo único que distingue una fila de la otra.
+                    <label className="papel" key={`${k}-${rol}`}>
                       <span>{rol}</span>
                       <select
                         value={actual}

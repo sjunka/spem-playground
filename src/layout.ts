@@ -211,10 +211,16 @@ function caja(
   };
 }
 
-/** Rounded right-angle elbow: out, turn, across, turn, in. Never a diagonal. */
-const codo = (x1: number, y1: number, x2: number, y2: number) => {
+/**
+ * Rounded right-angle elbow: out, turn, across, turn, in. Never a diagonal.
+ *
+ * `giro` places the vertical run. Two elbows that share a channel and take the
+ * default midpoint lie on top of each other, which in a view with eleven edges
+ * merges them into one unreadable spine, so the caller staggers them.
+ */
+const codo = (x1: number, y1: number, x2: number, y2: number, giro?: number) => {
   if (Math.abs(y2 - y1) < RADIO * 2) return `M ${x1} ${y1} L ${x2} ${y1}`;
-  const mx = cuadricula((x1 + x2) / 2);
+  const mx = giro === undefined ? cuadricula((x1 + x2) / 2) : cuadricula(giro);
   const baja = y2 > y1 ? 1 : -1;
   const a = `A ${RADIO} ${RADIO} 0 0 ${baja > 0 ? 1 : 0} ${mx} ${y1 + RADIO * baja}`;
   const b = `A ${RADIO} ${RADIO} 0 0 ${baja > 0 ? 0 : 1} ${mx + RADIO} ${y2}`;
@@ -239,11 +245,51 @@ const rama = (x1: number, y1: number, x2: number, y2: number) =>
 
 const centro = (n: { y: number; h: number }) => cuadricula(n.y + n.h / 2);
 
-const etiquetaEntre = (texto: string, x1: number, y1: number, x2: number, y2: number) => ({
+const etiquetaEntre = (
+  texto: string,
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  giro?: number,
+) => ({
   texto,
-  x: cuadricula((x1 + x2) / 2),
+  // Sobre el tramo vertical del codo, que es donde la arista es identificable.
+  x: cuadricula(giro === undefined ? (x1 + x2) / 2 : giro),
   y: cuadricula((y1 + y2) / 2) - 6,
 });
+
+/**
+ * Spreads the vertical runs of the elbows that share one channel, so a Fase with
+ * eleven edges draws eleven traceable lines instead of one merged spine.
+ */
+const giros = (n: number, desde: number, hasta: number) => {
+  const margen = 28;
+  const util = hasta - desde - margen * 2;
+  const paso = n > 1 ? Math.min(20, util / (n - 1)) : 0;
+  const ancho = paso * (n - 1);
+  const inicio = desde + margen + (util - ancho) / 2;
+  return Array.from({ length: n }, (_, i) => inicio + i * paso);
+};
+
+/**
+ * Nudges apart labels that landed on the same spot. Two edges whose endpoints
+ * average to the same point print their stereotype twice superimposed, which
+ * reads as a smudge; this walks them upwards until each one stands alone.
+ */
+function separarEtiquetas(flechas: Flecha[]) {
+  const puestas: { x: number; y: number }[] = [];
+  for (const f of flechas) {
+    if (!f.etiqueta) continue;
+    while (
+      puestas.some(
+        (p) => Math.abs(p.x - f.etiqueta!.x) < 96 && Math.abs(p.y - f.etiqueta!.y) < 16,
+      )
+    )
+      f.etiqueta.y -= 16;
+    puestas.push({ x: f.etiqueta.x, y: f.etiqueta.y });
+  }
+}
 
 type Marco = {
   width: number;
@@ -501,28 +547,32 @@ function flujo(fase: Fase): DiagramLayout {
     centrar(izq, alto(izq));
     centrar(der, alto(der));
 
-    for (const n of izq)
+    const girosIzq = giros(izq.length, PAD + PANEL_W, TAREAS_XE);
+    for (const [i, n] of izq.entries())
       flechas.push({
         tipo: "consume",
-        d: codo(n.x + n.w, centro(n), centrada.x, centro(centrada)),
+        d: codo(n.x + n.w, centro(n), centrada.x, centro(centrada), girosIzq[i]),
         etiqueta: etiquetaEntre(
           ESTEREOTIPOS.entrada,
           n.x + n.w,
           centro(n),
           centrada.x,
           centro(centrada),
+          girosIzq[i],
         ),
       });
-    for (const n of der)
+    const girosDer = giros(der.length, TAREAS_XE + NODE_W, DERECHA_XE);
+    for (const [i, n] of der.entries())
       flechas.push({
         tipo: "produce",
-        d: codo(centrada.x + centrada.w, centro(centrada), n.x, centro(n)),
+        d: codo(centrada.x + centrada.w, centro(centrada), n.x, centro(n), girosDer[i]),
         etiqueta: etiquetaEntre(
           ESTEREOTIPOS.salida,
           centrada.x + centrada.w,
           centro(centrada),
           n.x,
           centro(n),
+          girosDer[i],
         ),
       });
 
@@ -541,6 +591,7 @@ function flujo(fase: Fase): DiagramLayout {
     });
   }
 
+  separarEtiquetas(flechas);
   const fondo = Math.max(marco.filaY, ...nodos.map((n) => n.y + n.h));
   const usados = new Set<IdIcono>([
     "phase",
@@ -596,39 +647,45 @@ function roles(fase: Fase): DiagramLayout {
   const buscar = (col: Nodo[], prefijo: string, rol: string) =>
     col.find((n) => n.id === `${prefijo}-${rol}`)!;
 
-  const flechas: Flecha[] = [];
+  // Cada canal se recorre entero antes de dibujar: el reparto de los tramos
+  // verticales depende de cuántas aristas comparten el canal.
+  type Par = { origen: Nodo; destino: Nodo; texto: string };
+  const perform: Par[] = [];
+  const assist: Par[] = [];
   for (const [i, tarea] of fase.tareas.entries()) {
     const destino = tareas[i];
-    for (const r of tarea.roles) {
-      if (r.papel === "perform") {
-        const origen = buscar(ejecutan, "perform", r.rol);
-        flechas.push({
-          tipo: "flujo",
-          d: codo(origen.x + origen.w, centro(origen), destino.x, centro(destino)),
-          etiqueta: etiquetaEntre(
-            ESTEREOTIPOS.perform,
-            origen.x + origen.w,
-            centro(origen),
-            destino.x,
-            centro(destino),
-          ),
+    for (const r of tarea.roles)
+      if (r.papel === "perform")
+        perform.push({
+          origen: buscar(ejecutan, "perform", r.rol),
+          destino,
+          texto: ESTEREOTIPOS.perform,
         });
-      } else {
-        const fin = buscar(asisten, "assist", r.rol);
-        flechas.push({
-          tipo: "flujo",
-          d: codo(destino.x + destino.w, centro(destino), fin.x, centro(fin)),
-          etiqueta: etiquetaEntre(
-            ESTEREOTIPOS.assist,
-            destino.x + destino.w,
-            centro(destino),
-            fin.x,
-            centro(fin),
-          ),
+      else
+        assist.push({
+          origen: destino,
+          destino: buscar(asisten, "assist", r.rol),
+          texto: ESTEREOTIPOS.assist,
         });
-      }
-    }
   }
+
+  const flechas: Flecha[] = [];
+  const canal = (pares: Par[], desde: number, hasta: number) => {
+    const gs = giros(pares.length, desde, hasta);
+    for (const [i, { origen, destino, texto }] of pares.entries()) {
+      const x1 = origen.x + origen.w;
+      const y1 = centro(origen);
+      const y2 = centro(destino);
+      flechas.push({
+        tipo: "flujo",
+        d: codo(x1, y1, destino.x, y2, gs[i]),
+        etiqueta: etiquetaEntre(texto, x1, y1, destino.x, y2, gs[i]),
+      });
+    }
+  };
+  canal(perform, PAD + PANEL_W, TAREAS_XE);
+  canal(assist, TAREAS_XE + NODE_W, DERECHA_XE);
+  separarEtiquetas(flechas);
 
   const nodos = [...ejecutan, ...tareas, ...asisten];
   const fondo = Math.max(filaY, ...nodos.map((n) => n.y + n.h));
@@ -650,8 +707,9 @@ function roles(fase: Fase): DiagramLayout {
 
 /** The Fase as root and its Tareas hanging off it: the index view. */
 function descomposicion(fase: Fase): DiagramLayout {
-  // Same canvas width as the other views: the tree is narrow, but the title is
-  // not, and the four figures of a Fase are read side by side in the document.
+  // Same canvas width as the Resumen: the tree is narrow, but the title is not,
+  // and the two figures of a Fase are read side by side in the document. Flujo
+  // and Roles are wider because their edges carry a stereotype.
   const marco = encabezado(fase, "descomposicion", ANCHO, false);
 
   const raiz = caja(fase.id, fase.nombre, undefined, "phase", PAD, marco.filaY, NODE_W);

@@ -68,6 +68,33 @@ describe("las cuatro vistas", () => {
   });
 });
 
+describe("aristas y estereotipos", () => {
+  it("separa el tramo vertical de las aristas que comparten canal", () => {
+    // La Fase 4 dibuja seis aristas «perform» desde la misma columna, apiladas a
+    // lo largo de toda la figura: con un solo giro se fundirían en una vertical
+    // imposible de seguir. Cada arista del canal gira en su propia x.
+    for (const fase of fases) {
+      const l = layout(fase, "roles");
+      for (const estereotipo of [ESTEREOTIPOS.perform, ESTEREOTIPOS.assist]) {
+        const giros = l.flechas
+          .filter((f) => f.etiqueta?.texto === estereotipo)
+          .map((f) => f.etiqueta!.x);
+        if (giros.length > 1) expect(new Set(giros).size).toBe(giros.length);
+      }
+    }
+  });
+
+  it("no imprime dos estereotipos en el mismo punto", () => {
+    for (const fase of fases)
+      for (const vista of VISTAS) {
+        const puestas = layout(fase, vista)
+          .flechas.filter((f) => f.etiqueta)
+          .map((f) => `${f.etiqueta!.x},${f.etiqueta!.y}`);
+        expect(new Set(puestas).size).toBe(puestas.length);
+      }
+  });
+});
+
 describe("vista Descomposición", () => {
   const vista: Vista = "descomposicion";
 

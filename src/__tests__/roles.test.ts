@@ -38,9 +38,11 @@ describe("aplicarRoles", () => {
 
   it("conserva los papeles al reordenar la lista de Roles", () => {
     const r = aplicarRoles(fase, ["Beto", "Ana"]);
-    // Reordenar es un renombrado posicional doble: los papeles siguen al puesto.
-    expect(r.tareas[0].roles.map((x) => x.rol).sort()).toEqual(["Ana", "Beto"]);
-    expect(r.tareas[0].roles).toHaveLength(2);
+    // Reordenar mueve filas, no renombra: cada Rol conserva su papel.
+    expect(r.tareas[0].roles).toEqual([
+      { rol: "Ana", papel: "perform" },
+      { rol: "Beto", papel: "assist" },
+    ]);
   });
 
   it("no deja nunca una Tarea apuntando a un Rol que la Fase no declara", () => {
