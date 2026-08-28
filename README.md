@@ -13,6 +13,24 @@ veinte figuras, en la notación de EPF Composer / SPEM Designer.
 
 ![Fase 1, Resumen](figuras/fase-1-especificacion-global-de-nivel-cero-resumen.png)
 
+## La figura general del proceso
+
+Para abrir el documento hace falta lo contrario a una **Vista**: una sola imagen con
+el sistema completo, de la que las veinte figuras por **Fase** sean el desglose. Se
+generan **dos versiones** y se escoge cuál va al *paper*. Ver [ADR-0009](docs/adr/0009-figura-general-del-proceso.md).
+
+**Versión A — cadena de Fases.** Las cuatro **Fases** apiladas con sus **Roles** y sus
+**Tareas**, y entre una y la siguiente los **Productos de Trabajo** del traspaso.
+Responde *qué pasa, en qué orden y qué se entrega entre etapas*.
+
+![Versión A, la cadena de Fases](figuras/general-a-cadena-de-fases.png)
+
+**Versión B — carriles por Rol.** Una fila por **Rol** y una columna por **Fase**: cada
+**Tarea** aparece en el carril de quien la ejecuta y en el de quien asiste. Responde
+*quién participa, y en qué*.
+
+![Versión B, carriles por Rol](figuras/general-b-carriles-por-rol.png)
+
 | Vista | Qué responde | Cómo la dibuja |
 |---|---|---|
 | **Resumen** | ¿Qué es esta **Fase**? | Chips de **Roles**, panel de **Entrada**, **Tareas**, panel de **Salida** |
@@ -45,9 +63,10 @@ npm run dev        # editor en http://localhost:5173
 |---|---|
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` | Build de producción en `dist/` |
-| `npm test` | Los 76 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
+| `npm test` | Los 80 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run figuras` | Regenera las veinte `figuras/*.png` a 3x con Chrome headless (macOS) |
+| `npm run general` | Genera las dos versiones de la figura general: `figuras/general-a-*.png` y `general-b-*.png` |
 | `npm run epf` | Genera `figuras/epf-fase-*.png`: la figura EPF de cada **Fase**, sin abrir el editor |
 | `npm run fuentes` | Regenera `src/fuentes.css`, las tres tipografías en base64 |
 
@@ -71,6 +90,8 @@ El PDF abre el diálogo de impresión del navegador; ahí se elige «Guardar com
 src/
   iconos.ts       Los quince tipos de SPEM 2.0 como paths, con sus etiquetas.
   layout.ts       Función pura: una Fase y una vista → coordenadas absolutas.
+  general.ts      Las dos versiones de la figura general: el Modelo entero → SVG.
+  epf-svg.ts      Paleta, glifos y codos de EPF Composer, compartidos por las figuras EPF.
   formas.ts       El contorno de un nodo según su Tipo SPEM: chevron, hexágono, caja.
   roles.ts        Cascada al renombrar o borrar un Rol de la Fase.
   Diagrama.tsx    Dibuja ese layout como un <svg>. No calcula ningún número.
@@ -82,7 +103,7 @@ src/
   exportar.ts     PNG (canvas 3x) y PDF (print), sin dependencias.
   fuentes.css     Las tres caras en base64, para que el PNG no caiga a fuente del sistema.
   seed.ts         Las cuatro Fases del documento fuente.
-figuras/          Las veinte figuras finales, listas para el documento.
+figuras/          Las veinte figuras por Fase y las dos generales, listas para el documento.
 ```
 
 Dos dependencias de runtime: `react` y `react-dom`.
@@ -104,6 +125,7 @@ por decisión del spec.
 | [0006](docs/adr/0006-cuatro-vistas-por-fase.md) | Cuatro vistas por **Fase**; reemplaza a 0002 |
 | [0007](docs/adr/0007-notacion-epf-composer.md) | Las figuras adoptan la notación de EPF Composer / SPEM Designer |
 | [0008](docs/adr/0008-vista-detalle-epf.md) | Una quinta vista, **Detalle EPF**, con el layout de EPF |
+| [0009](docs/adr/0009-figura-general-del-proceso.md) | Una figura general del proceso completo, en dos versiones |
 
 El vocabulario del dominio está en [CONTEXT.md](CONTEXT.md). El spec y los tickets, en
 `.scratch/spem-playground/`.
