@@ -5,6 +5,10 @@
   --muted: #6b6f80;
   --rule: #d6d7de;
   --card: #ffffff;
+  /* Paleta EPF Composer / SPEM Designer: relleno crema, borde tostado, rotulo marron. */
+  --epf-relleno: #fbe3b8;
+  --epf-borde: #c8964b;
+  --epf-texto: #8a5a20;
   --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --sans: Geist, system-ui, -apple-system, "Helvetica Neue", sans-serif;
   --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -169,7 +173,7 @@ nav.vistas {
 .t-objetivo { font-size: 15px; fill: var(--muted); }
 .t-nodo { font-size: 16px; font-weight: 500; }
 .t-desc { font-size: 12.5px; fill: var(--muted); }
-.t-item { font-size: 13px; }
+.t-item { font-size: 13px; fill: var(--epf-texto); }
 .leyenda { color: var(--muted); }
 .leyenda line { stroke: var(--rule); }
 .t-leyenda { font-size: 12px; fill: var(--muted); }
@@ -188,12 +192,14 @@ nav.vistas {
 .chip rect { fill: none; stroke: var(--rule); }
 .chip text { font-family: var(--mono); font-size: 12px; fill: var(--muted); text-anchor: middle; }
 
-.panel { color: var(--muted); }
-.panel rect { fill: var(--card); stroke: var(--rule); }
+.panel { color: var(--epf-borde); }
+.panel rect { fill: var(--card); stroke: var(--epf-borde); }
 .panel-salida rect { stroke: var(--accent); }
 
-.nodo { color: var(--ink); }
-.nodo rect { fill: var(--card); stroke: var(--ink); }
+.nodo { color: var(--epf-borde); }
+.suelto { color: var(--epf-borde); }
+.nodo .caja { fill: var(--epf-relleno); stroke: var(--epf-borde); stroke-width: 1.2; }
+.t-nodo { fill: var(--epf-texto); }
 .flecha { fill: none; stroke: var(--muted); stroke-width: 1.5; }
 
 /* Entry motion: nodes settle in sequence, arrows draw themselves. */

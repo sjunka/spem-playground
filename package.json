@@ -9,7 +9,8 @@
     "test": "vitest run",
     "typecheck": "tsc -b --noEmit",
     "figuras": "vite-node scripts/figuras.tsx",
-    "fuentes": "node scripts/fuentes.mjs"
+    "fuentes": "node scripts/fuentes.mjs",
+    "epf": "vite-node scripts/epf.tsx"
   },
   "dependencies": {
     "react": "^19.2.0",

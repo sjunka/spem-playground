@@ -1,4 +1,5 @@
 import { CAJA, ICONOS, type IdIcono } from "./iconos";
+import { contorno } from "./formas";
 import { ESCALA, type DiagramLayout } from "./layout";
 
 const {
@@ -151,6 +152,18 @@ export function Diagrama({ l, faseId }: Props) {
         </g>
       ))}
 
+      {/* Rol y Producto sin caja: la Vista Detalle EPF los dibuja así. */}
+      {l.sueltos.map((s, i) => (
+        <g key={`s${i}`} className="suelto">
+          <Icono id={s.icono} x={s.x} y={s.iconoY} tam={IC.nodo} />
+          {s.lineas.map((linea, j) => (
+            <text key={j} x={s.textoX} y={s.y + I.lh * (j + 0.75)} className="t-item">
+              {linea}
+            </text>
+          ))}
+        </g>
+      ))}
+
       {l.flechas.map((flecha, i) => (
         <path
           key={i}
@@ -166,7 +179,8 @@ export function Diagrama({ l, faseId }: Props) {
           className="nodo"
           style={{ "--i": i } as React.CSSProperties}
         >
-          <rect x={nodo.x} y={nodo.y} width={nodo.w} height={nodo.h} rx={4} />
+          {/* EPF Composer da forma al nodo segun su Tipo SPEM: chevron, hexagono o caja. */}
+          <path className="caja" d={contorno(nodo.icono, nodo.x, nodo.y, nodo.w, nodo.h)} />
           <Icono id={nodo.icono} x={nodo.iconoX} y={nodo.iconoY} tam={IC.nodo} />
           {nodo.lineas.map((linea, j) => (
             <text
