@@ -1,5 +1,7 @@
 # Modelo de Procesos — SPEM 2.0 Playground
 
+**App en vivo: https://sjunka.github.io/spem-playground/**
+
 Editor web que produce los diagramas SPEM 2.0 del documento *Modelo de procesos*
 (sistema de riego autónomo guiado por drones para caficultura). El modelo se edita en un
 formulario, el diagrama se redibuja solo, y cada figura se exporta como PNG o PDF para
