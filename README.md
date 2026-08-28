@@ -13,6 +13,16 @@ veinte figuras, en la notación de EPF Composer / SPEM Designer.
 
 ![Fase 1, Resumen](figuras/fase-1-especificacion-global-de-nivel-cero-resumen.png)
 
+## La figura consolidada
+
+El modelo entero como una **red**, en la composición del *process model* de EPF
+Composer: cada celda lleva sus **Roles** arriba, la **Tarea** al centro y sus
+**Productos de Trabajo** abajo; las **Fases** 1 a 3 avanzan en cascada con el traspaso
+sobre el conector, y la **Fase 4** se repite dentro de la elipse hasta que el
+incremento pasa las pruebas y cumple la **Constitution.md**. Ver [ADR-0010](docs/adr/0010-figura-consolidada.md).
+
+![El modelo de procesos consolidado](figuras/consolidado-modelo-de-procesos.png)
+
 ## La figura general del proceso
 
 Para abrir el documento hace falta lo contrario a una **Vista**: una sola imagen con
@@ -63,9 +73,10 @@ npm run dev        # editor en http://localhost:5173
 |---|---|
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` | Build de producción en `dist/` |
-| `npm test` | Los 80 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
+| `npm test` | Los 83 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run figuras` | Regenera las veinte `figuras/*.png` a 3x con Chrome headless (macOS) |
+| `npm run consolidado` | Genera `figuras/consolidado-modelo-de-procesos.png`: las dieciocho **Tareas** en una sola red |
 | `npm run general` | Genera las dos versiones de la figura general: `figuras/general-a-*.png` y `general-b-*.png` |
 | `npm run epf` | Genera `figuras/epf-fase-*.png`: la figura EPF de cada **Fase**, sin abrir el editor |
 | `npm run fuentes` | Regenera `src/fuentes.css`, las tres tipografías en base64 |
@@ -90,6 +101,7 @@ El PDF abre el diálogo de impresión del navegador; ahí se elige «Guardar com
 src/
   iconos.ts       Los quince tipos de SPEM 2.0 como paths, con sus etiquetas.
   layout.ts       Función pura: una Fase y una vista → coordenadas absolutas.
+  consolidado.ts  La red completa: las dieciocho Tareas, sus decisiones y su ciclo.
   general.ts      Las dos versiones de la figura general: el Modelo entero → SVG.
   epf-svg.ts      Paleta, glifos y codos de EPF Composer, compartidos por las figuras EPF.
   formas.ts       El contorno de un nodo según su Tipo SPEM: chevron, hexágono, caja.
@@ -126,6 +138,7 @@ por decisión del spec.
 | [0007](docs/adr/0007-notacion-epf-composer.md) | Las figuras adoptan la notación de EPF Composer / SPEM Designer |
 | [0008](docs/adr/0008-vista-detalle-epf.md) | Una quinta vista, **Detalle EPF**, con el layout de EPF |
 | [0009](docs/adr/0009-figura-general-del-proceso.md) | Una figura general del proceso completo, en dos versiones |
+| [0010](docs/adr/0010-figura-consolidada.md) | La figura consolidada: una red con decisiones y ciclo, no una cascada |
 
 El vocabulario del dominio está en [CONTEXT.md](CONTEXT.md). El spec y los tickets, en
 `.scratch/spem-playground/`.
