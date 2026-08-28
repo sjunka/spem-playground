@@ -197,6 +197,7 @@ nav.vistas {
 .panel-salida rect { stroke: var(--accent); }
 
 .nodo { color: var(--epf-borde); }
+.suelto { color: var(--epf-borde); }
 .nodo .caja { fill: var(--epf-relleno); stroke: var(--epf-borde); stroke-width: 1.2; }
 .t-nodo { fill: var(--epf-texto); }
 .flecha { fill: none; stroke: var(--muted); stroke-width: 1.5; }

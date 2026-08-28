@@ -20,13 +20,17 @@ const sinSolapes = (nodos: Nodo[]) => {
       ]);
 };
 
-/** The types a figure actually draws: the title glyph plus every node's own. */
+/** The types a figure actually draws: the title glyph, every node's and every suelto's. */
 const dibujados = (l: ReturnType<typeof layout>) =>
-  new Set(["phase", ...l.nodos.map((n) => n.icono)]);
+  new Set([
+    "phase",
+    ...l.nodos.map((n) => n.icono),
+    ...l.sueltos.map((s) => s.icono),
+  ]);
 
 const vacia: Fase = { ...fase1, tareas: [], roles: [], entrada: [], salida: [] };
 
-describe("las cuatro vistas", () => {
+describe("las cinco vistas", () => {
   it("da el mismo tipo a las cuatro y no rompe con una Fase vacía", () => {
     for (const vista of VISTAS) {
       const l = layout(vacia, vista);
@@ -38,7 +42,13 @@ describe("las cuatro vistas", () => {
 
   it("rotula cada figura con el nombre de su vista", () => {
     const nombres = VISTAS.map((v) => layout(fase1, v).titulo.subtitulo);
-    expect(nombres).toEqual(["Resumen", "Flujo", "Roles", "Descomposición"]);
+    expect(nombres).toEqual([
+      "Resumen",
+      "Flujo",
+      "Roles",
+      "Descomposición",
+      "Detalle EPF",
+    ]);
     for (const vista of VISTAS)
       expect(layout(fase1, vista).titulo.nombre).toBe(fase1.nombre);
   });
@@ -266,5 +276,41 @@ describe("vista Flujo", () => {
     const l = layout(fase, vista);
     expect(l.nodos).toHaveLength(fase.tareas.length);
     expect(l.height).toBeGreaterThan(0);
+  });
+});
+
+describe("vista Detalle EPF", () => {
+  it("pone Roles a la izquierda, Tareas al centro y Productos a la derecha", () => {
+    const l = layout(fase1, "detalle");
+    const tarea = l.nodos[0];
+    // La banda a la que pertenece un suelto la dice su x, no su icono: la Fase 1
+    // tiene un Producto de Trabajo cuyo Tipo SPEM también es «Uso de Rol».
+    const izquierda = l.sueltos.filter((s) => s.x < tarea.x);
+    const derecha = l.sueltos.filter((s) => s.x > tarea.x);
+    expect(izquierda.length).toBe(
+      fase1.tareas.reduce((n, t) => n + t.roles.length, 0),
+    );
+    expect(izquierda.length + derecha.length).toBe(l.sueltos.length);
+    for (const r of izquierda) expect(r.x + 260).toBeLessThanOrEqual(tarea.x);
+    for (const p of derecha) expect(p.x).toBeGreaterThan(tarea.x + tarea.w);
+  });
+
+  it("etiqueta cada arista con un estereotipo de SPEM 2.0", () => {
+    for (const fase of fases) {
+      const l = layout(fase, "detalle");
+      const conEtiqueta = l.flechas.filter((f) => f.etiqueta);
+      const esperadas = fase.tareas.reduce(
+        (n, t) => n + t.roles.length + t.entrada.length + t.salida.length,
+        0,
+      );
+      expect(conEtiqueta.length).toBe(esperadas);
+      for (const f of conEtiqueta)
+        expect(Object.values(ESTEREOTIPOS)).toContain(f.etiqueta!.texto);
+    }
+  });
+
+  it("no dibuja paneles ni chips: las bandas los reemplazan", () => {
+    const l = layout(fases[3], "detalle");
+    expect([l.paneles.length, l.chips.length]).toEqual([0, 0]);
   });
 });

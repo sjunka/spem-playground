@@ -152,6 +152,18 @@ export function Diagrama({ l, faseId }: Props) {
         </g>
       ))}
 
+      {/* Rol y Producto sin caja: la Vista Detalle EPF los dibuja así. */}
+      {l.sueltos.map((s, i) => (
+        <g key={`s${i}`} className="suelto">
+          <Icono id={s.icono} x={s.x} y={s.iconoY} tam={IC.nodo} />
+          {s.lineas.map((linea, j) => (
+            <text key={j} x={s.textoX} y={s.y + I.lh * (j + 0.75)} className="t-item">
+              {linea}
+            </text>
+          ))}
+        </g>
+      ))}
+
       {l.flechas.map((flecha, i) => (
         <path
           key={i}

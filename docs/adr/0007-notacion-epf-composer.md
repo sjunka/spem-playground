@@ -35,3 +35,5 @@ a la derecha— para pegar en el documento sin pasar por el editor.
   la forma dicen lo mismo.
 - EPF limita la variabilidad de contenido a mapeos uno a uno; como aquí no hay capa de
   Method Content (ADR-0001), esa limitación no nos alcanza.
+
+- La quinta **Vista**, **Detalle EPF**, lleva esta notación a su layout propio. Ver ADR-0008.

@@ -66,6 +66,18 @@ export type DiagramLayout = {
     }[];
   }[];
   nodos: Nodo[];
+  /**
+   * Rol y Producto de Trabajo dibujados como EPF Composer los dibuja: glifo y
+   * texto, sin caja. Solo la Vista Detalle EPF los usa. Ver ADR-0008.
+   */
+  sueltos: {
+    lineas: string[];
+    icono: IdIcono;
+    x: number;
+    y: number;
+    iconoY: number;
+    textoX: number;
+  }[];
   flechas: Flecha[];
   /**
    * Decodes the glyphs the figure actually uses. ADR-0005 ruled the legend out
@@ -89,8 +101,8 @@ export type DiagramLayout = {
 
 /** The five stereotypes the four Vistas emit, in the OMG normative spelling. */
 export const ESTEREOTIPOS = {
-  perform: "«perform»",
-  assist: "«assist»",
+  perform: "«performs, primary»",
+  assist: "«assists»",
   include: "«include»",
   entrada: "«input, mandatory»",
   salida: "«output, mandatory»",
@@ -230,6 +242,34 @@ const codo = (x1: number, y1: number, x2: number, y2: number, giro?: number) => 
     a,
     `L ${mx} ${y2 - RADIO * baja}`,
     b,
+    `L ${x2} ${y2}`,
+  ].join(" ");
+};
+
+/**
+ * Horizontal run, one quarter-arc, then vertical run: the edge enters the top or
+ * the bottom edge of a node instead of its side. The Detalle EPF view routes its
+ * Entradas and Salidas this way, which is what keeps them off the Tarea's body.
+ */
+const codoHV = (x1: number, y1: number, x2: number, y2: number) => {
+  const s = Math.sign(x2 - x1) || 1;
+  const v = Math.sign(y2 - y1) || 1;
+  return [
+    `M ${x1} ${y1}`,
+    `L ${x2 - RADIO * s} ${y1}`,
+    `A ${RADIO} ${RADIO} 0 0 ${s * v > 0 ? 1 : 0} ${x2} ${y1 + RADIO * v}`,
+    `L ${x2} ${y2}`,
+  ].join(" ");
+};
+
+/** The mirror image: down the spine first, then across to the Producto. */
+const codoVH = (x1: number, y1: number, x2: number, y2: number) => {
+  const s = Math.sign(x2 - x1) || 1;
+  const v = Math.sign(y2 - y1) || 1;
+  return [
+    `M ${x1} ${y1}`,
+    `L ${x1} ${y2 - RADIO * v}`,
+    `A ${RADIO} ${RADIO} 0 0 ${s * v > 0 ? 0 : 1} ${x1 + RADIO * s} ${y2}`,
     `L ${x2} ${y2}`,
   ].join(" ");
 };
@@ -413,6 +453,8 @@ export function layout(fase: Fase, vista: Vista = "resumen"): DiagramLayout {
       return roles(fase);
     case "descomposicion":
       return descomposicion(fase);
+    case "detalle":
+      return detalle(fase);
     default:
       return resumen(fase);
   }
@@ -502,6 +544,7 @@ function resumen(fase: Fase): DiagramLayout {
     chips: marco.chips,
     paneles,
     nodos,
+    sueltos: [],
     flechas,
   };
 }
@@ -605,6 +648,7 @@ function flujo(fase: Fase): DiagramLayout {
     chips: [],
     paneles: [],
     nodos,
+    sueltos: [],
     flechas,
   };
 }
@@ -701,6 +745,7 @@ function roles(fase: Fase): DiagramLayout {
     chips: [],
     paneles: [],
     nodos,
+    sueltos: [],
     flechas,
   };
 }
@@ -738,6 +783,143 @@ function descomposicion(fase: Fase): DiagramLayout {
     chips: [],
     paneles: [],
     nodos,
+    sueltos: [],
+    flechas,
+  };
+}
+
+// --- Vista Detalle EPF -------------------------------------------------------
+// El diagrama de detalle de EPF Composer: tres bandas fijas —Roles, Tareas,
+// Productos de Trabajo— y, por Tarea, la Entrada encima y la Salida debajo, de
+// modo que ninguna arista cruce una caja. Ver ADR-0008.
+const ROL_W = 260;
+const PROD_W = 300;
+const DET_TAREAS_X = PAD + ROL_W + GAP_ESTEREOTIPO;
+const DET_PROD_X = DET_TAREAS_X + NODE_W + GAP_ESTEREOTIPO;
+const ANCHO_DET = DET_PROD_X + PROD_W + PAD;
+const DET_GAP = 56; // aire entre la banda de una Tarea y la de la siguiente
+const DET_SEP = 40; // aire entre la Tarea y sus Productos de Trabajo
+
+/** Glyph plus wrapped text, no box: how EPF draws a Rol or a Producto. */
+function suelto(texto: string, icono: IdIcono, x: number, y: number, w: number) {
+  const canal = ICONO_ITEM + ICONO_GAP_ITEM + 8;
+  const lineas = wrap(texto, FS_ITEM, w - canal);
+  const h = Math.max(cuadricula(ICONO_NODO + 8), lineas.length * line(FS_ITEM));
+  const item = {
+    lineas,
+    icono,
+    x,
+    y,
+    iconoY: cuadricula(y + h / 2 - ICONO_NODO / 2),
+    textoX: x + canal,
+  };
+  return { item, h };
+}
+
+const altoSueltos = (textos: { texto: string }[], w: number) =>
+  textos.reduce((h, t) => h + suelto(t.texto, "workProduct", 0, 0, w).h + 12, 0) -
+  (textos.length ? 12 : 0);
+
+function detalle(fase: Fase): DiagramLayout {
+  const marco = encabezado(fase, "detalle", ANCHO_DET, false);
+  const nodos: Nodo[] = [];
+  const sueltos: DiagramLayout["sueltos"] = [];
+  const flechas: Flecha[] = [];
+
+  let y = marco.filaY + line(FS_ITEM);
+  fase.tareas.forEach((tarea, i) => {
+    const tareaAlto = caja(tarea.id, tarea.nombre, undefined, tarea.icono, 0, 0, NODE_W).h;
+    const hRoles = altoSueltos(tarea.roles.map((r) => ({ texto: r.rol })), ROL_W);
+    const hEnt = altoSueltos(tarea.entrada, PROD_W);
+    const hSal = altoSueltos(tarea.salida, PROD_W);
+    const hBanda =
+      hEnt + (hEnt ? DET_SEP : 0) + tareaAlto + (hSal ? DET_SEP : 0) + hSal;
+    const alto = Math.max(hRoles, hBanda);
+    const top = y;
+    const ty = top + (alto - hBanda) / 2 + hEnt + (hEnt ? DET_SEP : 0);
+
+    const nodo = caja(tarea.id, tarea.nombre, undefined, tarea.icono, DET_TAREAS_X, cuadricula(ty), NODE_W);
+    nodos.push(nodo);
+
+    // --- Roles: cada uno con su propio giro, para que no se solapen dos aristas.
+    let ry = cuadricula(centro(nodo) - hRoles / 2);
+    const girosRol = giros(tarea.roles.length, PAD + ROL_W, DET_TAREAS_X);
+    tarea.roles.forEach((rol, k) => {
+      const { item, h } = suelto(rol.rol, "roleUse", PAD, ry, ROL_W);
+      sueltos.push(item);
+      const y1 = cuadricula(ry + h / 2);
+      const y2 = cuadricula(nodo.y + (nodo.h * (k + 1)) / (tarea.roles.length + 1));
+      flechas.push({
+        tipo: "flujo",
+        d: codo(PAD + ROL_W - 8, y1, nodo.x, y2, girosRol[k]),
+        // Por encima del tramo, nunca sobre él: con y1 ≈ y2 el punto medio cae
+        // justo en la línea y el estereotipo queda tachado por su propia arista.
+        etiqueta: {
+          texto: ESTEREOTIPOS[rol.papel],
+          x: cuadricula(girosRol[k] ?? (PAD + ROL_W + nodo.x) / 2),
+          y: Math.min(y1, y2) - 12,
+        },
+      });
+      ry += h + 12;
+    });
+
+    // --- Productos: Entrada por el borde superior, Salida por el inferior.
+    const columna = (items: Producto[], desde: number, entrada: boolean) => {
+      let py = desde;
+      items.forEach((producto, k) => {
+        const { item, h } = suelto(producto.texto, producto.icono, DET_PROD_X, py, PROD_W);
+        sueltos.push(item);
+        const py1 = cuadricula(py + h / 2);
+        // Una x propia por arista dentro del cuerpo de la Tarea, nunca en la punta.
+        const ax = cuadricula(nodo.x + 48 + ((NODE_W - 120) * (k + 1)) / (items.length + 1));
+        const etiquetaX = cuadricula(DET_PROD_X - 96);
+        flechas.push({
+          tipo: entrada ? "consume" : "produce",
+          d: entrada
+            ? codoHV(DET_PROD_X - 8, py1, ax, nodo.y)
+            : codoVH(ax, nodo.y + nodo.h, DET_PROD_X - 8, py1),
+          etiqueta: {
+            texto: entrada ? ESTEREOTIPOS.entrada : ESTEREOTIPOS.salida,
+            x: etiquetaX,
+            y: py1 - 8,
+          },
+        });
+        py += h + 12;
+      });
+    };
+    columna(tarea.entrada, top + (alto - hBanda) / 2, true);
+    columna(tarea.salida, cuadricula(nodo.y + nodo.h + DET_SEP), false);
+
+    // --- Cadena entre Tareas: misma x en los dos extremos, segmento recto.
+    if (i > 0) {
+      const previo = nodos[i - 1];
+      flechas.push({
+        tipo: "flujo",
+        d: `M ${previo.x + 48} ${previo.y + previo.h} L ${nodo.x + 48} ${nodo.y}`,
+      });
+    }
+    y = top + alto + DET_GAP;
+  });
+
+  const fondo = Math.max(
+    marco.filaY,
+    ...nodos.map((n) => n.y + n.h),
+    ...sueltos.map((s) => s.y + s.lineas.length * line(FS_ITEM)),
+  );
+  const usados = new Set<IdIcono>([
+    "phase",
+    ...(fase.tareas.some((t) => t.roles.length) ? (["roleUse"] as IdIcono[]) : []),
+    ...fase.tareas.map((t) => t.icono),
+    ...fase.tareas.flatMap((t) => [...t.entrada, ...t.salida]).map((p) => p.icono),
+  ]);
+
+  return {
+    ...cerrar(marco, usados, fondo),
+    titulo: marco.titulo,
+    chips: [],
+    paneles: [],
+    nodos,
+    sueltos,
     flechas,
   };
 }

@@ -10,7 +10,7 @@ en un formulario y se exporta como PNG o PDF para insertarlo de vuelta en el doc
 
 **Fase**:
 Una etapa del proceso de ingeniería, delimitada por sus entradas y salidas. El modelo
-tiene cuatro. Cada Fase produce cuatro imágenes, una por **Vista**. Ver ADR-0006.
+tiene cuatro. Cada Fase produce cinco imágenes, una por **Vista**. Ver ADR-0006 y ADR-0008.
 _Avoid_: Etapa, iteración, sprint, Phase
 
 **Tarea**:
@@ -25,8 +25,10 @@ documento fuente no da ese reparto por Tarea; lo aporta el editor. Ver ADR-0006.
 _Avoid_: Actor, responsable, cargo, participante
 
 **Vista**:
-Una de las cuatro figuras que una Fase produce: **Resumen**, **Flujo**, **Roles** y
-**Descomposición**. La Fase sigue siendo la unidad del modelo; la Vista es la unidad de
+Una de las cinco figuras que una Fase produce: **Resumen**, **Flujo**, **Roles**,
+**Descomposición** y **Detalle EPF** —esta última en la notación de EPF Composer:
+**Roles** a la izquierda, la cadena de **Tareas** al centro y los **Productos de
+Trabajo** a la derecha. Ver ADR-0008. La Fase sigue siendo la unidad del modelo; la Vista es la unidad de
 exportación, y cada una responde una pregunta distinta sobre la misma Fase.
 _Avoid_: Pestaña, modo, perspectiva, view, diagrama
 

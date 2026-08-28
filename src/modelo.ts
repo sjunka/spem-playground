@@ -33,10 +33,10 @@ export type Modelo = { version: 3; fases: Fase[] };
 
 export const VERSION = 3;
 
-/** The four figures a Fase produces. Ver ADR-0006. */
-export type Vista = "resumen" | "flujo" | "roles" | "descomposicion";
+/** The figures a Fase produces. Ver ADR-0006 y ADR-0008. */
+export type Vista = "resumen" | "flujo" | "roles" | "descomposicion" | "detalle";
 
-export const VISTAS: Vista[] = ["resumen", "flujo", "roles", "descomposicion"];
+export const VISTAS: Vista[] = ["resumen", "flujo", "roles", "descomposicion", "detalle"];
 
 /** Interface prose stays in Spanish; only the OMG stereotypes are in English. */
 export const NOMBRE_VISTA: Record<Vista, string> = {
@@ -44,6 +44,7 @@ export const NOMBRE_VISTA: Record<Vista, string> = {
   flujo: "Flujo",
   roles: "Roles",
   descomposicion: "Descomposición",
+  detalle: "Detalle EPF",
 };
 
 export const PAPELES: Papel[] = ["perform", "assist"];
