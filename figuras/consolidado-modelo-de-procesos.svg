@@ -7,9 +7,9 @@
 <text x="70" y="108" fill="#3a3a44" font-size="34" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">El modelo de procesos consolidado</text>
 <text x="70" y="134" fill="#6f6f8c" font-size="12" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Sistema de riego autónomo guiado por drones para caficultura — las cuatro Fases, las dieciocho Tareas y los siete Roles en una sola red.</text>
 <text x="70" y="154" fill="#6f6f8c" font-size="11" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Cada celda: los Roles arriba, la Tarea al centro, los Productos de Trabajo que produce abajo.</text>
-<rect x="259" y="196" width="1062" height="228" rx="16" fill="#fdfaf3" stroke="#c8964b" stroke-opacity="0.5" stroke-dasharray="7 5"/>
-<text x="277" y="220" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">FASE 1</text>
-<text x="351" y="221" fill="#8a5a20" font-size="13" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Especificación global de nivel cero</text>
+<rect x="259" y="228" width="1062" height="228" rx="16" fill="#fdfaf3" stroke="#c8964b" stroke-opacity="0.5" stroke-dasharray="7 5"/>
+<text x="277" y="252" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">FASE 1</text>
+<text x="351" y="253" fill="#8a5a20" font-size="13" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Especificación global de nivel cero</text>
 <rect x="259" y="558" width="1782" height="224" rx="16" fill="#fdfaf3" stroke="#c8964b" stroke-opacity="0.5" stroke-dasharray="7 5"/>
 <text x="277" y="582" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">FASE 2</text>
 <text x="351" y="583" fill="#8a5a20" font-size="13" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Descomposición en dominios</text>
@@ -22,10 +22,10 @@
 <text x="960" y="1679" fill="#8a5a20" font-size="26" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="middle">Ciclo de crecimiento</text>
 <text x="960" y="1705" fill="#6f6f8c" font-size="11" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">El incremento recorre el ciclo cada 2 a 4 semanas y vuelve a empezar</text>
 <text x="960" y="1723" fill="#6f6f8c" font-size="11" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">hasta que pasa las pruebas y cumple la Constitución.</text>
-<path d="M186 320 L305 320" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
-<path d="M555 320 L665 320" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
-<path d="M915 320 L1025 320" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
-<path d="M1150 386 L1150 488 Q1150 500 1138 500 L442 500 Q430 500 430 512 L430 628" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
+<path d="M186 352 L305 352" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
+<path d="M555 352 L665 352" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
+<path d="M915 352 L1025 352" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
+<path d="M1150 418 L1150 508 Q1150 520 1138 520 L442 520 Q430 520 430 532 L430 628" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M555 680 L665 680" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M915 680 L1025 680" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M1275 680 L1385 680" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
@@ -35,7 +35,7 @@
 <path d="M915 1060 L1025 1060" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M1275 1060 L1385 1060" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M1635 1060 L1795 1060" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
-<path d="M1900 1012 L1900 937 Q1900 925 1888 925 L442 925 Q430 925 430 937 L430 996" fill="none" stroke="#6f6f8c" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#punta)"/>
+<path d="M2005 1060 L2168 1060 Q2180 1060 2180 1048 L2180 208 Q2180 196 2168 196 L442 196 Q430 196 430 208 L430 274" fill="none" stroke="#6f6f8c" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#punta)"/>
 <path d="M1900 1108 L1900 1238 Q1900 1250 1888 1250 L482 1250 Q470 1250 470 1262 L470 1436" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M595 1500 L705 1500" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M955 1500 L1065 1500" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
@@ -47,19 +47,19 @@
 <path d="M595 1830 L505 1830" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
 <path d="M400 1782 L400 1677 Q400 1665 412 1665 L458 1665 Q470 1665 470 1653 L470 1564" fill="none" stroke="#6f6f8c" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#punta)"/>
 <path d="M400 1878 L400 2053 Q400 2065 412 2065 L948 2065 Q960 2065 960 2077 L960 2100" fill="none" stroke="#6f6f8c" stroke-width="1.3" marker-end="url(#punta)"/>
-<circle cx="150" cy="320" r="30" fill="#ffffff" stroke="#8a5a20" stroke-width="2"/>
-<circle cx="150" cy="320" r="23" fill="#8a5a20"/>
-<text x="150" y="368" fill="#8a5a20" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.1em">INICIO</text>
-<rect x="494" y="482" width="103" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
-<path d="M503 486 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M516 486 v7 h7" fill="none" stroke="#c8964b"/><line x1="506" y1="497" x2="520" y2="497" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="500" x2="520" y2="500" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="503" x2="520" y2="503" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="506" x2="520" y2="506" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="509" x2="520" y2="509" stroke="#4a72c4" stroke-width="1.4"/>
-<text x="532" y="494" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Constitution.md</text>
-<rect x="724" y="482" width="174.4" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
-<path d="M734 512 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
-<text x="762" y="494" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Políticas y límites de operación</text>
-<rect x="954" y="482" width="111.4" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
-<path d="M964 512 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
-<text x="992" y="494" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Reglas de negocio</text>
+<circle cx="150" cy="352" r="30" fill="#ffffff" stroke="#8a5a20" stroke-width="2"/>
+<circle cx="150" cy="352" r="23" fill="#8a5a20"/>
+<text x="150" y="400" fill="#8a5a20" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.1em">INICIO</text>
+<rect x="494" y="502" width="103" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
+<path d="M503 506 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M516 506 v7 h7" fill="none" stroke="#c8964b"/><line x1="506" y1="517" x2="520" y2="517" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="520" x2="520" y2="520" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="523" x2="520" y2="523" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="526" x2="520" y2="526" stroke="#4a72c4" stroke-width="1.4"/><line x1="506" y1="529" x2="520" y2="529" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="532" y="514" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Constitution.md</text>
+<rect x="724" y="502" width="174.4" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
+<path d="M734 532 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="762" y="514" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Políticas y límites de operación</text>
+<rect x="954" y="502" width="111.4" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
+<path d="M964 532 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="992" y="514" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Reglas de negocio</text>
 <rect x="534" y="862" width="145" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
 <path d="M543 866 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M556 866 v7 h7" fill="none" stroke="#c8964b"/><line x1="546" y1="877" x2="560" y2="877" stroke="#4a72c4" stroke-width="1.4"/><line x1="546" y1="880" x2="560" y2="880" stroke="#4a72c4" stroke-width="1.4"/><line x1="546" y1="883" x2="560" y2="883" stroke="#4a72c4" stroke-width="1.4"/><line x1="546" y1="886" x2="560" y2="886" stroke="#4a72c4" stroke-width="1.4"/><line x1="546" y1="889" x2="560" y2="889" stroke="#4a72c4" stroke-width="1.4"/>
@@ -89,8 +89,8 @@
 <rect x="1274" y="1232" width="132.4" height="34" rx="4" fill="#ffffff" stroke="#d9d9e0"/>
 <path d="M1300 1240 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(281.6, 271.92)" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1312" y="1244" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Pipeline de CI/CD base</text>
-<rect x="1922" y="915" width="24" height="14" rx="3" fill="#ffffff" stroke="#d9d9e0"/>
-<text x="1934" y="925" fill="#6f6f8c" font-size="8.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">No</text>
+<rect x="2168" y="690" width="24" height="14" rx="3" fill="#ffffff" stroke="#d9d9e0"/>
+<text x="2180" y="700" fill="#6f6f8c" font-size="8.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">No</text>
 <rect x="1922" y="1234" width="24" height="14" rx="3" fill="#ffffff" stroke="#d9d9e0"/>
 <text x="1934" y="1244" fill="#6f6f8c" font-size="8.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">Sí</text>
 <path d="M1530 1452 L1635 1500 L1530 1548 L1425 1500 Z" fill="#ffffff" stroke="#4a72c4" stroke-width="1.3"/>
@@ -129,30 +129,30 @@
 <text x="1402" y="2166" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Releases de software</text>
 <path d="M1664 2180 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
 <text x="1692" y="2166" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Manual de operación actualizado</text>
-<rect x="1380" y="200" width="810" height="200" rx="14" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.6"/>
-<text x="1402" y="228" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">EQUIPO</text>
-<text x="1472" y="229" fill="#8a5a20" font-size="13" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Los siete Roles del proceso</text>
-<ellipse cx="1420" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1410 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1442" y="264" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
-<ellipse cx="1610" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1600 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1632" y="264" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio (caficultor)</text>
-<ellipse cx="1800" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1790 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1822" y="264" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de seguridad de vuelo</text>
-<ellipse cx="1990" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1980 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="2012" y="264" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
-<ellipse cx="1420" cy="334" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1410 352 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1442" y="338" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de plataforma</text>
-<ellipse cx="1610" cy="334" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1600 352 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1632" y="338" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de adaptación</text>
-<ellipse cx="1800" cy="334" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1790 352 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1822" y="338" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
+<rect x="1380" y="232" width="770" height="200" rx="14" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.6"/>
+<text x="1402" y="260" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">EQUIPO</text>
+<text x="1472" y="261" fill="#8a5a20" font-size="13" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Los siete Roles del proceso</text>
+<ellipse cx="1420" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1410 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1442" y="296" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<ellipse cx="1610" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1600 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1632" y="296" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio (caficultor)</text>
+<ellipse cx="1800" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1790 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1822" y="296" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de seguridad de vuelo</text>
+<ellipse cx="1990" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1980 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="2012" y="296" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
+<ellipse cx="1420" cy="366" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1410 384 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1442" y="370" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de plataforma</text>
+<ellipse cx="1610" cy="366" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1600 384 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1632" y="370" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de adaptación</text>
+<ellipse cx="1800" cy="366" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1790 384 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1822" y="370" fill="#8a5a20" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
 <line x1="70" y1="2220" x2="2190" y2="2220" stroke="#d9d9e0"/>
 <text x="70" y="2244" fill="#6f6f8c" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">LEYENDA SPEM 2.0</text>
 <path d="M0 0 H34 L44 10 L34 20 H0 Z" transform="translate(250 2232)" fill="#fbe3b8" stroke="#c8964b"/>
@@ -171,59 +171,59 @@
 <text x="1554" y="2246" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Producto de Trabajo — debajo de la Tarea que lo produce</text>
 <path d="M1950 2242 h44" stroke="#6f6f8c" stroke-dasharray="5 4"/>
 <text x="2002" y="2246" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Retorno del ciclo</text>
-<path d="M305 242 H539 L555 320 L539 398 H305 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
-<ellipse cx="353.3333333333333" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M343.3333333333333 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="353.3333333333333" y="286" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
-<ellipse cx="430" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M420 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="430" y="286" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
-<text x="430" y="294" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">(caficultor)</text>
-<ellipse cx="506.6666666666667" cy="260" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M496.6666666666667 278 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="506.6666666666667" y="286" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de datos</text>
-<rect x="327" y="300" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
-<path transform="translate(333 311) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="353" y="316.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Definir Constitución, reglas y</text>
-<text x="353" y="328.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">contratos globales</text>
-<path d="M342.3333333333333 342 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M355.3333333333333 342 v7 h7" fill="none" stroke="#c8964b"/><line x1="345.3333333333333" y1="353" x2="359.3333333333333" y2="353" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="356" x2="359.3333333333333" y2="356" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="359" x2="359.3333333333333" y2="359" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="362" x2="359.3333333333333" y2="362" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="365" x2="359.3333333333333" y2="365" stroke="#4a72c4" stroke-width="1.4"/>
-<text x="353.3333333333333" y="374" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Constitution.md</text>
-<path d="M419 342 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M432 342 v7 h7" fill="none" stroke="#c8964b"/><line x1="422" y1="353" x2="436" y2="353" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="356" x2="436" y2="356" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="359" x2="436" y2="359" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="362" x2="436" y2="362" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="365" x2="436" y2="365" stroke="#4a72c4" stroke-width="1.4"/>
-<text x="430" y="374" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Contratos globales</text>
-<path d="M495.6666666666667 342 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M508.6666666666667 342 v7 h7" fill="none" stroke="#c8964b"/><line x1="498.6666666666667" y1="353" x2="512.6666666666667" y2="353" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="356" x2="512.6666666666667" y2="356" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="359" x2="512.6666666666667" y2="359" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="362" x2="512.6666666666667" y2="362" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="365" x2="512.6666666666667" y2="365" stroke="#4a72c4" stroke-width="1.4"/>
-<text x="506.6666666666667" y="374" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Contratos de</text>
-<text x="506.6666666666667" y="382" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">integración entre</text>
-<text x="506.6666666666667" y="390" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">dominios</text>
-<path d="M665 250 H899 L915 320 L899 390 H665 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
-<ellipse cx="732.5" cy="268" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M722.5 286 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="732.5" y="294" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
-<text x="732.5" y="302" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">(caficultor)</text>
-<ellipse cx="847.5" cy="268" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M837.5 286 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="847.5" y="294" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de datos</text>
-<rect x="687" y="308" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
-<path transform="translate(693 319) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="713" y="324.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Capturar y modelar el</text>
-<text x="713" y="336.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">conocimiento inicial del dominio</text>
-<path d="M780 376 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
-<text x="790" y="382" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Reglas de negocio</text>
-<path d="M1025 254 H1259 L1275 320 L1259 386 H1025 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
-<ellipse cx="1092.5" cy="272" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1082.5 290 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1092.5" y="298" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de seguridad de vuelo</text>
-<ellipse cx="1207.5" cy="272" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1197.5 290 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1207.5" y="298" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
-<rect x="1047" y="304" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
-<path transform="translate(1053 315) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
-<text x="1073" y="320.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Definir restricciones de</text>
-<text x="1073" y="332.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">seguridad de vuelo y normativas</text>
-<path d="M1140 372 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
-<text x="1150" y="378" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Políticas y límites de operación</text>
+<path d="M305 274 H539 L555 352 L539 430 H305 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<ellipse cx="353.3333333333333" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M343.3333333333333 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="353.3333333333333" y="318" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
+<ellipse cx="430" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M420 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="430" y="318" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
+<text x="430" y="326" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">(caficultor)</text>
+<ellipse cx="506.6666666666667" cy="292" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M496.6666666666667 310 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="506.6666666666667" y="318" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de datos</text>
+<rect x="327" y="332" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
+<path transform="translate(333 343) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="353" y="348.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Definir Constitución, reglas y</text>
+<text x="353" y="360.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">contratos globales</text>
+<path d="M342.3333333333333 374 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M355.3333333333333 374 v7 h7" fill="none" stroke="#c8964b"/><line x1="345.3333333333333" y1="385" x2="359.3333333333333" y2="385" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="388" x2="359.3333333333333" y2="388" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="391" x2="359.3333333333333" y2="391" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="394" x2="359.3333333333333" y2="394" stroke="#4a72c4" stroke-width="1.4"/><line x1="345.3333333333333" y1="397" x2="359.3333333333333" y2="397" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="353.3333333333333" y="406" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Constitution.md</text>
+<path d="M419 374 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M432 374 v7 h7" fill="none" stroke="#c8964b"/><line x1="422" y1="385" x2="436" y2="385" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="388" x2="436" y2="388" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="391" x2="436" y2="391" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="394" x2="436" y2="394" stroke="#4a72c4" stroke-width="1.4"/><line x1="422" y1="397" x2="436" y2="397" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="430" y="406" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Contratos globales</text>
+<path d="M495.6666666666667 374 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M508.6666666666667 374 v7 h7" fill="none" stroke="#c8964b"/><line x1="498.6666666666667" y1="385" x2="512.6666666666667" y2="385" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="388" x2="512.6666666666667" y2="388" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="391" x2="512.6666666666667" y2="391" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="394" x2="512.6666666666667" y2="394" stroke="#4a72c4" stroke-width="1.4"/><line x1="498.6666666666667" y1="397" x2="512.6666666666667" y2="397" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="506.6666666666667" y="406" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Contratos de</text>
+<text x="506.6666666666667" y="414" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">integración entre</text>
+<text x="506.6666666666667" y="422" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">dominios</text>
+<path d="M665 282 H899 L915 352 L899 422 H665 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<ellipse cx="732.5" cy="300" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M722.5 318 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="732.5" y="326" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
+<text x="732.5" y="334" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">(caficultor)</text>
+<ellipse cx="847.5" cy="300" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M837.5 318 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="847.5" y="326" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de datos</text>
+<rect x="687" y="340" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
+<path transform="translate(693 351) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="713" y="356.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Capturar y modelar el</text>
+<text x="713" y="368.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">conocimiento inicial del dominio</text>
+<path d="M780 408 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="790" y="414" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Reglas de negocio</text>
+<path d="M1025 286 H1259 L1275 352 L1259 418 H1025 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<ellipse cx="1092.5" cy="304" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1082.5 322 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1092.5" y="330" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de seguridad de vuelo</text>
+<ellipse cx="1207.5" cy="304" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1197.5 322 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1207.5" y="330" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
+<rect x="1047" y="336" width="202" height="36" rx="5" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.55"/>
+<path transform="translate(1053 347) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="1073" y="352.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Definir restricciones de</text>
+<text x="1073" y="364.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">seguridad de vuelo y normativas</text>
+<path d="M1140 404 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="1150" y="410" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Políticas y límites de operación</text>
 <path d="M305 628 H539 L555 680 L539 732 H305 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
 <ellipse cx="372.5" cy="646" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M362.5 664 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>

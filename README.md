@@ -19,7 +19,8 @@ El modelo entero como una **red**, en la composición del *process model* de EPF
 Composer: cada celda lleva sus **Roles** arriba, la **Tarea** al centro y sus
 **Productos de Trabajo** abajo; las **Fases** 1 a 3 avanzan en cascada con el traspaso
 sobre el conector, y la **Fase 4** se repite dentro de la elipse hasta que el
-incremento pasa las pruebas y cumple la **Constitution.md**. Ver [ADR-0010](docs/adr/0010-figura-consolidada.md).
+incremento pasa las pruebas y cumple la **Constitution.md**. Los tres rombos llevan su
+retorno: la traza mínima que no responde en SIL/HIL vuelve a la **Fase 1**. Ver [ADR-0010](docs/adr/0010-figura-consolidada.md).
 
 ![El modelo de procesos consolidado](figuras/consolidado-modelo-de-procesos.png)
 

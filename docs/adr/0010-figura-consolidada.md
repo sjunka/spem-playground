@@ -24,8 +24,9 @@ Se añade `src/consolidado.ts`: **una sola** figura con las dieciocho **Tareas**
 - **La red.** Las **Fases** 1 a 3 avanzan en cascada, cada una sobre su banda, y entre
   ellas los **Productos de Trabajo** del traspaso viajan **sobre** el conector.
 - **Las decisiones.** Tres rombos, con sus retornos punteados: la traza mínima que no
-  responde vuelve al prototipo, el incremento que no pasa las pruebas vuelve a
-  construcción, el que no cumple la **Constitution.md** vuelve a sincronización.
+  responde vuelve a la **Fase 1** —no al prototipo: si la traza no responde, lo que
+  está mal es el marco, no el intento—, el incremento que no pasa las pruebas vuelve a
+  construcción, y el que no cumple la **Constitution.md** vuelve a sincronización.
 - **El ciclo.** La **Fase 4** va dentro de una elipse: entra el prototipo validado y
   no se sale de ella hasta que el incremento pasa las dos puertas.
 

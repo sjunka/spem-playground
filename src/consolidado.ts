@@ -185,7 +185,7 @@ function traspaso(productos: Producto[], x: number, y: number, paso = 260) {
 // El mapa de la figura. Bandas 1–3 en cascada; la Fase 4 cierra el ciclo dentro
 // de la elipse, con sus dos decisiones y sus dos retornos.
 const POS: Record<string, [number, number]> = {
-  "t1-1": [430, 320], "t1-2": [790, 320], "t1-3": [1150, 320],
+  "t1-1": [430, 352], "t1-2": [790, 352], "t1-3": [1150, 352],
   "t2-1": [430, 680], "t2-2": [790, 680], "t2-3": [1150, 680], "t2-4": [1510, 680], "t2-5": [1870, 680],
   "t3-1": [430, 1060], "t3-2": [790, 1060], "t3-3": [1150, 1060], "t3-4": [1510, 1060],
   "t4-1": [470, 1500], "t4-2": [830, 1500], "t4-3": [1190, 1500],
@@ -193,7 +193,9 @@ const POS: Record<string, [number, number]> = {
 };
 
 const ELIPSE = { cx: 960, cy: 1665, rx: 800, ry: 330 };
-const CANAL_12 = 500, CANAL_23 = 880, CANAL_34 = 1250;
+const CANAL_12 = 520, CANAL_23 = 880, CANAL_34 = 1250;
+// El canal del retorno a la Fase 1: por fuera de todo, a la derecha y por arriba.
+const RETORNO_X = 2180, RETORNO_Y = 196;
 
 export function consolidado(m: Modelo) {
   const tareas = new Map(m.fases.flatMap((f) => f.tareas.map((t) => [t.id, t] as const)));
@@ -249,9 +251,9 @@ export function consolidado(m: Modelo) {
   );
 
   // --- Fase 1: del arranque a la Constitución.
-  cuerpo.push(hito("INICIO", 150, 320));
+  cuerpo.push(hito("INICIO", 150, 352));
   aristas.push(
-    conector([[186, 320], izq(c["t1-1"])]),
+    conector([[186, 352], izq(c["t1-1"])]),
     conector([der(c["t1-1"]), izq(c["t1-2"])]),
     conector([der(c["t1-2"]), izq(c["t1-3"])]),
     // Traspaso a la Fase 2: baja por la derecha y vuelve al canal.
@@ -275,13 +277,17 @@ export function consolidado(m: Modelo) {
     conector([der(c["t3-2"]), izq(c["t3-3"])]),
     conector([der(c["t3-3"]), izq(c["t3-4"])]),
     conector([der(c["t3-4"]), [d0.cx - d0.w / 2, d0.cy]]),
-    // No: vuelve a construir el prototipo.
-    conector([[d0.cx, d0.cy - d0.h / 2], [d0.cx, 925], [430, 925], arriba(c["t3-1"])], true),
+    // No: la traza que no responde no se reintenta aquí — vuelve a la Fase 1, a
+    // revisar la Constitución, las reglas y los contratos que la sostienen.
+    conector(
+      [[d0.cx + d0.w / 2, d0.cy], [RETORNO_X, d0.cy], [RETORNO_X, RETORNO_Y], [430, RETORNO_Y], arriba(c["t1-1"])],
+      true,
+    ),
     // Sí: entra al ciclo.
     conector([[d0.cx, d0.cy + d0.h / 2], [d0.cx, CANAL_34], [470, CANAL_34], arriba(c["t4-1"])]),
   );
   cuerpo.push(d0.svg, traspaso(m.fases[2].salida, 620, CANAL_34, 330));
-  cuerpo.push(rotulo("No", d0.cx + 34, 925), rotulo("Sí", d0.cx + 34, CANAL_34 - 6));
+  cuerpo.push(rotulo("No", RETORNO_X, 700), rotulo("Sí", d0.cx + 34, CANAL_34 - 6));
 
   // --- Fase 4: el ciclo, en sentido horario.
   aristas.push(
@@ -325,9 +331,9 @@ export function consolidado(m: Modelo) {
 
   // --- el equipo completo, arriba a la derecha.
   const roles = [...new Set(m.fases.flatMap((f) => f.roles))];
-  const px0 = 1380, py0 = 200;
+  const px0 = 1380, py0 = 232, px1 = 2150;
   cuerpo.push(
-    `<rect x="${px0}" y="${py0}" width="${W - 70 - px0}" height="200" rx="14" fill="${PAPEL}" stroke="${TAN}" stroke-opacity="0.6"/>`,
+    `<rect x="${px0}" y="${py0}" width="${px1 - px0}" height="200" rx="14" fill="${PAPEL}" stroke="${TAN}" stroke-opacity="0.6"/>`,
     T("EQUIPO", px0 + 22, py0 + 28, { fs: 9, fill: TAN, f: MONO, ls: "0.16em" }),
     T("Los siete Roles del proceso", px0 + 92, py0 + 29, { fs: 13, fill: MARRON, f: SERIF }),
     ...roles.flatMap((rol, i) => {
