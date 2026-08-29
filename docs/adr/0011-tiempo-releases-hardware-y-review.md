@@ -47,6 +47,11 @@ huecos reales, y ninguno es de dibujo:
   rechazo sino aprendizaje.
 - El anillo de la **Fase 4** se reordena con una decisión en cada extremo, y el
   rótulo del centro dice que es *el estado permanente del proyecto*.
+- **Quién hace qué.** El panel del equipo enumeraba los nueve **Roles** sin decir de
+  qué responde ninguno. Ahora cada **Rol** sale unido por una línea a los códigos de
+  las **Tareas** que ejecuta —relleno— y en las que asiste —contorno—, y cada celda
+  de la red lleva ese código (`T1.1`, `T2.6`, `T4.7`) en su esquina. La línea es lo
+  que convierte una lista de nombres en un reparto de responsabilidad.
 
 ## Consecuencias
 
@@ -56,5 +61,9 @@ huecos reales, y ninguno es de dibujo:
   fechas en un modelo que no las tiene.
 - Las veinte figuras por **Fase**, las cuatro EPF y las dos generales se regeneran
   con las Tareas y los Roles nuevos: son la misma fuente.
+- El panel «quién hace qué» deja a la vista un hueco del modelo: el **Ingeniero de
+  datos** asiste en seis **Tareas** y no ejecuta ninguna. La figura lo dice con todas
+  sus letras en vez de disimularlo. El reparto por **Tarea** es una inferencia del
+  editor (ADR-0006) y este es exactamente el tipo de revisión que pedía.
 - Sigue faltando, y se decide **no** meterlo aquí: el backlog priorizado y las
   métricas del proceso. Piden su propia figura; esta ya lleva su carga.

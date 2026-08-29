@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { versionA, versionB } from "../general";
-import { consolidado, RELEASES } from "../consolidado";
+import { codigo, consolidado, RELEASES } from "../consolidado";
 import { seed } from "../seed";
 import { esc } from "../epf-svg";
 import { wrap } from "../layout";
@@ -53,6 +53,17 @@ describe("las dos versiones del proceso completo", () => {
     expect(svg).toContain("retroalimentación al backlog");
     expect(svg).toContain("INICIO");
     expect(svg).toContain("FIN");
+  });
+
+  it("la figura consolidada ata cada Rol con las Tareas que ejecuta", () => {
+    const svg = consolidado(modelo);
+    expect(svg).toContain("QUIÉN HACE QUÉ");
+    // El código aparece dos veces por Tarea: en su celda y en el panel de Roles.
+    for (const fase of modelo.fases)
+      for (const t of fase.tareas) {
+        const veces = svg.match(new RegExp(`>${codigo(t.id).replace(".", "\\.")}<`, "g"))?.length ?? 0;
+        expect([t.id, veces >= 2]).toEqual([t.id, true]);
+      }
   });
 
   it("la figura consolidada trae el tiempo, los releases y la cadena SDD", () => {

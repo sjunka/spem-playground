@@ -47,6 +47,9 @@ function contornoCelda(icono: IdIcono, x: number, y: number, w: number, h: numbe
 const glifo = (id: IdIcono, x: number, y: number, tam: number, color = MARRON) =>
   `<path transform="translate(${x} ${y}) scale(${tam / 24})" d="${ICONOS[id]}" fill="none" stroke="${color}" stroke-width="1.6" stroke-linejoin="round"/>`;
 
+/** T1.1, T2.6, T4.7… el código que la celda y el panel de Roles comparten. */
+export const codigo = (id: string) => id.replace("t", "T").replace("-", ".");
+
 const eyebrow = (t: string, x: number, y: number, color = GRIS, fs = 8) =>
   T(t, x, y, { fs, fill: color, f: MONO, ls: "0.14em" });
 
@@ -86,6 +89,8 @@ function celda(t: Tarea, cx: number, cy: number): Celda {
     // El contorno lo da el Tipo SPEM: chevron a la Tarea, hexágono al Hito.
     `<path d="${contornoCelda(t.icono, x, y, w, h)}" fill="${CREMA}" stroke="${TAN}" stroke-width="1.3"/>`,
   ];
+
+  partes.push(T(codigo(t.id), x + 10, y + 19, { fs: 8, fill: TAN, w: 600, f: MONO }));
 
   let py = y + 10;
   m.roles.forEach((r, i) => {
@@ -393,24 +398,53 @@ export function consolidado(m: Modelo) {
     hito("FIN", 420, 2240),
   );
 
-  // --- el equipo completo, arriba a la derecha: los nueve Roles, en dos frentes.
+  // --- quién hace qué: cada Rol unido por una línea a las Tareas que ejecuta.
+  // El panel enumeraba los Roles sin decir de qué responde ninguno; el código de
+  // la celda —T1.1, T2.6— es lo que ata la lista con la red.
   const roles = [...new Set(m.fases.flatMap((f) => f.roles))];
   const hardware = ["Ingeniero electrónico", "Ingeniero mecatrónico"];
-  const px0 = 1440, py0 = 232, px1 = 2400;
+  const todas = m.fases.flatMap((f) => f.tareas);
+  const conPapel = (rol: string, papel: "perform" | "assist") =>
+    todas.filter((t) => t.roles.some((r) => r.rol === rol && r.papel === papel)).map((t) => codigo(t.id));
+
+  const px0 = 1440, py0 = 232, px1 = 2440, filaH = 30;
+  const chip = (texto: string, x: number, y: number, ejecuta: boolean) =>
+    `<rect x="${x}" y="${y - 11}" width="34" height="15" rx="3" fill="${ejecuta ? CREMA : PAPEL}" stroke="${TAN}"${ejecuta ? "" : ' stroke-dasharray="3 2"'}/>
+${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, fill: ejecuta ? MARRON : GRIS })}`;
+
   cuerpo.push(
-    panel("EQUIPO", "Nueve Roles en dos frentes: software y electrónica, con el caficultor entre ellos.", px0, py0, px1 - px0, 236),
+    panel(
+      "QUIÉN HACE QUÉ",
+      "Cada Rol, unido a las Tareas de las que responde. Relleno: las ejecuta. Contorno: asiste en ellas.",
+      px0, py0, px1 - px0, 66 + roles.length * filaH + 16,
+    ),
     ...roles.flatMap((rol, i) => {
-      const x = px0 + 26 + (i % 3) * 310;
-      const y = py0 + 62 + Math.floor(i / 3) * 58;
+      const y = py0 + 78 + i * filaH;
       const esHw = hardware.includes(rol);
+      const ejecuta = conPapel(rol, "perform");
+      const asiste = conPapel(rol, "assist");
+      // Un Rol sin Tareas propias deja su nota, y los chips de asistencia arrancan
+      // después de ella: el hueco es un hallazgo del modelo, no un error de dibujo.
+      let cx = px0 + (ejecuta.length ? 268 : 458);
+      const chips = [
+        ...ejecuta.map((t) => chip(t, (cx += 38) - 38, y, true)),
+        ...(asiste.length
+          ? [T("asiste:", (cx += 44) - 40, y, { fs: 7.5, fill: GRIS, f: MONO })]
+          : []),
+        ...asiste.map((t) => chip(t, (cx += 38) - 38, y, false)),
+      ];
       return [
-        gRol(x, y),
-        ...lineas(rol, 8.5, 240).map((l, j) =>
-          T(l, x + 36, y + 12 + j * 10, { fs: 8.5, fill: esHw ? AZUL : MARRON, w: esHw ? 600 : 400 }),
-        ),
+        gRol(px0 + 22, y - 18),
+        T(rol, px0 + 58, y, { fs: 8.5, fill: esHw ? AZUL : MARRON, w: esHw ? 600 : 400 }),
+        // La línea que une al Rol con su trabajo: sin ella el panel solo enumera.
+        `<line x1="${px0 + 246}" y1="${y - 4}" x2="${px0 + 264}" y2="${y - 4}" stroke="${TAN}" stroke-opacity="0.7"/>`,
+        ejecuta.length
+          ? ""
+          : T("no ejecuta ninguna Tarea, solo asiste", px0 + 268, y, { fs: 8, fill: AZUL }),
+        ...chips,
       ];
     }),
-    T("en azul, el equipo de electrónica", px0 + 26, py0 + 220, { fs: 8.5, fill: AZUL }),
+    T("en azul, el equipo de electrónica", px0 + 22, py0 + 72 + roles.length * filaH, { fs: 8.5, fill: AZUL }),
   );
 
   // --- el plan de releases y la cadena SDD, abajo.

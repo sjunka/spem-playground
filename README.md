@@ -22,7 +22,9 @@ Composer: cada celda lleva sus **Roles** arriba, la **Tarea** al centro y sus
 que el incremento pasa las pruebas y cumple la **Constitution.md**. Los tres rombos
 llevan su retorno: la traza mínima que no responde en SIL/HIL vuelve a la **Fase 1**.
 La figura trae además el **plan de releases** R0–R3, la cadena de **Spec-Driven
-Development** y la **retroalimentación** del review con el caficultor al backlog.
+Development**, la **retroalimentación** del review con el caficultor al backlog y el
+panel **quién hace qué**, que une cada **Rol** con el código de las **Tareas** que
+ejecuta y en las que asiste.
 Ver [ADR-0010](docs/adr/0010-figura-consolidada.md) y [ADR-0011](docs/adr/0011-tiempo-releases-hardware-y-review.md).
 
 ![El modelo de procesos consolidado](figuras/consolidado-modelo-de-procesos.png)
@@ -77,7 +79,7 @@ npm run dev        # editor en http://localhost:5173
 |---|---|
 | `npm run dev` | Servidor de desarrollo |
 | `npm run build` | Build de producción en `dist/` |
-| `npm test` | Los 84 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
+| `npm test` | Los 85 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run figuras` | Regenera las veinte `figuras/*.png` a 3x con Chrome headless (macOS) |
 | `npm run consolidado` | Genera `figuras/consolidado-modelo-de-procesos.png`: las veintiuna **Tareas** en una sola red |

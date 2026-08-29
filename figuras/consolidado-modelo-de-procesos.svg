@@ -138,37 +138,153 @@
 <circle cx="420" cy="2240" r="30" fill="#ffffff" stroke="#8a5a20" stroke-width="2"/>
 <circle cx="420" cy="2240" r="23" fill="#8a5a20"/>
 <text x="420" y="2288" fill="#8a5a20" font-size="10" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle" letter-spacing="0.1em">FIN</text>
-<rect x="1440" y="232" width="960" height="236" rx="12" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.6"/>
-<text x="1462" y="258" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">EQUIPO</text>
-<text x="1462" y="276" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Nueve Roles en dos frentes: software y electrónica, con el caficultor entre ellos.</text>
-<ellipse cx="1480" cy="302" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1470 320 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1502" y="306" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
-<ellipse cx="1790" cy="302" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1780 320 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1812" y="306" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio (caficultor)</text>
-<ellipse cx="2100" cy="302" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M2090 320 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="2122" y="306" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de seguridad de vuelo</text>
-<ellipse cx="1480" cy="360" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1470 378 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1502" y="364" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
-<ellipse cx="1790" cy="360" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1780 378 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1812" y="364" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de plataforma</text>
-<ellipse cx="2100" cy="360" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M2090 378 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="2122" y="364" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de adaptación</text>
-<ellipse cx="1480" cy="418" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1470 436 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1502" y="422" fill="#4a72c4" font-size="8.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Ingeniero electrónico</text>
-<ellipse cx="1790" cy="418" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M1780 436 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="1812" y="422" fill="#4a72c4" font-size="8.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Ingeniero mecatrónico</text>
-<ellipse cx="2100" cy="418" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
-<path d="M2090 436 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
-<text x="2122" y="422" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
-<text x="1466" y="452" fill="#4a72c4" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">en azul, el equipo de electrónica</text>
+<rect x="1440" y="232" width="1000" height="352" rx="12" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.6"/>
+<text x="1462" y="258" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">QUIÉN HACE QUÉ</text>
+<text x="1462" y="276" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Cada Rol, unido a las Tareas de las que responde. Relleno: las ejecuta. Contorno: asiste en ellas.</text>
+<ellipse cx="1476" cy="300" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 318 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="310" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<line x1="1686" y1="306" x2="1704" y2="306" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="299" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="310" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T1.1</text>
+<rect x="1746" y="299" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1763" y="310" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.1</text>
+<rect x="1784" y="299" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1801" y="310" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.2</text>
+<rect x="1822" y="299" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1839" y="310" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.1</text>
+<rect x="1860" y="299" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1877" y="310" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.5</text>
+<text x="1902" y="310" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1942" y="299" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1959" y="310" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T1.3</text>
+<rect x="1980" y="299" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1997" y="310" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T3.4</text>
+<rect x="2018" y="299" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2035" y="310" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.7</text>
+<ellipse cx="1476" cy="330" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 348 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="340" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio (caficultor)</text>
+<line x1="1686" y1="336" x2="1704" y2="336" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="329" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="340" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T1.2</text>
+<rect x="1746" y="329" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1763" y="340" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T3.4</text>
+<rect x="1784" y="329" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1801" y="340" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.6</text>
+<rect x="1822" y="329" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1839" y="340" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.7</text>
+<text x="1864" y="340" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1904" y="329" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1921" y="340" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T1.1</text>
+<rect x="1942" y="329" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1959" y="340" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.4</text>
+<ellipse cx="1476" cy="360" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 378 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="370" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de seguridad de vuelo</text>
+<line x1="1686" y1="366" x2="1704" y2="366" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="359" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="370" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T1.3</text>
+<ellipse cx="1476" cy="390" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 408 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="400" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
+<line x1="1686" y1="396" x2="1704" y2="396" stroke="#c8964b" stroke-opacity="0.7"/>
+<text x="1708" y="400" fill="#4a72c4" font-size="8" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">no ejecuta ninguna Tarea, solo asiste</text>
+<text x="1902" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1942" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1959" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T1.1</text>
+<rect x="1980" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1997" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T1.2</text>
+<rect x="2018" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2035" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.2</text>
+<rect x="2056" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2073" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.3</text>
+<rect x="2094" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2111" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T3.1</text>
+<rect x="2132" y="389" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2149" y="400" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.2</text>
+<ellipse cx="1476" cy="420" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 438 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="430" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de plataforma</text>
+<line x1="1686" y1="426" x2="1704" y2="426" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="419" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="430" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.3</text>
+<rect x="1746" y="419" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1763" y="430" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.5</text>
+<rect x="1784" y="419" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1801" y="430" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T3.3</text>
+<rect x="1822" y="419" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1839" y="430" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.4</text>
+<text x="1864" y="430" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1904" y="419" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1921" y="430" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.4</text>
+<rect x="1942" y="419" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1959" y="430" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T3.2</text>
+<rect x="1980" y="419" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1997" y="430" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.2</text>
+<rect x="2018" y="419" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="2035" y="430" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.3</text>
+<ellipse cx="1476" cy="450" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 468 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="460" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de adaptación</text>
+<line x1="1686" y1="456" x2="1704" y2="456" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="449" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="460" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.4</text>
+<rect x="1746" y="449" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1763" y="460" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T3.1</text>
+<rect x="1784" y="449" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1801" y="460" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.2</text>
+<text x="1826" y="460" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1866" y="449" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1883" y="460" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.1</text>
+<rect x="1904" y="449" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1921" y="460" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.5</text>
+<rect x="1942" y="449" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1959" y="460" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.1</text>
+<rect x="1980" y="449" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1997" y="460" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.6</text>
+<ellipse cx="1476" cy="480" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 498 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="490" fill="#4a72c4" font-size="8.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Ingeniero electrónico</text>
+<line x1="1686" y1="486" x2="1704" y2="486" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="479" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="490" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T2.6</text>
+<text x="1750" y="490" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1790" y="479" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1807" y="490" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T3.5</text>
+<ellipse cx="1476" cy="510" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 528 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="520" fill="#4a72c4" font-size="8.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Ingeniero mecatrónico</text>
+<line x1="1686" y1="516" x2="1704" y2="516" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="509" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="520" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T3.5</text>
+<text x="1750" y="520" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1790" y="509" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1807" y="520" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T2.6</text>
+<ellipse cx="1476" cy="540" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M1466 558 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1498" y="550" fill="#8a5a20" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
+<line x1="1686" y1="546" x2="1704" y2="546" stroke="#c8964b" stroke-opacity="0.7"/>
+
+<rect x="1708" y="539" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1725" y="550" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T3.2</text>
+<rect x="1746" y="539" width="34" height="15" rx="3" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="1763" y="550" fill="#8a5a20" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">T4.3</text>
+<text x="1788" y="550" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start">asiste:</text>
+<rect x="1828" y="539" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1845" y="550" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T3.3</text>
+<rect x="1866" y="539" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1883" y="550" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.5</text>
+<rect x="1904" y="539" width="34" height="15" rx="3" fill="#ffffff" stroke="#c8964b" stroke-dasharray="3 2"/>
+<text x="1921" y="550" fill="#6f6f8c" font-size="7.5" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">T4.7</text>
+<text x="1462" y="574" fill="#4a72c4" font-size="8.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">en azul, el equipo de electrónica</text>
 <rect x="620" y="2160" width="940" height="250" rx="12" fill="#ffffff" stroke="#c8964b" stroke-opacity="0.6"/>
 <text x="642" y="2186" fill="#c8964b" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">PLAN DE RELEASES</text>
 <text x="642" y="2204" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Qué se entrega, cuándo, y con qué criterio se da por bueno.</text>
@@ -258,6 +374,7 @@
 <path d="M2070 2582 h44" stroke="#4a72c4" stroke-width="1.4" stroke-dasharray="2 5" stroke-linecap="round"/>
 <text x="2122" y="2586" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Retroalimentación: lo aprendido reordena el backlog</text>
 <path d="M435 294 H669 L685 372 L669 450 H435 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="445" y="313" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T1.1</text>
 <ellipse cx="483.3333333333333" cy="312" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M473.3333333333333 330 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="483.3333333333333" y="338" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
@@ -284,6 +401,7 @@
 <text x="636.6666666666667" y="434" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">integración entre</text>
 <text x="636.6666666666667" y="442" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">dominios</text>
 <path d="M765 302 H999 L1015 372 L999 442 H765 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="775" y="321" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T1.2</text>
 <ellipse cx="832.5" cy="320" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M822.5 338 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="832.5" y="346" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
@@ -298,6 +416,7 @@
 <path d="M880 428 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
 <text x="890" y="434" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Reglas de negocio</text>
 <path d="M1095 306 H1329 L1345 372 L1329 438 H1095 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1105" y="325" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T1.3</text>
 <ellipse cx="1162.5" cy="324" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1152.5 342 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1162.5" y="350" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de seguridad de vuelo</text>
@@ -311,6 +430,7 @@
 <path d="M1210 424 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
 <text x="1220" y="430" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Políticas y límites de operación</text>
 <path d="M435 688 H669 L685 740 L669 792 H435 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="445" y="707" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.1</text>
 <ellipse cx="502.5" cy="706" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M492.5 724 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="502.5" y="732" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
@@ -323,6 +443,7 @@
 <text x="483" y="762.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Identificar subdominios y</text>
 <text x="483" y="774.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">definir subcontratos internos</text>
 <path d="M765 698 H999 L1015 740 L999 782 H765 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="775" y="717" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.2</text>
 <ellipse cx="832.5" cy="716" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M822.5 734 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="832.5" y="742" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
@@ -333,6 +454,7 @@
 <path transform="translate(793 753) scale(0.5833333333333334)" d="M3 5.4 h12.2 l5.4 6.6 -5.4 6.6 H3 z" fill="none" stroke="#8a5a20" stroke-width="1.6" stroke-linejoin="round"/>
 <text x="813" y="764.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Seleccionar escenario piloto</text>
 <path d="M1103 664 H1337 A10 10 0 0 1 1345 672 V808 A10 10 0 0 1 1337 816 H1103 A10 10 0 0 1 1095 808 V672 A10 10 0 0 1 1103 664 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1105" y="683" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.3</text>
 <ellipse cx="1162.5" cy="682" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1152.5 700 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1162.5" y="708" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de plataforma</text>
@@ -351,6 +473,7 @@
 <text x="1277.5" y="800" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Entornos de simulación SIL y</text>
 <text x="1277.5" y="808" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">HIL configurados</text>
 <path d="M1425 670 H1659 L1675 740 L1659 810 H1425 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1435" y="689" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.4</text>
 <ellipse cx="1492.5" cy="688" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1482.5 706 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1492.5" y="714" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de software de</text>
@@ -366,6 +489,7 @@
 <path d="M1552 770 v7 h7" fill="none" stroke="#c8964b"/><line x1="1542" y1="781" x2="1556" y2="781" stroke="#4a72c4" stroke-width="1.4"/><line x1="1542" y1="784" x2="1556" y2="784" stroke="#4a72c4" stroke-width="1.4"/><line x1="1542" y1="787" x2="1556" y2="787" stroke="#4a72c4" stroke-width="1.4"/><line x1="1542" y1="790" x2="1556" y2="790" stroke="#4a72c4" stroke-width="1.4"/><line x1="1542" y1="793" x2="1556" y2="793" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="1550" y="802" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Modelo de arquitectura del sistema</text>
 <path d="M1755 664 H1989 L2005 740 L1989 816 H1755 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1765" y="683" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.5</text>
 <ellipse cx="1822.5" cy="682" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1812.5 700 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1822.5" y="708" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de plataforma</text>
@@ -382,6 +506,7 @@
 <path d="M1882 776 v7 h7" fill="none" stroke="#c8964b"/><line x1="1872" y1="787" x2="1886" y2="787" stroke="#4a72c4" stroke-width="1.4"/><line x1="1872" y1="790" x2="1886" y2="790" stroke="#4a72c4" stroke-width="1.4"/><line x1="1872" y1="793" x2="1886" y2="793" stroke="#4a72c4" stroke-width="1.4"/><line x1="1872" y1="796" x2="1886" y2="796" stroke="#4a72c4" stroke-width="1.4"/><line x1="1872" y1="799" x2="1886" y2="799" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="1880" y="808" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Especificaciones de la lógica de adaptación</text>
 <path d="M2085 664 H2319 L2335 740 L2319 816 H2085 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="2095" y="683" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T2.6</text>
 <ellipse cx="2152.5" cy="682" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M2142.5 700 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="2152.5" y="708" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero electrónico</text>
@@ -400,6 +525,7 @@
 <path d="M2273.5 772 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(495.77, 168.96)" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="2267.5" y="800" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Banco de pruebas de hardware</text>
 <path d="M435 1056 H669 L685 1120 L669 1184 H435 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="445" y="1075" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T3.1</text>
 <ellipse cx="502.5" cy="1074" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M492.5 1092 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="502.5" y="1100" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de software de</text>
@@ -414,6 +540,7 @@
 <path d="M562 1144 v7 h7" fill="none" stroke="#c8964b"/><line x1="552" y1="1155" x2="566" y2="1155" stroke="#4a72c4" stroke-width="1.4"/><line x1="552" y1="1158" x2="566" y2="1158" stroke="#4a72c4" stroke-width="1.4"/><line x1="552" y1="1161" x2="566" y2="1161" stroke="#4a72c4" stroke-width="1.4"/><line x1="552" y1="1164" x2="566" y2="1164" stroke="#4a72c4" stroke-width="1.4"/><line x1="552" y1="1167" x2="566" y2="1167" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="560" y="1176" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Prototipo vertical funcional</text>
 <path d="M765 1120 L781 1054 H999 L1015 1120 L999 1186 H781 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="775" y="1073" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T3.2</text>
 <ellipse cx="832.5" cy="1072" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M822.5 1090 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="832.5" y="1098" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">QA de software</text>
@@ -428,6 +555,7 @@
 <path d="M892 1146 v7 h7" fill="none" stroke="#c8964b"/><line x1="882" y1="1157" x2="896" y2="1157" stroke="#4a72c4" stroke-width="1.4"/><line x1="882" y1="1160" x2="896" y2="1160" stroke="#4a72c4" stroke-width="1.4"/><line x1="882" y1="1163" x2="896" y2="1163" stroke="#4a72c4" stroke-width="1.4"/><line x1="882" y1="1166" x2="896" y2="1166" stroke="#4a72c4" stroke-width="1.4"/><line x1="882" y1="1169" x2="896" y2="1169" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="890" y="1178" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Informes de validación de control</text>
 <path d="M1095 1054 H1329 L1345 1120 L1329 1186 H1095 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1105" y="1073" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T3.3</text>
 <ellipse cx="1162.5" cy="1072" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1152.5 1090 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1162.5" y="1098" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de plataforma</text>
@@ -441,6 +569,7 @@
 <path d="M1226 1150 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(265.32, 252.12)" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1220" y="1178" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Pipeline de CI/CD base</text>
 <path d="M1425 1120 L1441 1068 H1659 L1675 1120 L1659 1172 H1441 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1435" y="1087" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T3.4</text>
 <ellipse cx="1492.5" cy="1086" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1482.5 1104 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1492.5" y="1112" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
@@ -453,6 +582,7 @@
 <text x="1473" y="1142.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">Validar reglas de negocio y</text>
 <text x="1473" y="1154.2" fill="#3a3a44" font-size="10" font-weight="600" font-family="Geist, sans-serif" text-anchor="start">condiciones agronómicas</text>
 <path d="M1755 1054 H1989 L2005 1120 L1989 1186 H1755 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1765" y="1073" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T3.5</text>
 <ellipse cx="1822.5" cy="1072" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1812.5 1090 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1822.5" y="1098" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero mecatrónico</text>
@@ -466,6 +596,7 @@
 <path d="M1886 1150 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(410.52, 252.12)" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1880" y="1178" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Banco HIL con hardware real</text>
 <path d="M523 1466 H757 A10 10 0 0 1 765 1474 V1586 A10 10 0 0 1 757 1594 H523 A10 10 0 0 1 515 1586 V1474 A10 10 0 0 1 523 1466 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="525" y="1485" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.1</text>
 <ellipse cx="582.5" cy="1484" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M572.5 1502 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="582.5" y="1510" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
@@ -480,6 +611,7 @@
 <path d="M642 1554 v7 h7" fill="none" stroke="#c8964b"/><line x1="632" y1="1565" x2="646" y2="1565" stroke="#4a72c4" stroke-width="1.4"/><line x1="632" y1="1568" x2="646" y2="1568" stroke="#4a72c4" stroke-width="1.4"/><line x1="632" y1="1571" x2="646" y2="1571" stroke="#4a72c4" stroke-width="1.4"/><line x1="632" y1="1574" x2="646" y2="1574" stroke="#4a72c4" stroke-width="1.4"/><line x1="632" y1="1577" x2="646" y2="1577" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="640" y="1586" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Archivos spec.md / task.md</text>
 <path d="M863 1456 H1097 A10 10 0 0 1 1105 1464 V1596 A10 10 0 0 1 1097 1604 H863 A10 10 0 0 1 855 1596 V1464 A10 10 0 0 1 863 1456 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="865" y="1475" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.2</text>
 <ellipse cx="903.3333333333334" cy="1474" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M893.3333333333334 1492 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="903.3333333333334" y="1500" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de</text>
@@ -503,6 +635,7 @@
 <path d="M1039.5 1564 v7 h7" fill="none" stroke="#c8964b"/><line x1="1029.5" y1="1575" x2="1043.5" y2="1575" stroke="#4a72c4" stroke-width="1.4"/><line x1="1029.5" y1="1578" x2="1043.5" y2="1578" stroke="#4a72c4" stroke-width="1.4"/><line x1="1029.5" y1="1581" x2="1043.5" y2="1581" stroke="#4a72c4" stroke-width="1.4"/><line x1="1029.5" y1="1584" x2="1043.5" y2="1584" stroke="#4a72c4" stroke-width="1.4"/><line x1="1029.5" y1="1587" x2="1043.5" y2="1587" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="1037.5" y="1596" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Releases de software</text>
 <path d="M1203 1464 H1437 A10 10 0 0 1 1445 1472 V1588 A10 10 0 0 1 1437 1596 H1203 A10 10 0 0 1 1195 1588 V1472 A10 10 0 0 1 1203 1464 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1205" y="1483" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.3</text>
 <ellipse cx="1262.5" cy="1482" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1252.5 1500 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1262.5" y="1508" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">QA de software</text>
@@ -518,6 +651,7 @@
 <path d="M1383.5 1560 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(299.97, 342.32)" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1377.5" y="1588" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Entornos SIL/HIL validados</text>
 <path d="M1535 1930 L1551 1860 H1769 L1785 1930 L1769 2000 H1551 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1545" y="1879" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.4</text>
 <ellipse cx="1602.5" cy="1878" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1592.5 1896 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1602.5" y="1904" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Ingeniero de plataforma</text>
@@ -533,6 +667,7 @@
 <path d="M1662 1960 v7 h7" fill="none" stroke="#c8964b"/><line x1="1652" y1="1971" x2="1666" y2="1971" stroke="#4a72c4" stroke-width="1.4"/><line x1="1652" y1="1974" x2="1666" y2="1974" stroke="#4a72c4" stroke-width="1.4"/><line x1="1652" y1="1977" x2="1666" y2="1977" stroke="#4a72c4" stroke-width="1.4"/><line x1="1652" y1="1980" x2="1666" y2="1980" stroke="#4a72c4" stroke-width="1.4"/><line x1="1652" y1="1983" x2="1666" y2="1983" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="1660" y="1992" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Paquete de calibración de sensores y actuadores</text>
 <path d="M1195 1930 L1211 1860 H1429 L1445 1930 L1429 2000 H1211 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="1205" y="1879" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.7</text>
 <ellipse cx="1243.3333333333333" cy="1878" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M1233.3333333333333 1896 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="1243.3333333333333" y="1904" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
@@ -551,6 +686,7 @@
 <path d="M1322 1960 v7 h7" fill="none" stroke="#c8964b"/><line x1="1312" y1="1971" x2="1326" y2="1971" stroke="#4a72c4" stroke-width="1.4"/><line x1="1312" y1="1974" x2="1326" y2="1974" stroke="#4a72c4" stroke-width="1.4"/><line x1="1312" y1="1977" x2="1326" y2="1977" stroke="#4a72c4" stroke-width="1.4"/><line x1="1312" y1="1980" x2="1326" y2="1980" stroke="#4a72c4" stroke-width="1.4"/><line x1="1312" y1="1983" x2="1326" y2="1983" stroke="#4a72c4" stroke-width="1.4"/>
 <text x="1320" y="1992" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Lecciones y ajustes al backlog</text>
 <path d="M855 1860 H1089 L1105 1930 L1089 2000 H855 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="865" y="1879" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.6</text>
 <ellipse cx="922.5" cy="1878" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M912.5 1896 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="922.5" y="1904" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Experto del dominio</text>
@@ -566,6 +702,7 @@
 <path d="M970 1986 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
 <text x="980" y="1992" fill="#6f6f8c" font-size="6.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="middle">Manual de operación actualizado</text>
 <path d="M515 1930 L531 1882 H749 L765 1930 L749 1978 H531 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.3"/>
+<text x="525" y="1901" fill="#c8964b" font-size="8" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="start">T4.5</text>
 <ellipse cx="582.5" cy="1900" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
 <path d="M572.5 1918 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
 <text x="582.5" y="1926" fill="#8a5a20" font-size="6.5" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Gerente de proyecto</text>
