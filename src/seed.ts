@@ -9,6 +9,10 @@ const ID = "Ingeniero de datos";
 const IP = "Ingeniero de plataforma";
 const ISA = "Ingeniero de software de adaptación";
 const QA = "QA de software";
+// El sistema es ciberfísico: la electrónica y la integración con el dron son
+// trabajo de ingeniería propio, no un detalle de la plataforma de software.
+const IE = "Ingeniero electrónico";
+const IM = "Ingeniero mecatrónico";
 
 const ejecuta = (...roles: string[]): RolTarea[] =>
   roles.map((rol) => ({ rol, papel: "perform" as const }));
@@ -34,6 +38,10 @@ const LOGICA = wp("Especificaciones de la lógica de adaptación");
 const PROTOTIPO = wp("Prototipo vertical funcional");
 const INFORMES = wp("Informes de validación de control");
 const PIPELINE = tool("Pipeline de CI/CD base");
+const ESQUEMATICOS = wp("Esquemáticos y lista de materiales");
+const BANCO_HW = tool("Banco de pruebas de hardware");
+const BANCO_HIL = tool("Banco HIL con hardware real");
+const LECCIONES = wp("Lecciones y ajustes al backlog");
 
 /**
  * The four Fases of the *Modelo de procesos* document.
@@ -108,7 +116,7 @@ export const seed = (): Modelo => ({
       nombre: "Fase 2: Descomposición en dominios",
       objetivo:
         "Fragmentar el sistema, preparar los entornos de simulación y traducir esquemas.",
-      roles: [GP, ID, IP, ISA],
+      roles: [GP, ID, IP, ISA, IE, IM],
       tareas: [
         {
           id: "t2-1",
@@ -160,16 +168,26 @@ export const seed = (): Modelo => ({
           entrada: [],
           salida: [LOGICA],
         },
+        {
+          id: "t2-6",
+          icono: "task",
+          nombre: "Diseñar la electrónica de sensores, actuadores y enlace del dron",
+          descripcion:
+            "Esquemáticos, selección de componentes y banco de pruebas del hardware que el software va a comandar.",
+          roles: [...ejecuta(IE), ...asiste(IM)],
+          entrada: [POLITICAS, PLANOS],
+          salida: [ESQUEMATICOS, BANCO_HW],
+        },
       ],
       entrada: [PLANOS, CONSTITUCION, POLITICAS, REGLAS, CONTRATOS_2],
-      salida: [SPECS, ENTORNOS, ARQUITECTURA, LOGICA],
+      salida: [SPECS, ENTORNOS, ARQUITECTURA, LOGICA, ESQUEMATICOS, BANCO_HW],
     },
     {
       id: "fase-3",
       nombre: "Fase 3: Esqueleto funcional mínimo",
       objetivo:
         "Construir el prototipo vertical: unir extremo a extremo una traza mínima del sistema.",
-      roles: [ISA, ID, QA, IP, GP, ED],
+      roles: [ISA, ID, QA, IP, GP, ED, IM, IE],
       tareas: [
         {
           id: "t3-1",
@@ -209,9 +227,19 @@ export const seed = (): Modelo => ({
           entrada: [],
           salida: [],
         },
+        {
+          id: "t3-5",
+          icono: "task",
+          nombre: "Integrar el hardware real en el banco HIL",
+          descripcion:
+            "Montar sensores y actuadores reales contra la lógica de control: donde el equipo de electrónica y el de software se encuentran.",
+          roles: [...ejecuta(IM), ...asiste(IE)],
+          entrada: [ENTORNOS, ESQUEMATICOS, BANCO_HW],
+          salida: [BANCO_HIL],
+        },
       ],
-      entrada: [SPECS, ENTORNOS, ARQUITECTURA, LOGICA],
-      salida: [PROTOTIPO, INFORMES, PIPELINE],
+      entrada: [SPECS, ENTORNOS, ARQUITECTURA, LOGICA, ESQUEMATICOS, BANCO_HW],
+      salida: [PROTOTIPO, INFORMES, PIPELINE, BANCO_HIL],
     },
     {
       id: "fase-4",
@@ -253,7 +281,7 @@ export const seed = (): Modelo => ({
           descripcion:
             "Ejecución de pruebas automatizadas mediante CI/CD, SIL/HIL y gemelos digitales.",
           roles: [...ejecuta(QA), ...asiste(IP)],
-          entrada: [PIPELINE],
+          entrada: [PIPELINE, BANCO_HIL],
           salida: [tool("Pipeline de CI/CD ejecutado"), tool("Entornos SIL/HIL validados")],
         },
         {
@@ -286,11 +314,22 @@ export const seed = (): Modelo => ({
           entrada: [],
           salida: [guia("Manual de operación actualizado")],
         },
+        {
+          id: "t4-7",
+          icono: "milestone",
+          nombre: "Review del incremento con el caficultor",
+          descripcion:
+            "Demostrar el incremento en su terreno y recoger lo aprendido: es lo que reordena el backlog del siguiente ciclo.",
+          roles: [...ejecuta(ED), ...asiste(GP, QA)],
+          entrada: [],
+          salida: [LECCIONES],
+        },
       ],
       entrada: [
         PROTOTIPO,
         INFORMES,
         PIPELINE,
+        BANCO_HIL,
         tool("Monitoreo y operación del dron"),
         tool("Sistema de riego y variables climáticas"),
         tool("Coordinación múltiple de drones"),
@@ -303,6 +342,7 @@ export const seed = (): Modelo => ({
         wp("Paquete de calibración de sensores y actuadores"),
         wp("Releases de software"),
         guia("Manual de operación actualizado"),
+        LECCIONES,
       ],
     },
   ],

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { versionA, versionB } from "../general";
-import { consolidado } from "../consolidado";
+import { consolidado, RELEASES } from "../consolidado";
 import { seed } from "../seed";
 import { esc } from "../epf-svg";
 import { wrap } from "../layout";
@@ -40,13 +40,27 @@ describe("las dos versiones del proceso completo", () => {
     });
   }
 
-  it("la figura consolidada cierra el ciclo: dos decisiones y dos retornos", () => {
+  it("la figura consolidada cierra el ciclo: tres decisiones, tres retornos y la retroalimentación", () => {
     const svg = consolidado(modelo);
+    // Un No y un Sí por decisión; el del prototipo validado además marca el R0.
     expect(svg.match(/>No</g)?.length).toBe(3);
-    expect(svg.match(/>Sí</g)?.length).toBe(3);
-    // Los retornos son las únicas aristas punteadas.
+    expect(svg.match(/>Sí</g)?.length).toBe(2);
+    expect(svg).toContain("Sí · R0");
+    // Tres retornos punteados, más el trazo de la leyenda.
     expect(svg.match(/stroke-dasharray="5 4"/g)?.length).toBe(4);
+    // La retroalimentación va en azul y con su propio trazo, no es un rechazo.
+    expect(svg.match(/stroke-dasharray="2 5"/g)?.length).toBe(2);
+    expect(svg).toContain("retroalimentación al backlog");
     expect(svg).toContain("INICIO");
     expect(svg).toContain("FIN");
+  });
+
+  it("la figura consolidada trae el tiempo, los releases y la cadena SDD", () => {
+    const svg = consolidado(modelo);
+    expect(svg).toContain("ITERACIÓN 0");
+    expect(svg).toContain("SEM 9–14");
+    for (const [id] of RELEASES) expect([id, svg.includes(`>${id}<`)]).toEqual([id, true]);
+    expect(svg).toContain("Constitution.md");
+    expect(svg).toContain("SPEC-DRIVEN DEVELOPMENT");
   });
 });
