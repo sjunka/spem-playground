@@ -152,6 +152,7 @@ por decisión del spec.
 | [0011](docs/adr/0011-tiempo-releases-hardware-y-review.md) | El modelo gana tiempo, plan de releases, equipo de electrónica y review |
 | [0012](docs/adr/0012-tarjeta-vertical-por-fase.md) | La **Fase** en una tarjeta vertical, y la negrita como responsabilidad |
 | [0013](docs/adr/0013-consolidada-vertical.md) | La figura consolidada se pone de pie: una columna por **Fase** |
+| [0014](docs/adr/0014-hardware-sin-plataforma-y-dos-puertas.md) | Fuera el ingeniero de plataforma; puerta agronómica y puerta de especificaciones |
 
 El vocabulario del dominio está en [CONTEXT.md](CONTEXT.md). El spec y los tickets, en
 `.scratch/spem-playground/`.

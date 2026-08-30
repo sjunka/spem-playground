@@ -6,7 +6,6 @@ const GP = "Gerente de proyecto";
 const ED = "Experto del dominio (caficultor)";
 const ISV = "Ingeniero de seguridad de vuelo";
 const ID = "Ingeniero de datos";
-const IP = "Ingeniero de plataforma";
 const ISA = "Ingeniero de software de adaptación";
 const QA = "QA de software";
 // El sistema es ciberfísico: la electrónica y la integración con el dron son
@@ -42,6 +41,8 @@ const ESQUEMATICOS = wp("Esquemáticos y lista de materiales");
 const BANCO_HW = tool("Banco de pruebas de hardware");
 const BANCO_HIL = tool("Banco HIL con hardware real");
 const LECCIONES = wp("Lecciones y ajustes al backlog");
+const RED_SENSORES = wp("Red de sensores instalada");
+const FIRMWARE = wp("Firmware de sensores y actuadores");
 
 /**
  * The four Fases of the *Modelo de procesos* document.
@@ -116,7 +117,7 @@ export const seed = (): Modelo => ({
       nombre: "Fase 2: Descomposición en dominios",
       objetivo:
         "Fragmentar el sistema, preparar los entornos de simulación y traducir esquemas.",
-      roles: [GP, ID, IP, ISA, IE, IM],
+      roles: [GP, ID, ISA, IE, IM],
       tareas: [
         {
           id: "t2-1",
@@ -144,7 +145,7 @@ export const seed = (): Modelo => ({
           nombre: "Traducir esquemas técnicos y disponer entornos SIL, HIL y gemelos digitales",
           descripcion:
             "Preparar la infraestructura de simulación y los archivos base (spec.md, plan.md, task.md).",
-          roles: [...ejecuta(IP), ...asiste(ID)],
+          roles: [...ejecuta(IE, IM), ...asiste(ID)],
           entrada: [POLITICAS],
           salida: [SPECS, ENTORNOS],
         },
@@ -154,7 +155,7 @@ export const seed = (): Modelo => ({
           nombre: "Diseñar el modelo de arquitectura preliminar",
           descripcion:
             "Estructurar cómo se interconectarán sensores, drones y el servidor de adaptación (bucle MAPE-K).",
-          roles: [...ejecuta(ISA), ...asiste(IP)],
+          roles: [...ejecuta(ISA), ...asiste(IM, IE)],
           entrada: [CONTRATOS_2],
           salida: [ARQUITECTURA],
         },
@@ -163,8 +164,8 @@ export const seed = (): Modelo => ({
           icono: "task",
           nombre: "Planificar la estrategia de calibración de sensores y actuadores",
           descripcion:
-            "Definir los parámetros base que requerirá el ingeniero de plataforma.",
-          roles: [...ejecuta(IP), ...asiste(ISA)],
+            "Definir los parámetros base que el equipo de hardware usará para calibrar en campo.",
+          roles: [...ejecuta(IM, IE), ...asiste(ISA)],
           entrada: [],
           salida: [LOGICA],
         },
@@ -187,7 +188,7 @@ export const seed = (): Modelo => ({
       nombre: "Fase 3: Esqueleto funcional mínimo",
       objetivo:
         "Construir el prototipo vertical: unir extremo a extremo una traza mínima del sistema.",
-      roles: [ISA, ID, QA, IP, GP, ED, IM, IE],
+      roles: [ISA, ID, QA, GP, ED, IM, IE],
       tareas: [
         {
           id: "t3-1",
@@ -205,7 +206,7 @@ export const seed = (): Modelo => ({
           nombre: "Validar el prototipo en entorno simulado (SIL/HIL)",
           descripcion:
             "Probar la traza mínima para verificar que la lógica de control responde antes de tocar hardware real.",
-          roles: [...ejecuta(QA), ...asiste(IP)],
+          roles: [...ejecuta(QA), ...asiste(IM, IE)],
           entrada: [ENTORNOS],
           salida: [INFORMES],
         },
@@ -215,7 +216,7 @@ export const seed = (): Modelo => ({
           nombre: "Establecer el pipeline de CI/CD base",
           descripcion:
             "Automatizar el empaquetado inicial de las especificaciones y el código del prototipo.",
-          roles: [...ejecuta(IP), ...asiste(QA)],
+          roles: [...ejecuta(ISA), ...asiste(QA)],
           entrada: [],
           salida: [PIPELINE],
         },
@@ -223,7 +224,7 @@ export const seed = (): Modelo => ({
           id: "t3-4",
           icono: "milestone",
           nombre: "Validar reglas de negocio y condiciones agronómicas",
-          roles: [...ejecuta(ED), ...asiste(GP)],
+          roles: [...ejecuta(ED), ...asiste(GP, QA)],
           entrada: [],
           salida: [],
         },
@@ -246,7 +247,7 @@ export const seed = (): Modelo => ({
       nombre: "Fase 4: Ciclo de crecimiento",
       objetivo:
         "Escalar el sistema mediante desarrollo paralelo, integración continua y validación en el cultivo.",
-      roles: [ISA, ID, QA, IP, GP, ED],
+      roles: [ISA, ID, QA, GP, ED, IM, IE],
       tareas: [
         {
           id: "t4-1",
@@ -265,14 +266,15 @@ export const seed = (): Modelo => ({
           descripcion:
             "Desarrollo concurrente de componentes de datos, plataforma, seguridad de vuelo y adaptación.",
           // The five successive increments of the Fase's Entrada are consumed here.
-          roles: [...ejecuta(ISA), ...asiste(ID, IP)],
+          roles: [...ejecuta(ISA), ...asiste(ID, IM, IE)],
           entrada: [
             PROTOTIPO,
             tool("Monitoreo y operación del dron"),
             tool("Sistema de riego y variables climáticas"),
             tool("Coordinación múltiple de drones"),
           ],
-          salida: [wp("Código fuente"), wp("Releases de software")],
+          // La electrónica y la mecatrónica entregan lo suyo en el mismo incremento.
+          salida: [wp("Código fuente"), wp("Releases de software"), RED_SENSORES, FIRMWARE],
         },
         {
           id: "t4-3",
@@ -280,26 +282,26 @@ export const seed = (): Modelo => ({
           nombre: "Verificación e integración continua",
           descripcion:
             "Ejecución de pruebas automatizadas mediante CI/CD, SIL/HIL y gemelos digitales.",
-          roles: [...ejecuta(QA), ...asiste(IP)],
+          roles: [...ejecuta(QA), ...asiste(IM, IE)],
           entrada: [PIPELINE, BANCO_HIL],
           salida: [tool("Pipeline de CI/CD ejecutado"), tool("Entornos SIL/HIL validados")],
         },
         {
           id: "t4-4",
           icono: "milestone",
-          nombre: "Despliegue en campo y validación fenológica global",
+          nombre: "Despliegue en campo",
           descripcion:
-            "Llevar los releases al terreno real, calibrar dispositivos y evaluar el impacto del riego con el caficultor.",
-          roles: [...ejecuta(IP), ...asiste(ED)],
+            "Llevar los releases al terreno real e instalar y calibrar los dispositivos físicos del sistema.",
+          roles: [...ejecuta(IM, IE), ...asiste(ISA)],
           entrada: [],
           salida: [wp("Paquete de calibración de sensores y actuadores")],
         },
         {
           id: "t4-5",
           icono: "milestone",
-          nombre: "Auditoría de cumplimiento de la Constitución y del plan.md",
+          nombre: "Auditoría de cumplimiento de las especificaciones",
           descripcion:
-            "Revisar que el incremento no rompa las reglas globales de la Fase 1 ni se salga del plan.md acordado en la Fase 2.",
+            "Revisar que el incremento no rompa la Constitution.md de la Fase 1 ni se salga del plan.md acordado en la Fase 2.",
           roles: [...ejecuta(GP), ...asiste(QA)],
           entrada: [],
           salida: [],
@@ -340,6 +342,8 @@ export const seed = (): Modelo => ({
         tool("Pipeline de CI/CD ejecutado"),
         tool("Entornos SIL/HIL validados"),
         wp("Paquete de calibración de sensores y actuadores"),
+        RED_SENSORES,
+        FIRMWARE,
         wp("Releases de software"),
         guia("Manual de operación actualizado"),
         LECCIONES,

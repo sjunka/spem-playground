@@ -101,8 +101,11 @@ function celda(t: Tarea, cx: number, cy: number): Celda {
   m.roles.forEach((_, i) => {
     const gx = x + 10 + i * m.colRol + m.colRol / 2;
     const tx = Math.max(bx + 12, Math.min(bx + bw - 12, gx + (x + w / 2 - gx) * 0.3));
+    // Arranca bajo la última línea del nombre: cruzar el rótulo del Rol lo vuelve
+    // ilegible, y la línea es una asignación, no un tachado.
+    const desde = py + 30 + m.lsRol[i].length * LH_MINI;
     partes.push(
-      `<line x1="${gx}" y1="${py + 26}" x2="${tx}" y2="${yBanda}" stroke="${TAN}" stroke-width="1" stroke-opacity="0.8"/>`,
+      `<line x1="${gx}" y1="${desde}" x2="${tx}" y2="${yBanda}" stroke="${TAN}" stroke-width="1" stroke-opacity="0.8"/>`,
     );
   });
   m.roles.forEach((r, i) => {
@@ -264,7 +267,12 @@ const PAD_X = 46, PAD_TOP = 64, PAD_BOT = 26; // el aire del panel de Fase
 const RX = 720, RY = 600;
 const ANILLO_CX = 850;
 const ANILLO_X = [530, 1170]; // izquierda: el regreso; derecha: la bajada
-const CORREDOR_X = 1025; // por donde sube la retroalimentación, sin tocar el rótulo
+const CORREDOR_X = 985; // por donde sube la retroalimentación, sin tocar el rótulo
+const RETORNO_X = 1032; // el carril del retorno de la puerta de especificaciones
+
+// La decisión agronómica parte la columna de la Fase 3: la celda que la sigue
+// deja sitio para el rombo antes de dibujarse.
+const HUECO: Record<string, number> = { "t3-5": 168 };
 
 const COLUMNAS: [string, string, string[]][] = [
   ["FASE 1", "Especificación global de nivel cero", ["t1-1", "t1-2", "t1-3"]],
@@ -285,6 +293,7 @@ export function consolidado(m: Modelo) {
     ids.forEach((id) => {
       const t = tareas.get(id)!;
       const h = medir(t).h;
+      y += HUECO[id] ?? 0;
       c[id] = celda(t, COL_X[i], y + h / 2);
       y += h + PASO_Y;
     });
@@ -299,7 +308,7 @@ export function consolidado(m: Modelo) {
   const POS: Record<string, [number, number]> = {
     "t4-1": anillo(1, -380), "t4-2": anillo(1, -140), "t4-3": anillo(1, 100),
     "t4-4": [ANILLO_CX, ANILLO_CY + 470],
-    "t4-7": anillo(0, 300), "t4-6": anillo(0, 60), "t4-5": anillo(0, -180),
+    "t4-5": anillo(0, 300), "t4-6": anillo(0, 60), "t4-7": anillo(0, -180),
   };
   for (const [id, [x, y]] of Object.entries(POS)) c[id] = celda(tareas.get(id)!, x, y);
 
@@ -310,7 +319,10 @@ export function consolidado(m: Modelo) {
 
   const d0 = decision("¿La traza mínima responde en SIL/HIL?", COL_X[2], yD0);
   const d1 = decision("¿Las pruebas del incremento pasan?", ANILLO_X[1], ANILLO_CY + 330);
-  const d2 = decision("¿El incremento cumple la Constitución y el plan.md?", ANILLO_X[0], ANILLO_CY - 400);
+  const d2 = decision("¿El incremento cumple con las especificaciones?", ANILLO_X[0], ANILLO_CY - 400);
+  // La puerta agronómica de la Fase 3: lo que no valida el caficultor no sigue.
+  const yD3 = c["t3-5"].y - (HUECO["t3-5"] ?? 0) / 2 - PASO_Y / 2;
+  const d3 = decision("¿Las reglas de negocio y las condiciones agronómicas son válidas?", COL_X[2], yD3);
 
   const fondo: string[] = [];
   const aristas: string[] = [];
@@ -351,15 +363,15 @@ export function consolidado(m: Modelo) {
     `<ellipse cx="${ANILLO_CX}" cy="${ANILLO_CY}" rx="${RX}" ry="${RY}" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.7" stroke-dasharray="9 6" stroke-width="1.6"/>`,
     T("SEM 15 →", ANILLO_CX - RX + 40, ANILLO_CY - RY + 46, { fs: 9, fill: GRIS, f: MONO, ls: "0.1em" }),
     // El rótulo va en el corredor central, que es lo que el anillo deja libre.
-    glifo("iteration", ANILLO_CX - 18, ANILLO_CY - 216, 36, TAN),
-    T("FASE 4 · EL ESTADO PERMANENTE DEL PROYECTO", ANILLO_CX, ANILLO_CY - 156, {
+    glifo("iteration", ANILLO_CX - 18, ANILLO_CY - 130, 36, TAN),
+    T("FASE 4 · EL ESTADO PERMANENTE DEL PROYECTO", ANILLO_CX, ANILLO_CY - 70, {
       fs: 9, a: "middle", fill: TAN, f: MONO, ls: "0.14em",
     }),
-    T("Ciclo de crecimiento", ANILLO_CX, ANILLO_CY - 116, { fs: 24, a: "middle", fill: MARRON, f: SERIF }),
+    T("Ciclo de crecimiento", ANILLO_CX, ANILLO_CY - 30, { fs: 24, a: "middle", fill: MARRON, f: SERIF }),
     ...lineas(
       "Un incremento cada 2 a 4 semanas: se construye, se verifica, se despliega, se muestra al caficultor y lo aprendido reordena el backlog del siguiente.",
-      10, 320,
-    ).map((l, j) => T(l, ANILLO_CX, ANILLO_CY - 88 + j * 15, { fs: 10, a: "middle", fill: GRIS })),
+      10, 280,
+    ).map((l, j) => T(l, ANILLO_CX, ANILLO_CY - 2 + j * 15, { fs: 10, a: "middle", fill: GRIS })),
   );
 
   // --- Fase 1: del arranque a la Constitución.
@@ -372,7 +384,8 @@ export function consolidado(m: Modelo) {
   // cargada con los Productos de Trabajo del traspaso.
   COLUMNAS.forEach(([, , ids], i) => {
     for (let k = 0; k < ids.length - 1; k++)
-      aristas.push(conector([abajo(c[ids[k]]), arriba(c[ids[k + 1]])]));
+      if (!HUECO[ids[k + 1]])
+        aristas.push(conector([abajo(c[ids[k]]), arriba(c[ids[k + 1]])]));
     if (i === COLUMNAS.length - 1) return;
     const x = CANAL_X[i], yBajo = ultima(i).y + ultima(i).h + 42, yAlto = Y_COL - 42;
     aristas.push(
@@ -384,6 +397,19 @@ export function consolidado(m: Modelo) {
       T(`FASE ${i + 1} → FASE ${i + 2}`, x, yAlto - 22, { fs: 8, a: "middle", fill: TAN, f: MONO, ls: "0.12em" }),
     );
   });
+
+  // --- la puerta agronómica de la Fase 3.
+  aristas.push(
+    conector([abajo(c["t3-4"]), [COL_X[2], d3.cy - d3.h / 2]]),
+    conector([[COL_X[2], d3.cy + d3.h / 2], arriba(c["t3-5"])]),
+    // No: lo que el caficultor no valida no es un problema de código, es una regla
+    // mal escrita: vuelve a la Constitución de la Fase 1.
+    conector(
+      [[d3.cx + d3.w / 2, d3.cy], [W - M - 30, d3.cy], [W - M - 30, 300], [COL_X[0] + 40, 300], [COL_X[0] + 40, primera(0).y]],
+      "retorno",
+    ),
+  );
+  cuerpo.push(d3.svg, rotulo("Sí", COL_X[2] + 34, d3.cy + 84), rotulo("No", W - M - 30, d3.cy - 60));
 
   // --- la puerta de salida del arranque.
   aristas.push(
@@ -413,12 +439,16 @@ export function consolidado(m: Modelo) {
     conector([[d1.cx + d1.w / 2, d1.cy], [1370, d1.cy], [1370, c["t4-2"].cy], der(c["t4-2"])], "retorno"),
     // Sí: baja al campo, y el anillo vuelve por la fila de abajo.
     conector([[d1.cx, d1.cy + d1.h / 2], [ANILLO_X[1], c["t4-4"].cy], der(c["t4-4"])]),
-    conector([izq(c["t4-4"]), [ANILLO_X[0], c["t4-4"].cy], abajo(c["t4-7"])]),
-    conector([arriba(c["t4-7"]), abajo(c["t4-6"])]),
-    conector([arriba(c["t4-6"]), abajo(c["t4-5"])]),
-    conector([arriba(c["t4-5"]), [ANILLO_X[0], d2.cy + d2.h / 2]]),
-    // No: otro incremento.
-    conector([[d2.cx, d2.cy - d2.h / 2], [ANILLO_X[0], ANILLO_CY - 520], [ANILLO_X[1], ANILLO_CY - 520], arriba(c["t4-1"])], "retorno"),
+    conector([izq(c["t4-4"]), [ANILLO_X[0], c["t4-4"].cy], abajo(c["t4-5"])]),
+    conector([arriba(c["t4-5"]), abajo(c["t4-6"])]),
+    conector([arriba(c["t4-6"]), abajo(c["t4-7"])]),
+    conector([arriba(c["t4-7"]), [ANILLO_X[0], d2.cy + d2.h / 2]]),
+    // No: el incremento que no cumple las especificaciones vuelve a la
+    // sincronización, que es donde se decide qué se rehace y con qué prioridad.
+    conector(
+      [[d2.cx + d2.w / 2, d2.cy], [RETORNO_X, d2.cy], [RETORNO_X, c["t4-1"].cy], izq(c["t4-1"])],
+      "retorno",
+    ),
     // Sí: sale del ciclo y cierra el proceso.
     conector([[d2.cx - d2.w / 2, d2.cy], [180, d2.cy], [180, ANILLO_CY + RY + 80], [214, ANILLO_CY + RY + 80]]),
     // La retroalimentación del review: lo aprendido en campo reordena el backlog.
@@ -431,11 +461,13 @@ export function consolidado(m: Modelo) {
     d1.svg, d2.svg,
     rotulo("No", 1370, d1.cy - 60),
     rotulo("Sí", d1.cx + 34, d1.cy + 90),
-    rotulo("No", d2.cx + 34, d2.cy - 90),
+    rotulo("No", d2.cx + d2.w / 2 + 60, d2.cy - 12),
     rotulo("Sí", 214, ANILLO_CY + RY + 74),
-    rotulo("retroalimentación al backlog", 840, c["t4-7"].cy - 4, AZUL),
-    // Dónde se corta cada release del plan.
-    rotulo("R1 · R2 · R3", c["t4-4"].cx, c["t4-4"].cy + c["t4-4"].h / 2 + 22, MARRON),
+    rotulo("retroalimentación al backlog", 830, c["t4-7"].cy - 26, AZUL),
+    // Dónde se corta cada release del plan: el despliegue en campo abre R1 y R2,
+    // y el manual de operación es lo que cierra R3.
+    rotulo("R1 · R2", c["t4-4"].cx, c["t4-4"].cy + c["t4-4"].h / 2 + 22, MARRON),
+    rotulo("R3", c["t4-6"].x - 36, c["t4-6"].cy, MARRON),
     hito("FIN", 250, ANILLO_CY + RY + 80),
   );
 
@@ -520,7 +552,7 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
           : "",
       ];
     }),
-    panel("EL PROCESO ENTREGA", "Ocho Productos de Trabajo, con dueño y Fase de origen.", 1010, py1, W - M - 1010, 226),
+    panel("EL PROCESO ENTREGA", "Los Productos de Trabajo que salen del ciclo, con dueño y Fase de origen.", 1010, py1, W - M - 1010, 62 + Math.ceil(m.fases[3].salida.length / 2) * 42),
     ...m.fases[3].salida.flatMap((p, i) => {
       const x = 1032 + (i % 2) * 300;
       const y = py1 + 62 + Math.floor(i / 2) * 42;
@@ -532,7 +564,7 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
   );
 
   // --- leyenda, en dos filas: la figura ya no tiene ancho para una sola.
-  const ly = py1 + 226 + 60;
+  const ly = py1 + Math.max(150, 62 + Math.ceil(m.fases[3].salida.length / 2) * 42) + 60;
   const formas: [string, string][] = [
     [contorno("task", 0, 0, 44, 20), "Tarea"],
     [contorno("milestone", 0, 0, 44, 20), "Hito"],
@@ -569,7 +601,7 @@ ${PUNTA}
 <rect width="100%" height="100%" fill="${PAPEL}"/>
 ${eyebrow("MODELO DE PROCESOS — SPEM 2.0 · SPEC-DRIVEN DEVELOPMENT", M, 62, GRIS, 10)}
 ${T("El modelo de procesos consolidado", M, 108, { fs: 34, f: SERIF, fill: TINTA })}
-${T("Sistema ciberfísico de riego autónomo guiado por drones para caficultura — cuatro Fases, veintiuna Tareas y nueve Roles en una sola red.", M, 134, { fs: 12, fill: GRIS })}
+${T("Sistema ciberfísico de riego autónomo guiado por drones para caficultura — cuatro Fases, veintiuna Tareas y ocho Roles en una sola red.", M, 134, { fs: 12, fill: GRIS })}
 ${T("Cada Fase es una columna: el tiempo baja dentro de ella y avanza hacia la derecha entre Fases. En cada celda, el Rol en negrita ejecuta la Tarea y responde por los Productos de Trabajo que salen de ella.", M, 154, { fs: 11, fill: GRIS })}
 ${fondo.join("\n")}
 ${aristas.join("\n")}

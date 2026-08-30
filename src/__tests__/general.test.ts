@@ -40,14 +40,14 @@ describe("las dos versiones del proceso completo", () => {
     });
   }
 
-  it("la figura consolidada cierra el ciclo: tres decisiones, tres retornos y la retroalimentación", () => {
+  it("la figura consolidada cierra el ciclo: cuatro decisiones, cuatro retornos y la retroalimentación", () => {
     const svg = consolidado(modelo);
-    // Un No y un Sí por decisión; el del prototipo validado además marca el R0.
-    expect(svg.match(/>No</g)?.length).toBe(3);
-    expect(svg.match(/>Sí</g)?.length).toBe(2);
+    // Un No y un Sí por decisión; el del prototipo validado marca el R0 en su Sí.
+    expect(svg.match(/>No</g)?.length).toBe(4);
+    expect(svg.match(/>Sí</g)?.length).toBe(3);
     expect(svg).toContain("Sí · R0");
-    // Tres retornos punteados, más el trazo de la leyenda.
-    expect(svg.match(/stroke-dasharray="5 4"/g)?.length).toBe(4);
+    // Cuatro retornos punteados, más el trazo de la leyenda.
+    expect(svg.match(/stroke-dasharray="5 4"/g)?.length).toBe(5);
     // La retroalimentación va en azul y con su propio trazo, no es un rechazo.
     expect(svg.match(/stroke-dasharray="2 5"/g)?.length).toBe(2);
     expect(svg).toContain("retroalimentación al backlog");
