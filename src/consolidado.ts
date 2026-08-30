@@ -17,12 +17,13 @@ import {
 } from "./epf-svg";
 
 // ------------------------------------------------------------------ medidas
-const W = 2560;
+const W = 1700;
 const M = 70;
 const CELDA_W = 250;
-const PASO = 330; // separación entre celdas de una banda
-const COL = (i: number) => 560 + i * PASO;
+
+
 const FS_ROL = 6.5, FS_NOMBRE = 10, FS_PROD = 6.5;
+const GAP_ROL = 16; // el aire donde cae la línea que une el Rol con su Tarea
 const LH_MINI = 8;
 
 const lineas = (t: string, fs: number, w: number) => wrap(t, fs, w);
@@ -78,7 +79,7 @@ function medir(t: Tarea) {
 
   return {
     roles, lsRol, colRol, lsNombre, hNombre, prods, lsProd, colProd, hRoles, hProds,
-    h: 10 + hRoles + 6 + hNombre + (hProds ? 6 + hProds : 0) + 10,
+    h: 10 + hRoles + GAP_ROL + hNombre + (hProds ? 6 + hProds : 0) + 10,
   };
 }
 
@@ -93,6 +94,17 @@ function celda(t: Tarea, cx: number, cy: number): Celda {
   partes.push(T(codigo(t.id), x + 10, y + 19, { fs: 8, fill: TAN, w: 600, f: MONO }));
 
   let py = y + 10;
+  // La línea de asignación: en SPEM el Rol no se posa junto a la Tarea, se une a
+  // ella. Va debajo de los textos, del hombro del Rol al borde de la banda.
+  const yBanda = py + m.hRoles + GAP_ROL;
+  const bx = x + 22, bw = w - 48;
+  m.roles.forEach((_, i) => {
+    const gx = x + 10 + i * m.colRol + m.colRol / 2;
+    const tx = Math.max(bx + 12, Math.min(bx + bw - 12, gx + (x + w / 2 - gx) * 0.3));
+    partes.push(
+      `<line x1="${gx}" y1="${py + 26}" x2="${tx}" y2="${yBanda}" stroke="${TAN}" stroke-width="1" stroke-opacity="0.8"/>`,
+    );
+  });
   m.roles.forEach((r, i) => {
     const gx = x + 10 + i * m.colRol + m.colRol / 2;
     partes.push(
@@ -106,7 +118,7 @@ function celda(t: Tarea, cx: number, cy: number): Celda {
       ),
     );
   });
-  py += m.hRoles + 6;
+  py += m.hRoles + GAP_ROL;
 
   // La banda blanca del nombre: lo que se lee primero al recorrer la red.
   partes.push(
@@ -185,19 +197,30 @@ const hito = (texto: string, cx: number, cy: number, r = 30) =>
     T(texto, cx, cy + r + 18, { fs: 10, a: "middle", fill: MARRON, w: 600, f: MONO, ls: "0.1em" }),
   ].join("\n");
 
-/** Los Productos de Trabajo que viajan por un conector, sobre el propio trazo. */
-function traspaso(productos: Producto[], x: number, y: number, paso: number) {
-  return productos
-    .flatMap((p, i) => {
-      const px = x + i * paso;
-      const ls = lineas(p.texto, 7.5, paso - 52);
-      return [
-        `<rect x="${px - 6}" y="${y - 18}" width="${Math.min(paso - 16, 40 + Math.max(...ls.map((l) => l.length)) * 4.2)}" height="${Math.max(34, 12 + ls.length * 9)}" rx="4" fill="${PAPEL}" stroke="${REGLA}"/>`,
-        gProducto(p, px, y - 14),
-        ...ls.map((l, j) => T(l, px + 32, y - 6 + j * 9, { fs: 7.5, fill: GRIS })),
+/** Los Productos de Trabajo del traspaso, apilados sobre el canal vertical. */
+function traspaso(productos: Producto[], x: number, y0: number) {
+  const cajas = productos.map((p) => {
+    const ls = lineas(p.texto, 7.5, CANAL_W - 52);
+    return { p, ls, h: Math.max(34, 12 + ls.length * 9) };
+  });
+  const total = cajas.reduce((h, b) => h + b.h + 10, 0) - 10;
+  let y = y0 - total / 2;
+  const svg = cajas
+    .flatMap(({ p, ls, h }) => {
+      const partes = [
+        `<rect x="${x - CANAL_W / 2}" y="${y}" width="${CANAL_W}" height="${h}" rx="4" fill="${PAPEL}" stroke="${REGLA}"/>`,
+        gProducto(p, x - CANAL_W / 2 + 6, y + h / 2 - 13),
+        ...ls.map((l, j) =>
+          T(l, x - CANAL_W / 2 + 38, y + h / 2 - (ls.length - 1) * 4.5 + j * 9 + 3, {
+            fs: 7.5, fill: GRIS,
+          }),
+        ),
       ];
+      y += h + 10;
+      return partes;
     })
     .join("\n");
+  return { svg, total };
 }
 
 // ------------------------------------------------------------------ paneles
@@ -205,7 +228,7 @@ function panel(titulo: string, bajada: string, x: number, y: number, w: number, 
   return [
     `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${PAPEL}" stroke="${TAN}" stroke-opacity="0.6"/>`,
     eyebrow(titulo, x + 22, y + 26, TAN, 9),
-    T(bajada, x + 22, y + 44, { fs: 9.5, fill: GRIS }),
+    ...lineas(bajada, 9.5, w - 44).map((l, j) => T(l, x + 22, y + 44 + j * 13, { fs: 9.5, fill: GRIS })),
   ].join("\n");
 }
 
@@ -226,188 +249,208 @@ const CADENA_SDD = [
 ];
 
 // ------------------------------------------------------------------ posiciones
-// El mapa de la figura. Fases 1–3 en cascada, como Iteración 0; la Fase 4 cierra
-// el anillo dentro de la elipse, con una decisión en cada extremo.
-const Y1 = 372, Y2 = 740, Y3 = 1120;
-const ANILLO_SUP = 1530, ANILLO_INF = 1930;
+// La figura es vertical: cada Fase es una columna que se lee hacia abajo, y las
+// Fases se suceden hacia la derecha. El anillo de la Fase 4 va debajo de las tres,
+// y los paneles al pie. Ver ADR-0013.
+const COL_X = [340, 860, 1380]; // el centro de cada columna de Fase
+const CANAL_X = [600, 1120]; // el canal de traspaso entre dos columnas
+const CANAL_W = 160;
+const Y_REGLA = 392; // la regla del tiempo, encima de las columnas
+const Y_COL = 500; // el borde superior de la primera celda de cada columna
+const PASO_Y = 48; // entre dos celdas de una columna
+const PAD_X = 46, PAD_TOP = 64, PAD_BOT = 26; // el aire del panel de Fase
 
-const POS: Record<string, [number, number]> = {
-  "t1-1": [COL(0), Y1], "t1-2": [COL(1), Y1], "t1-3": [COL(2), Y1],
-  "t2-1": [COL(0), Y2], "t2-2": [COL(1), Y2], "t2-3": [COL(2), Y2],
-  "t2-4": [COL(3), Y2], "t2-5": [COL(4), Y2], "t2-6": [COL(5), Y2],
-  "t3-1": [COL(0), Y3], "t3-2": [COL(1), Y3], "t3-3": [COL(2), Y3],
-  "t3-4": [COL(3), Y3], "t3-5": [COL(4), Y3],
-  "t4-1": [640, ANILLO_SUP], "t4-2": [980, ANILLO_SUP], "t4-3": [1320, ANILLO_SUP],
-  "t4-4": [1660, ANILLO_INF], "t4-7": [1320, ANILLO_INF],
-  "t4-6": [980, ANILLO_INF], "t4-5": [640, ANILLO_INF],
-};
+// El anillo: dos columnas y un fondo de elipse, con una decisión en cada extremo.
+const RX = 720, RY = 600;
+const ANILLO_CX = 850;
+const ANILLO_X = [530, 1170]; // izquierda: el regreso; derecha: la bajada
+const CORREDOR_X = 1025; // por donde sube la retroalimentación, sin tocar el rótulo
 
-const ELIPSE = { cx: 1060, cy: 1730, rx: 860, ry: 380 };
-const CANAL_12 = 540, CANAL_23 = 940, CANAL_34 = 1290;
-const RETORNO_X = 2470, RETORNO_Y = 196;
-const EJE_X = 150; // la regla del tiempo, a la izquierda de todo
-const CORREDOR = 1810; // el pasillo entre las dos filas del anillo
-
-const SEMANAS: [string, number][] = [
-  ["SEM 1–3", Y1], ["SEM 4–8", Y2], ["SEM 9–14", Y3], ["SEM 15 →", ELIPSE.cy - ELIPSE.ry + 40],
+const COLUMNAS: [string, string, string[]][] = [
+  ["FASE 1", "Especificación global de nivel cero", ["t1-1", "t1-2", "t1-3"]],
+  ["FASE 2", "Descomposición en dominios", ["t2-1", "t2-2", "t2-3", "t2-4", "t2-5", "t2-6"]],
+  ["FASE 3", "Esqueleto funcional mínimo", ["t3-1", "t3-2", "t3-3", "t3-4", "t3-5"]],
 ];
+
+const SEMANAS = ["SEM 1–3", "SEM 4–8", "SEM 9–14"];
 
 export function consolidado(m: Modelo) {
   const tareas = new Map(m.fases.flatMap((f) => f.tareas.map((t) => [t.id, t] as const)));
-  const c = Object.fromEntries(
-    Object.entries(POS).map(([id, [x, y]]) => [id, celda(tareas.get(id)!, x, y)]),
-  ) as Record<string, Celda>;
+
+  // --- las tres columnas de arranque: la altura de cada celda decide la siguiente.
+  const c: Record<string, Celda> = {};
+  const columna: { top: number; bot: number; ids: string[] }[] = [];
+  COLUMNAS.forEach(([, , ids], i) => {
+    let y = Y_COL;
+    ids.forEach((id) => {
+      const t = tareas.get(id)!;
+      const h = medir(t).h;
+      c[id] = celda(t, COL_X[i], y + h / 2);
+      y += h + PASO_Y;
+    });
+    columna.push({ top: Y_COL, bot: y - PASO_Y, ids });
+  });
+  const colBot = Math.max(...columna.map((k) => k.bot));
+
+  // --- la decisión que cierra el arranque, y con ella el anillo de la Fase 4.
+  const yD0 = colBot + PAD_BOT + 110;
+  const ANILLO_CY = yD0 + 48 + 130 + RY;
+  const anillo = (i: number, dy: number) => [ANILLO_X[i], ANILLO_CY + dy] as [number, number];
+  const POS: Record<string, [number, number]> = {
+    "t4-1": anillo(1, -380), "t4-2": anillo(1, -140), "t4-3": anillo(1, 100),
+    "t4-4": [ANILLO_CX, ANILLO_CY + 470],
+    "t4-7": anillo(0, 300), "t4-6": anillo(0, 60), "t4-5": anillo(0, -180),
+  };
+  for (const [id, [x, y]] of Object.entries(POS)) c[id] = celda(tareas.get(id)!, x, y);
 
   const arriba = (n: Celda) => [n.cx, n.y] as [number, number];
   const abajo = (n: Celda) => [n.cx, n.y + n.h] as [number, number];
   const izq = (n: Celda) => [n.x, n.cy] as [number, number];
   const der = (n: Celda) => [n.x + n.w, n.cy] as [number, number];
 
-  const d0 = decision("¿La traza mínima responde en SIL/HIL?", 2230, Y3);
-  const d1 = decision("¿Las pruebas del incremento pasan?", 1660, ANILLO_SUP);
-  const d2 = decision("¿El incremento cumple la Constitución?", 420, ELIPSE.cy);
+  const d0 = decision("¿La traza mínima responde en SIL/HIL?", COL_X[2], yD0);
+  const d1 = decision("¿Las pruebas del incremento pasan?", ANILLO_X[1], ANILLO_CY + 330);
+  const d2 = decision("¿El incremento cumple la Constitución y el plan.md?", ANILLO_X[0], ANILLO_CY - 400);
 
   const fondo: string[] = [];
   const aristas: string[] = [];
   const cuerpo: string[] = [];
 
-  // --- las bandas de Fase, detrás de todo.
-  const bandas: [string, string, string[]][] = [
-    ["FASE 1", "Especificación global de nivel cero", ["t1-1", "t1-2", "t1-3"]],
-    ["FASE 2", "Descomposición en dominios", ["t2-1", "t2-2", "t2-3", "t2-4", "t2-5", "t2-6"]],
-    ["FASE 3", "Esqueleto funcional mínimo", ["t3-1", "t3-2", "t3-3", "t3-4", "t3-5"]],
-  ];
-  let iterTop = Infinity, iterBot = 0;
-  for (const [n, nombre, ids] of bandas) {
+  // --- el panel de cada Fase, detrás de su columna.
+  COLUMNAS.forEach(([n, nombre, ids], i) => {
     const cs = ids.map((id) => c[id]);
-    const x = Math.min(...cs.map((n) => n.x)) - 46;
-    const y = Math.min(...cs.map((n) => n.y)) - 46;
-    const x2 = Math.max(...cs.map((n) => n.x + n.w)) + 46;
-    const y2 = Math.max(...cs.map((n) => n.y + n.h)) + 26;
-    iterTop = Math.min(iterTop, y);
-    iterBot = Math.max(iterBot, y2);
+    const x = COL_X[i] - CELDA_W / 2 - PAD_X;
+    const y = Math.min(...cs.map((k) => k.y)) - PAD_TOP;
+    const y2 = Math.max(...cs.map((k) => k.y + k.h)) + PAD_BOT;
     fondo.push(
-      `<rect x="${x}" y="${y}" width="${x2 - x}" height="${y2 - y}" rx="16" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.5" stroke-dasharray="7 5"/>`,
+      `<rect x="${x}" y="${y}" width="${CELDA_W + PAD_X * 2}" height="${y2 - y}" rx="16" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.5" stroke-dasharray="7 5"/>`,
       eyebrow(n, x + 18, y + 24, TAN, 9),
-      T(nombre, x + 92, y + 25, { fs: 13, fill: MARRON, f: SERIF }),
+      ...lineas(nombre, 13, CELDA_W + PAD_X * 2 - 36).map((l, j) =>
+        T(l, x + 18, y + 44 + j * 15, { fs: 13, fill: MARRON, f: SERIF }),
+      ),
     );
-  }
+  });
 
-  // --- el eje del tiempo, y con él la marca de que las Fases 1–3 son una sola
-  // pasada de arranque: es lo que impide leer la figura como una cascada.
+  // --- la regla del tiempo. En vertical el tiempo baja dentro de cada Fase y
+  // avanza hacia la derecha entre Fases: la regla es lo que lo dice.
+  const rx0 = COL_X[0] - CELDA_W / 2 - PAD_X, rx1 = COL_X[2] + CELDA_W / 2 + PAD_X;
   fondo.push(
-    `<line x1="${EJE_X}" y1="${iterTop - 30}" x2="${EJE_X}" y2="${iterBot + 10}" stroke="${TAN}" stroke-width="2"/>`,
-    `<path d="M${EJE_X - 10} ${iterTop - 30} h20 M${EJE_X - 10} ${iterBot + 10} h20" stroke="${TAN}" stroke-width="2"/>`,
-    `<text transform="translate(${EJE_X - 22} ${(iterTop + iterBot) / 2}) rotate(-90)" text-anchor="middle" font-family="${MONO}" font-size="11" letter-spacing="0.2em" fill="${TAN}">ITERACIÓN 0 · ARRANQUE, UNA SOLA VEZ</text>`,
-    ...SEMANAS.map(([texto, y]) =>
-      T(texto, EJE_X + 14, y - 96, { fs: 9, fill: GRIS, f: MONO, ls: "0.1em" }),
-    ),
-    T("El tiempo corre hacia abajo.", EJE_X - 62, iterTop - 46, { fs: 9, fill: GRIS }),
+    `<line x1="${rx0}" y1="${Y_REGLA}" x2="${rx1}" y2="${Y_REGLA}" stroke="${TAN}" stroke-width="2"/>`,
+    `<path d="M${rx0} ${Y_REGLA - 10} v20 M${rx1} ${Y_REGLA - 10} v20" stroke="${TAN}" stroke-width="2"/>`,
+    T("ITERACIÓN 0 · ARRANQUE, UNA SOLA VEZ", (rx0 + rx1) / 2, Y_REGLA - 22, {
+      fs: 11, a: "middle", fill: TAN, f: MONO, ls: "0.2em",
+    }),
+    ...COL_X.flatMap((x, i) => [
+      `<line x1="${x}" y1="${Y_REGLA}" x2="${x}" y2="${Y_REGLA + 10}" stroke="${TAN}" stroke-width="2"/>`,
+      T(SEMANAS[i], x, Y_REGLA + 28, { fs: 9, a: "middle", fill: GRIS, f: MONO, ls: "0.1em" }),
+    ]),
   );
 
   // --- la elipse del ciclo: la Fase 4 no termina, se repite.
   fondo.push(
-    `<ellipse cx="${ELIPSE.cx}" cy="${ELIPSE.cy}" rx="${ELIPSE.rx}" ry="${ELIPSE.ry}" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.7" stroke-dasharray="9 6" stroke-width="1.6"/>`,
-    // El rótulo va en el pasillo del centro, que es lo que la elipse deja libre.
-    glifo("iteration", ELIPSE.cx - 18, ELIPSE.cy - 116, 36, TAN),
-    T("FASE 4 · EL ESTADO PERMANENTE DEL PROYECTO", ELIPSE.cx, ELIPSE.cy - 60, {
-      fs: 10, a: "middle", fill: TAN, f: MONO, ls: "0.18em",
+    `<ellipse cx="${ANILLO_CX}" cy="${ANILLO_CY}" rx="${RX}" ry="${RY}" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.7" stroke-dasharray="9 6" stroke-width="1.6"/>`,
+    T("SEM 15 →", ANILLO_CX - RX + 40, ANILLO_CY - RY + 46, { fs: 9, fill: GRIS, f: MONO, ls: "0.1em" }),
+    // El rótulo va en el corredor central, que es lo que el anillo deja libre.
+    glifo("iteration", ANILLO_CX - 18, ANILLO_CY - 216, 36, TAN),
+    T("FASE 4 · EL ESTADO PERMANENTE DEL PROYECTO", ANILLO_CX, ANILLO_CY - 156, {
+      fs: 9, a: "middle", fill: TAN, f: MONO, ls: "0.14em",
     }),
-    T("Ciclo de crecimiento", ELIPSE.cx, ELIPSE.cy - 26, { fs: 26, a: "middle", fill: MARRON, f: SERIF }),
-    T("Un incremento cada 2 a 4 semanas: se construye, se verifica, se despliega,", ELIPSE.cx, ELIPSE.cy, {
-      fs: 11, a: "middle", fill: GRIS,
-    }),
-    T("se muestra al caficultor y lo aprendido reordena el backlog del siguiente.", ELIPSE.cx, ELIPSE.cy + 18, {
-      fs: 11, a: "middle", fill: GRIS,
-    }),
+    T("Ciclo de crecimiento", ANILLO_CX, ANILLO_CY - 116, { fs: 24, a: "middle", fill: MARRON, f: SERIF }),
+    ...lineas(
+      "Un incremento cada 2 a 4 semanas: se construye, se verifica, se despliega, se muestra al caficultor y lo aprendido reordena el backlog del siguiente.",
+      10, 320,
+    ).map((l, j) => T(l, ANILLO_CX, ANILLO_CY - 88 + j * 15, { fs: 10, a: "middle", fill: GRIS })),
   );
 
   // --- Fase 1: del arranque a la Constitución.
-  cuerpo.push(hito("INICIO", 320, Y1));
-  aristas.push(
-    conector([[356, Y1], izq(c["t1-1"])]),
-    conector([der(c["t1-1"]), izq(c["t1-2"])]),
-    conector([der(c["t1-2"]), izq(c["t1-3"])]),
-    conector([abajo(c["t1-3"]), [COL(2), CANAL_12], [COL(0), CANAL_12], arriba(c["t2-1"])]),
-  );
-  cuerpo.push(traspaso(m.fases[0].salida.slice(0, 3), 600, CANAL_12, 215));
+  const primera = (i: number) => c[COLUMNAS[i][2][0]];
+  const ultima = (i: number) => c[COLUMNAS[i][2][COLUMNAS[i][2].length - 1]];
+  cuerpo.push(hito("INICIO", 112, primera(0).cy));
+  aristas.push(conector([[148, primera(0).cy], izq(primera(0))]));
 
-  // --- Fase 2: seis Tareas, la última del equipo de electrónica.
-  aristas.push(
-    ...[0, 1, 2, 3, 4].map((i) =>
-      conector([der(c[`t2-${i + 1}`]), izq(c[`t2-${i + 2}`])]),
-    ),
-    conector([abajo(c["t2-6"]), [COL(5), CANAL_23], [COL(0), CANAL_23], arriba(c["t3-1"])]),
-  );
-  cuerpo.push(
-    traspaso(m.fases[1].salida, 600, CANAL_23, 270),
-    eyebrow("SPEC-DRIVEN DEVELOPMENT · LA ESPECIFICACIÓN MANDA SOBRE EL CÓDIGO", 600, CANAL_23 - 34, TAN, 9),
-  );
+  // --- dentro de una columna la cadena baja; entre columnas sube por el canal,
+  // cargada con los Productos de Trabajo del traspaso.
+  COLUMNAS.forEach(([, , ids], i) => {
+    for (let k = 0; k < ids.length - 1; k++)
+      aristas.push(conector([abajo(c[ids[k]]), arriba(c[ids[k + 1]])]));
+    if (i === COLUMNAS.length - 1) return;
+    const x = CANAL_X[i], yBajo = ultima(i).y + ultima(i).h + 42, yAlto = Y_COL - 42;
+    aristas.push(
+      conector([abajo(ultima(i)), [COL_X[i], yBajo], [x, yBajo], [x, yAlto], [COL_X[i + 1], yAlto], arriba(primera(i + 1))]),
+    );
+    const salida = m.fases[i].salida;
+    cuerpo.push(
+      traspaso(salida, x, (yAlto + yBajo) / 2).svg,
+      T(`FASE ${i + 1} → FASE ${i + 2}`, x, yAlto - 22, { fs: 8, a: "middle", fill: TAN, f: MONO, ls: "0.12em" }),
+    );
+  });
 
-  // --- Fase 3: el prototipo vertical, el banco HIL y la puerta de salida.
+  // --- la puerta de salida del arranque.
   aristas.push(
-    ...[0, 1, 2, 3].map((i) => conector([der(c[`t3-${i + 1}`]), izq(c[`t3-${i + 2}`])])),
-    conector([der(c["t3-5"]), [d0.cx - d0.w / 2, d0.cy]]),
+    conector([abajo(ultima(2)), [COL_X[2], d0.cy - d0.h / 2]]),
     // No: la traza que no responde no se reintenta aquí — vuelve a la Fase 1, a
     // revisar la Constitución, las reglas y los contratos que la sostienen.
     conector(
-      [[d0.cx + d0.w / 2, d0.cy], [RETORNO_X, d0.cy], [RETORNO_X, RETORNO_Y], [COL(0), RETORNO_Y], arriba(c["t1-1"])],
+      // Entra por la esquina de la columna, no por su centro: el rótulo de la Fase
+      // vive justo ahí y una línea encima lo vuelve ilegible.
+      [[d0.cx + d0.w / 2, d0.cy], [W - M, d0.cy], [W - M, 250], [COL_X[0] + 95, 250], [COL_X[0] + 95, primera(0).y]],
       "retorno",
     ),
-    conector([[d0.cx, d0.cy + d0.h / 2], [d0.cx, CANAL_34], [640, CANAL_34], arriba(c["t4-1"])]),
+    conector([[d0.cx, d0.cy + d0.h / 2], [d0.cx, ANILLO_CY - 540], [ANILLO_X[1], ANILLO_CY - 540], arriba(c["t4-1"])]),
   );
   cuerpo.push(
     d0.svg,
-    traspaso(m.fases[2].salida, 700, CANAL_34, 300),
-    rotulo("No", RETORNO_X, 700),
-    rotulo("Sí · R0", d0.cx + 52, CANAL_34 - 6),
+    rotulo("No", W - M - 40, d0.cy - 60),
+    rotulo("Sí · R0", d0.cx + 60, ANILLO_CY - 546),
   );
 
-  // --- Fase 4: el anillo, con una decisión en cada extremo.
+  // --- el anillo: baja por la derecha, cruza por abajo y regresa por la izquierda.
   aristas.push(
-    conector([der(c["t4-1"]), izq(c["t4-2"])]),
-    conector([der(c["t4-2"]), izq(c["t4-3"])]),
-    conector([der(c["t4-3"]), [d1.cx - d1.w / 2, d1.cy]]),
+    conector([abajo(c["t4-1"]), arriba(c["t4-2"])]),
+    conector([abajo(c["t4-2"]), arriba(c["t4-3"])]),
+    conector([abajo(c["t4-3"]), [ANILLO_X[1], d1.cy - d1.h / 2]]),
     // No: el incremento vuelve a construcción.
-    conector([[d1.cx, d1.cy - d1.h / 2], [d1.cx, 1440], [980, 1440], arriba(c["t4-2"])], "retorno"),
-    // Sí: baja al campo y el anillo vuelve por la fila de abajo.
-    conector([[d1.cx, d1.cy + d1.h / 2], arriba(c["t4-4"])]),
-    conector([izq(c["t4-4"]), der(c["t4-7"])]),
-    conector([izq(c["t4-7"]), der(c["t4-6"])]),
-    conector([izq(c["t4-6"]), der(c["t4-5"])]),
-    conector([izq(c["t4-5"]), [d2.cx, c["t4-5"].cy], [d2.cx, d2.cy + d2.h / 2]]),
+    conector([[d1.cx + d1.w / 2, d1.cy], [1370, d1.cy], [1370, c["t4-2"].cy], der(c["t4-2"])], "retorno"),
+    // Sí: baja al campo, y el anillo vuelve por la fila de abajo.
+    conector([[d1.cx, d1.cy + d1.h / 2], [ANILLO_X[1], c["t4-4"].cy], der(c["t4-4"])]),
+    conector([izq(c["t4-4"]), [ANILLO_X[0], c["t4-4"].cy], abajo(c["t4-7"])]),
+    conector([arriba(c["t4-7"]), abajo(c["t4-6"])]),
+    conector([arriba(c["t4-6"]), abajo(c["t4-5"])]),
+    conector([arriba(c["t4-5"]), [ANILLO_X[0], d2.cy + d2.h / 2]]),
     // No: otro incremento.
-    conector([[d2.cx, d2.cy - d2.h / 2], [d2.cx, ANILLO_SUP], izq(c["t4-1"])], "retorno"),
+    conector([[d2.cx, d2.cy - d2.h / 2], [ANILLO_X[0], ANILLO_CY - 520], [ANILLO_X[1], ANILLO_CY - 520], arriba(c["t4-1"])], "retorno"),
     // Sí: sale del ciclo y cierra el proceso.
-    conector([[d2.cx - d2.w / 2, d2.cy], [250, d2.cy], [250, 2240], [390, 2240]]),
+    conector([[d2.cx - d2.w / 2, d2.cy], [180, d2.cy], [180, ANILLO_CY + RY + 80], [214, ANILLO_CY + RY + 80]]),
     // La retroalimentación del review: lo aprendido en campo reordena el backlog.
     conector(
-      [arriba(c["t4-7"]), [c["t4-7"].cx, CORREDOR], [700, CORREDOR], [700, c["t4-1"].y + c["t4-1"].h]],
+      [der(c["t4-7"]), [CORREDOR_X, c["t4-7"].cy], [CORREDOR_X, c["t4-1"].cy], izq(c["t4-1"])],
       "feedback",
     ),
   );
   cuerpo.push(
     d1.svg, d2.svg,
-    rotulo("No", d1.cx + 34, 1440),
-    rotulo("Sí", d1.cx + 34, ANILLO_INF - 130),
-    rotulo("No", d2.cx + 34, ANILLO_SUP + 74),
-    rotulo("Sí", 250 + 34, 2234),
-    rotulo("retroalimentación al backlog", 1010, CORREDOR + 4, AZUL),
+    rotulo("No", 1370, d1.cy - 60),
+    rotulo("Sí", d1.cx + 34, d1.cy + 90),
+    rotulo("No", d2.cx + 34, d2.cy - 90),
+    rotulo("Sí", 214, ANILLO_CY + RY + 74),
+    rotulo("retroalimentación al backlog", 840, c["t4-7"].cy - 4, AZUL),
     // Dónde se corta cada release del plan.
-    rotulo("R1 · R2 · R3", c["t4-4"].cx + 150, ANILLO_INF, MARRON),
-    hito("FIN", 420, 2240),
+    rotulo("R1 · R2 · R3", c["t4-4"].cx, c["t4-4"].cy + c["t4-4"].h / 2 + 22, MARRON),
+    hito("FIN", 250, ANILLO_CY + RY + 80),
   );
 
-  // --- quién hace qué: cada Rol unido por una línea a las Tareas que ejecuta.
-  // El panel enumeraba los Roles sin decir de qué responde ninguno; el código de
-  // la celda —T1.1, T2.6— es lo que ata la lista con la red.
+  // --- los paneles, al pie de la figura.
+  const py0 = ANILLO_CY + RY + 170;
+
+  // quién hace qué: cada Rol unido por una línea a las Tareas que ejecuta. El
+  // código de la celda —T1.1, T2.6— es lo que ata la lista con la red.
   const roles = [...new Set(m.fases.flatMap((f) => f.roles))];
   const hardware = ["Ingeniero electrónico", "Ingeniero mecatrónico"];
   const todas = m.fases.flatMap((f) => f.tareas);
   const conPapel = (rol: string, papel: "perform" | "assist") =>
     todas.filter((t) => t.roles.some((r) => r.rol === rol && r.papel === papel)).map((t) => codigo(t.id));
 
-  const px0 = 1440, py0 = 232, px1 = 2440, filaH = 30;
+  const px0 = M, filaH = 30, hQuien = 78 + roles.length * filaH + 10;
   const chip = (texto: string, x: number, y: number, ejecuta: boolean) =>
     `<rect x="${x}" y="${y - 11}" width="34" height="15" rx="3" fill="${ejecuta ? CREMA : PAPEL}" stroke="${TAN}"${ejecuta ? "" : ' stroke-dasharray="3 2"'}/>
 ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, fill: ejecuta ? MARRON : GRIS })}`;
@@ -415,11 +458,11 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
   cuerpo.push(
     panel(
       "QUIÉN HACE QUÉ",
-      "Cada Rol, unido a las Tareas de las que responde. Relleno: las ejecuta. Contorno: asiste en ellas.",
-      px0, py0, px1 - px0, 66 + roles.length * filaH + 16,
+      "Cada Rol, unido a las Tareas de las que responde. Relleno: las ejecuta —y responde por sus Productos de Trabajo—. Contorno: asiste en ellas.",
+      px0, py0, 1000, hQuien + 22,
     ),
     ...roles.flatMap((rol, i) => {
-      const y = py0 + 78 + i * filaH;
+      const y = py0 + 90 + i * filaH;
       const esHw = hardware.includes(rol);
       const ejecuta = conPapel(rol, "perform");
       const asiste = conPapel(rol, "assist");
@@ -428,9 +471,7 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
       let cx = px0 + (ejecuta.length ? 268 : 458);
       const chips = [
         ...ejecuta.map((t) => chip(t, (cx += 38) - 38, y, true)),
-        ...(asiste.length
-          ? [T("asiste:", (cx += 44) - 40, y, { fs: 7.5, fill: GRIS, f: MONO })]
-          : []),
+        ...(asiste.length ? [T("asiste:", (cx += 44) - 40, y, { fs: 7.5, fill: GRIS, f: MONO })] : []),
         ...asiste.map((t) => chip(t, (cx += 38) - 38, y, false)),
       ];
       return [
@@ -438,58 +479,60 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
         T(rol, px0 + 58, y, { fs: 8.5, fill: esHw ? AZUL : MARRON, w: esHw ? 600 : 400 }),
         // La línea que une al Rol con su trabajo: sin ella el panel solo enumera.
         `<line x1="${px0 + 246}" y1="${y - 4}" x2="${px0 + 264}" y2="${y - 4}" stroke="${TAN}" stroke-opacity="0.7"/>`,
-        ejecuta.length
-          ? ""
-          : T("no ejecuta ninguna Tarea, solo asiste", px0 + 268, y, { fs: 8, fill: AZUL }),
+        ejecuta.length ? "" : T("no ejecuta ninguna Tarea, solo asiste", px0 + 268, y, { fs: 8, fill: AZUL }),
         ...chips,
       ];
     }),
-    T("en azul, el equipo de electrónica", px0 + 22, py0 + 72 + roles.length * filaH, { fs: 8.5, fill: AZUL }),
+    T("en azul, el equipo de electrónica", px0 + 22, py0 + 84 + roles.length * filaH, { fs: 8.5, fill: AZUL }),
   );
 
-  // --- el plan de releases y la cadena SDD, abajo.
-  const py = 2160;
+  // el plan de releases, al lado.
+  const rx = 1100, rw = W - M - rx;
   cuerpo.push(
-    panel("PLAN DE RELEASES", "Qué se entrega, cuándo, y con qué criterio se da por bueno.", 620, py, 940, 250),
+    panel("PLAN DE RELEASES", "Qué se entrega, cuándo, y con qué criterio se da por bueno.", rx, py0, rw, 250),
     ...RELEASES.flatMap(([id, semana, que, criterio], i) => {
-      const y = py + 74 + i * 42;
+      const y = py0 + 86 + i * 40;
       return [
-        `<path d="M${648} ${y - 4} l10 10 -10 10 -10 -10 z" fill="${CREMA}" stroke="${MARRON}"/>`,
-        T(id, 672, y + 2, { fs: 10, w: 600, fill: MARRON, f: MONO }),
-        T(semana, 712, y + 2, { fs: 9, fill: GRIS, f: MONO }),
-        T(que, 780, y + 2, { fs: 9.5, fill: TINTA, w: 600 }),
-        T(criterio, 780, y + 14, { fs: 8.5, fill: GRIS }),
+        `<path d="M${rx + 30} ${y - 4} l10 10 -10 10 -10 -10 z" fill="${CREMA}" stroke="${MARRON}"/>`,
+        T(id, rx + 54, y + 2, { fs: 10, w: 600, fill: MARRON, f: MONO }),
+        T(semana, rx + 94, y + 2, { fs: 9, fill: GRIS, f: MONO }),
+        T(que, rx + 162, y + 2, { fs: 9.5, fill: TINTA, w: 600 }),
+        T(criterio, rx + 162, y + 14, { fs: 8.5, fill: GRIS }),
       ];
     }),
-    panel("EL CICLO SDD", "Cada eslabón nace del anterior; el código es el último, nunca el primero.", 1600, py, 890, 124),
+  );
+
+  // la cadena SDD y lo que el proceso entrega, en la fila de abajo.
+  const py1 = py0 + Math.max(hQuien + 22, 250) + 40;
+  cuerpo.push(
+    panel(
+      "SPEC-DRIVEN DEVELOPMENT",
+      "La especificación manda sobre el código: cada eslabón nace del anterior, y el código es el último, nunca el primero.",
+      M, py1, 900, 150,
+    ),
     ...CADENA_SDD.flatMap((paso, i) => {
-      const x = 1622 + i * 140;
+      const x = M + 22 + i * 140;
       return [
-        `<rect x="${x}" y="${py + 78}" width="118" height="30" rx="6" fill="${CREMA}" stroke="${TAN}"/>`,
-        T(paso, x + 59, py + 97, { fs: 9, a: "middle", fill: MARRON, w: 600, f: MONO }),
+        `<rect x="${x}" y="${py1 + 96}" width="118" height="30" rx="6" fill="${CREMA}" stroke="${TAN}"/>`,
+        T(paso, x + 59, py1 + 115, { fs: 9, a: "middle", fill: MARRON, w: 600, f: MONO }),
         i < CADENA_SDD.length - 1
-          ? `<path d="M${x + 120} ${py + 93} h14" stroke="${GRIS}" marker-end="url(#punta)"/>`
+          ? `<path d="M${x + 120} ${py1 + 111} h14" stroke="${GRIS}" marker-end="url(#punta)"/>`
           : "",
       ];
     }),
-  );
-
-  // --- lo que el proceso entrega.
-  const pe = py + 148;
-  cuerpo.push(
-    panel("EL PROCESO ENTREGA", "Ocho Productos de Trabajo, con dueño y Fase de origen.", 1600, pe, 890, 224),
+    panel("EL PROCESO ENTREGA", "Ocho Productos de Trabajo, con dueño y Fase de origen.", 1010, py1, W - M - 1010, 226),
     ...m.fases[3].salida.flatMap((p, i) => {
-      const x = 1622 + (i % 2) * 440;
-      const y = pe + 58 + Math.floor(i / 2) * 42;
+      const x = 1032 + (i % 2) * 300;
+      const y = py1 + 62 + Math.floor(i / 2) * 42;
       return [
         gProducto(p, x, y),
-        ...lineas(p.texto, 8.5, 380).map((l, j) => T(l, x + 32, y + 12 + j * 10, { fs: 8.5, fill: MARRON })),
+        ...lineas(p.texto, 8.5, 250).map((l, j) => T(l, x + 32, y + 12 + j * 10, { fs: 8.5, fill: MARRON })),
       ];
     }),
   );
 
-  // --- leyenda.
-  const ly = 2560;
+  // --- leyenda, en dos filas: la figura ya no tiene ancho para una sola.
+  const ly = py1 + 226 + 60;
   const formas: [string, string][] = [
     [contorno("task", 0, 0, 44, 20), "Tarea"],
     [contorno("milestone", 0, 0, 44, 20), "Hito"],
@@ -497,37 +540,37 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
   ];
   cuerpo.push(
     `<line x1="${M}" y1="${ly}" x2="${W - M}" y2="${ly}" stroke="${REGLA}"/>`,
-    eyebrow("LEYENDA SPEM 2.0", M, ly + 24, GRIS, 9),
+    eyebrow("LEYENDA SPEM 2.0", M, ly + 26, GRIS, 9),
     ...formas.flatMap(([d, nombre], i) => {
-      const x = 250 + i * 220;
+      const x = 250 + i * 200;
       return [
         `<path d="${d}" transform="translate(${x} ${ly + 12})" fill="${CREMA}" stroke="${TAN}"/>`,
         T(nombre, x + 54, ly + 26, { fs: 9, fill: GRIS }),
       ];
     }),
-    `<path d="M930 ${ly + 12} l24 10 -24 10 -24 -10 z" fill="${PAPEL}" stroke="${AZUL}"/>`,
-    T("Decisión", 968, ly + 26, { fs: 9, fill: GRIS }),
-    gRol(1060, ly + 6),
-    T("Rol — en negrita, quien ejecuta", 1094, ly + 26, { fs: 9, fill: GRIS }),
-    gProducto({ texto: "", icono: "workProduct" }, 1350, ly + 6),
-    T("Producto de Trabajo — debajo de quien lo produce", 1384, ly + 26, { fs: 9, fill: GRIS }),
-    `<path d="M1760 ${ly + 22} h44" stroke="${GRIS}" stroke-dasharray="5 4"/>`,
-    T("Retorno: el trabajo se rehace", 1812, ly + 26, { fs: 9, fill: GRIS }),
-    `<path d="M2070 ${ly + 22} h44" stroke="${AZUL}" stroke-width="1.4" stroke-dasharray="2 5" stroke-linecap="round"/>`,
-    T("Retroalimentación: lo aprendido reordena el backlog", 2122, ly + 26, { fs: 9, fill: GRIS }),
+    `<path d="M880 ${ly + 12} l24 10 -24 10 -24 -10 z" fill="${PAPEL}" stroke="${AZUL}"/>`,
+    T("Decisión", 918, ly + 26, { fs: 9, fill: GRIS }),
+    gRol(1050, ly + 6),
+    T("Rol — en negrita, quien ejecuta la Tarea y responde por sus Productos de Trabajo", 1084, ly + 26, { fs: 9, fill: GRIS }),
+    gProducto({ texto: "", icono: "workProduct" }, 250, ly + 44),
+    T("Producto de Trabajo — debajo de quien lo produce", 284, ly + 64, { fs: 9, fill: GRIS }),
+    `<path d="M700 ${ly + 60} h44" stroke="${GRIS}" stroke-dasharray="5 4"/>`,
+    T("Retorno: el trabajo se rehace", 752, ly + 64, { fs: 9, fill: GRIS }),
+    `<path d="M1050 ${ly + 60} h44" stroke="${AZUL}" stroke-width="1.4" stroke-dasharray="2 5" stroke-linecap="round"/>`,
+    T("Retroalimentación: lo aprendido reordena el backlog", 1102, ly + 64, { fs: 9, fill: GRIS }),
   );
 
-  const H = ly + 66;
+  const H = ly + 104;
   return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-labelledby="cons-t cons-d" xmlns="http://www.w3.org/2000/svg">
 <title id="cons-t">Modelo de procesos consolidado — riego autónomo guiado por drones</title>
-<desc id="cons-d">${esc("Las veintiuna Tareas de las cuatro Fases en una sola red SPEM 2.0: cada celda lleva sus Roles arriba, la Tarea al centro y sus Productos de Trabajo abajo. Las Fases 1 a 3 son la Iteración 0 de arranque; la Fase 4 se repite dentro de la elipse cada dos a cuatro semanas, con review del incremento con el caficultor y retroalimentación al backlog. La figura incluye eje de tiempo en semanas, plan de releases R0 a R3 y la cadena de Spec-Driven Development.")}</desc>
+<desc id="cons-d">${esc("Las veintiuna Tareas de las cuatro Fases en una sola red SPEM 2.0, en composición vertical: cada Fase es una columna que se lee hacia abajo, y las Fases se suceden hacia la derecha, con los Productos de Trabajo del traspaso sobre el canal que las une. Cada celda lleva sus Roles arriba —en negrita el que ejecuta la Tarea y responde por sus artefactos—, la Tarea al centro y sus Productos de Trabajo abajo. Las Fases 1 a 3 son la Iteración 0 de arranque; la Fase 4 se repite dentro de la elipse cada dos a cuatro semanas, con review del incremento con el caficultor y retroalimentación al backlog. La figura incluye regla de tiempo en semanas, plan de releases R0 a R3 y la cadena de Spec-Driven Development.")}</desc>
 ${PUNTA}
 <defs><marker id="punta-azul" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="${AZUL}"/></marker></defs>
 <rect width="100%" height="100%" fill="${PAPEL}"/>
 ${eyebrow("MODELO DE PROCESOS — SPEM 2.0 · SPEC-DRIVEN DEVELOPMENT", M, 62, GRIS, 10)}
 ${T("El modelo de procesos consolidado", M, 108, { fs: 34, f: SERIF, fill: TINTA })}
 ${T("Sistema ciberfísico de riego autónomo guiado por drones para caficultura — cuatro Fases, veintiuna Tareas y nueve Roles en una sola red.", M, 134, { fs: 12, fill: GRIS })}
-${T("Cada celda: los Roles arriba, la Tarea al centro, los Productos de Trabajo que produce abajo. El tiempo corre hacia abajo; el ciclo de la Fase 4 no termina.", M, 154, { fs: 11, fill: GRIS })}
+${T("Cada Fase es una columna: el tiempo baja dentro de ella y avanza hacia la derecha entre Fases. En cada celda, el Rol en negrita ejecuta la Tarea y responde por los Productos de Trabajo que salen de ella.", M, 154, { fs: 11, fill: GRIS })}
 ${fondo.join("\n")}
 ${aristas.join("\n")}
 ${cuerpo.join("\n")}

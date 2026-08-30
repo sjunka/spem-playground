@@ -297,9 +297,9 @@ export const seed = (): Modelo => ({
         {
           id: "t4-5",
           icono: "milestone",
-          nombre: "Auditoría de cumplimiento de la Constitución",
+          nombre: "Auditoría de cumplimiento de la Constitución y del plan.md",
           descripcion:
-            "Revisar que los incrementos no rompan las reglas globales establecidas en la Fase 1.",
+            "Revisar que el incremento no rompa las reglas globales de la Fase 1 ni se salga del plan.md acordado en la Fase 2.",
           roles: [...ejecuta(GP), ...asiste(QA)],
           entrada: [],
           salida: [],
