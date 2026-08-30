@@ -1,0 +1,175 @@
+<svg viewBox="0 0 900 1270" width="900" height="1270" role="img" aria-labelledby="fase-4-t fase-4-d" xmlns="http://www.w3.org/2000/svg">
+<title id="fase-4-t">Fase 4: Ciclo de crecimiento</title>
+<desc id="fase-4-d">Escalar el sistema mediante desarrollo paralelo, integración continua y validación en el cultivo. Notación EPF/SPEM 2.0: por Tarea, los Roles a la izquierda —en negrita el que la ejecuta y responde por sus Productos de Trabajo—, la Tarea al centro y su Salida a la derecha.</desc>
+<defs><marker id="punta" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#6f6f8c"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="44" fill="#6f6f8c" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">FASE 4</text>
+<text x="40" y="78" fill="#3a3a44" font-size="24" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Ciclo de crecimiento</text>
+<text x="40" y="100" fill="#6f6f8c" font-size="10.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Escalar el sistema mediante desarrollo paralelo, integración continua y validación en el cultivo.</text>
+<rect x="40" y="148" width="820" height="1004" rx="14" fill="none" stroke="#d9d9e0"/>
+<text x="76" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">ROLES</text>
+<text x="330" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">TAREAS</text>
+<text x="640" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">PRODUCTOS DE TRABAJO</text>
+<ellipse cx="90" cy="191" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 209 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="200.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<ellipse cx="90" cy="232" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 250 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="235.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de</text>
+<text x="108" y="247.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">adaptación</text>
+<path d="M262 219 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<rect x="330" y="187" width="250" height="64" rx="10" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="203" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.1</text>
+<text x="443" y="203" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Actividad&gt;&gt;</text>
+<text x="443" y="221" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Sincronización inter dominio</text>
+<path d="M643 205 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 205 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="216" x2="660" y2="216" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="219" x2="660" y2="219" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="222" x2="660" y2="222" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="225" x2="660" y2="225" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="228" x2="660" y2="228" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="222.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Archivos spec.md / task.md</text>
+<path d="M582 219 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="254" x2="370" y2="290" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="308" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 326 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="311.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de</text>
+<text x="108" y="323.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">adaptación</text>
+<ellipse cx="90" cy="349" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 367 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="358.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
+<ellipse cx="90" cy="387" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 405 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="396.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero mecatrónico</text>
+<ellipse cx="90" cy="425" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 443 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="434.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero electrónico</text>
+<path d="M262 371 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<rect x="330" y="339" width="250" height="64" rx="10" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="355" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.2</text>
+<text x="443" y="355" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Actividad&gt;&gt;</text>
+<text x="443" y="373" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Construcción en paralelo</text>
+<text x="443" y="387" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">(contrato primero)</text>
+<path d="M643 297 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 297 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="308" x2="660" y2="308" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="311" x2="660" y2="311" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="314" x2="660" y2="314" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="317" x2="660" y2="317" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="320" x2="660" y2="320" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="314.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Código fuente</text>
+<path d="M582 371 H602 Q610 371 610 363 V319 Q610 311 618 311 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M643 335 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 335 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="346" x2="660" y2="346" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="349" x2="660" y2="349" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="352" x2="660" y2="352" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="355" x2="660" y2="355" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="358" x2="660" y2="358" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="352.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Releases de software</text>
+<path d="M582 371 H602 Q610 371 610 363 V357 Q610 349 618 349 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M643 373 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 373 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="384" x2="660" y2="384" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="387" x2="660" y2="387" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="390" x2="660" y2="390" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="393" x2="660" y2="393" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="396" x2="660" y2="396" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="390.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Red de sensores instalada</text>
+<path d="M582 371 H602 Q610 371 610 379 V379 Q610 387 618 387 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M643 414 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 414 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="425" x2="660" y2="425" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="428" x2="660" y2="428" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="431" x2="660" y2="431" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="434" x2="660" y2="434" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="437" x2="660" y2="437" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="425.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Firmware de sensores y</text>
+<text x="672" y="437.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">actuadores</text>
+<path d="M582 371 H602 Q610 371 610 379 V420 Q610 428 618 428 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="406" x2="370" y2="480" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="495" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 513 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="504.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
+<ellipse cx="90" cy="533" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 551 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="542.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero mecatrónico</text>
+<ellipse cx="90" cy="571" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 589 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="580.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero electrónico</text>
+<path d="M262 539 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<rect x="330" y="507" width="250" height="64" rx="10" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="523" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.3</text>
+<text x="443" y="523" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Proceso&gt;&gt;</text>
+<text x="443" y="541" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Verificación e integración</text>
+<text x="443" y="555" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">continua</text>
+<path d="M660 510 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(140.8, 111.32000000000001)" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="672" y="523.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Pipeline de CI/CD ejecutado</text>
+<path d="M582 539 H602 Q610 539 610 531 V528 Q610 520 618 520 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M660 548 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(140.8, 119.68)" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="672" y="561.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Entornos SIL/HIL validados</text>
+<path d="M582 539 H602 Q610 539 610 547 V550 Q610 558 618 558 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="574" x2="370" y2="626" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="641" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 659 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="650.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Ingeniero mecatrónico</text>
+<ellipse cx="90" cy="679" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 697 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="688.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Ingeniero electrónico</text>
+<ellipse cx="90" cy="720" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 738 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="723.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de</text>
+<text x="108" y="735.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">adaptación</text>
+<path d="M262 688 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 688 L360 656 H550 L580 688 L550 720 H360 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="672" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.4</text>
+<text x="443" y="672" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Hito&gt;&gt;</text>
+<text x="443" y="690" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Despliegue en campo</text>
+<path d="M643 674 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 674 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="685" x2="660" y2="685" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="688" x2="660" y2="688" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="691" x2="660" y2="691" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="694" x2="660" y2="694" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="697" x2="660" y2="697" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="685.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Paquete de calibración de</text>
+<text x="672" y="697.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">sensores y actuadores</text>
+<path d="M582 688 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="723" x2="370" y2="778" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="793" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 811 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="802.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<ellipse cx="90" cy="831" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 849 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="840.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
+<path d="M262 818 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 818 L360 786 H550 L580 818 L550 850 H360 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="802" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.5</text>
+<text x="443" y="802" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Hito&gt;&gt;</text>
+<text x="443" y="820" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Auditoría de cumplimiento de</text>
+<text x="443" y="834" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">las especificaciones</text>
+<line x1="370" y1="853" x2="370" y2="886" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="904" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 922 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="907.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio</text>
+<text x="108" y="919.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">(caficultor)</text>
+<ellipse cx="90" cy="948" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 966 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="951.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de software de</text>
+<text x="108" y="963.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">adaptación</text>
+<path d="M262 932 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 900 H558 L580 932 L558 964 H330 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="916" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.6</text>
+<text x="443" y="916" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Tarea&gt;&gt;</text>
+<text x="443" y="934" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Elaboración y actualización</text>
+<text x="443" y="948" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">del manual de operación</text>
+<path d="M644 944 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="672" y="929.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Manual de operación</text>
+<text x="672" y="941.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">actualizado</text>
+<path d="M582 932 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="967" x2="370" y2="1006" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="1024" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 1042 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="1027.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio</text>
+<text x="108" y="1039.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">(caficultor)</text>
+<ellipse cx="90" cy="1065" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 1083 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="1074.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<ellipse cx="90" cy="1103" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 1121 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="1112.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">QA de software</text>
+<path d="M262 1068 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 1068 L360 1036 H550 L580 1068 L550 1100 H360 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="1052" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T4.7</text>
+<text x="443" y="1052" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Hito&gt;&gt;</text>
+<text x="443" y="1070" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Review del incremento con el</text>
+<text x="443" y="1084" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">caficultor</text>
+<path d="M643 1054 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 1054 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="1065" x2="660" y2="1065" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="1068" x2="660" y2="1068" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="1071" x2="660" y2="1071" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="1074" x2="660" y2="1074" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="1077" x2="660" y2="1077" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="1071.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Lecciones y ajustes al backlog</text>
+<path d="M582 1068 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="40" y1="1192" x2="860" y2="1192" stroke="#d9d9e0"/>
+<text x="40" y="1214" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">LEYENDA SPEM 2.0</text>
+<ellipse cx="246" cy="1206" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M236 1224 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="266" y="1215" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Rol</text>
+<path d="M385 1198 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M398 1198 v7 h7" fill="none" stroke="#c8964b"/><line x1="388" y1="1209" x2="402" y2="1209" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="1212" x2="402" y2="1212" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="1215" x2="402" y2="1215" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="1218" x2="402" y2="1218" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="1221" x2="402" y2="1221" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="416" y="1215" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Producto de Trabajo</text>
+<path d="M536 1224 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="566" y="1215" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Guía / Métrica</text>
+<path d="M702 1202 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(150.04, 263.56)" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="716" y="1215" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Herramienta</text>
+<text x="40" y="1238" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">En negrita, el Rol que ejecuta la Tarea: es quien responde por los Productos de Trabajo que salen de ella.</text>
+</svg>

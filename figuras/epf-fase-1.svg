@@ -1,0 +1,92 @@
+<svg viewBox="0 0 900 676" width="900" height="676" role="img" aria-labelledby="fase-1-t fase-1-d" xmlns="http://www.w3.org/2000/svg">
+<title id="fase-1-t">Fase 1: Especificación global de nivel cero</title>
+<desc id="fase-1-d">Fijar el marco de gobernanza, límites y contratos iniciales. Notación EPF/SPEM 2.0: por Tarea, los Roles a la izquierda —en negrita el que la ejecuta y responde por sus Productos de Trabajo—, la Tarea al centro y su Salida a la derecha.</desc>
+<defs><marker id="punta" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#6f6f8c"/></marker></defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="44" fill="#6f6f8c" font-size="9" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.16em">FASE 1</text>
+<text x="40" y="78" fill="#3a3a44" font-size="24" font-weight="400" font-family="'Instrument Serif', Georgia, serif" text-anchor="start">Especificación global de nivel cero</text>
+<text x="40" y="100" fill="#6f6f8c" font-size="10.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Fijar el marco de gobernanza, límites y contratos iniciales.</text>
+<rect x="40" y="148" width="820" height="410" rx="14" fill="none" stroke="#d9d9e0"/>
+<text x="76" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">ROLES</text>
+<text x="330" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">TAREAS</text>
+<text x="640" y="170" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">PRODUCTOS DE TRABAJO</text>
+<ellipse cx="90" cy="191" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 209 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="200.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<ellipse cx="90" cy="232" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 250 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="235.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio</text>
+<text x="108" y="247.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">(caficultor)</text>
+<ellipse cx="90" cy="273" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 291 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="282.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
+<path d="M262 238 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 206 H558 L580 238 L558 270 H330 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="222" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T1.1</text>
+<text x="443" y="222" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Tarea&gt;&gt;</text>
+<text x="443" y="240" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Definir Constitución, reglas y</text>
+<text x="443" y="254" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">contratos globales</text>
+<path d="M643 183 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 183 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="194" x2="660" y2="194" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="197" x2="660" y2="197" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="200" x2="660" y2="200" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="203" x2="660" y2="203" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="206" x2="660" y2="206" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="200.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Constitution.md</text>
+<path d="M582 238 H602 Q610 238 610 230 V205 Q610 197 618 197 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M643 221 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 221 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="232" x2="660" y2="232" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="235" x2="660" y2="235" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="238" x2="660" y2="238" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="241" x2="660" y2="241" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="244" x2="660" y2="244" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="238.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Contratos globales</text>
+<path d="M582 238 H602 Q610 238 610 230 V243 Q610 235 618 235 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M643 262 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M656 262 v7 h7" fill="none" stroke="#c8964b"/><line x1="646" y1="273" x2="660" y2="273" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="276" x2="660" y2="276" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="279" x2="660" y2="279" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="282" x2="660" y2="282" stroke="#4a72c4" stroke-width="1.4"/><line x1="646" y1="285" x2="660" y2="285" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="672" y="273.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Contratos de integración entre</text>
+<text x="672" y="285.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">dominios</text>
+<path d="M582 238 H602 Q610 238 610 246 V268 Q610 276 618 276 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="273" x2="370" y2="328" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="348" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 366 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="351.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Experto del dominio</text>
+<text x="108" y="363.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">(caficultor)</text>
+<ellipse cx="90" cy="389" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 407 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="398.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de datos</text>
+<path d="M262 373 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 334 H558 L580 373 L558 412 H330 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="350" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T1.2</text>
+<text x="443" y="350" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Tarea&gt;&gt;</text>
+<text x="443" y="368" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Capturar y modelar el</text>
+<text x="443" y="382" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">conocimiento inicial del</text>
+<text x="443" y="396" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">dominio</text>
+<path d="M644 385 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="672" y="376.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Reglas de negocio</text>
+<path d="M582 373 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="370" y1="415" x2="370" y2="446" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<ellipse cx="90" cy="466" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 484 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="469.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">Ingeniero de seguridad de</text>
+<text x="108" y="481.5" fill="#8a5a20" font-size="9.5" font-weight="700" font-family="Geist, sans-serif" text-anchor="start">vuelo</text>
+<ellipse cx="90" cy="507" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M80 525 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="108" y="516.5" fill="#6f6f8c" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Gerente de proyecto</text>
+<path d="M262 491 H323" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<path d="M330 452 H558 L580 491 L558 530 H330 Z" fill="#fbe3b8" stroke="#c8964b" stroke-width="1.2"/>
+<text x="342" y="468" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.1em">T1.3</text>
+<text x="443" y="468" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="middle">&lt;&lt;Tarea&gt;&gt;</text>
+<text x="443" y="486" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">Definir restricciones de</text>
+<text x="443" y="500" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">seguridad de vuelo y</text>
+<text x="443" y="514" fill="#8a5a20" font-size="11" font-weight="600" font-family="Geist, sans-serif" text-anchor="middle">normativas</text>
+<path d="M644 503 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="672" y="488.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Políticas y límites de</text>
+<text x="672" y="500.5" fill="#8a5a20" font-size="9.5" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">operación</text>
+<path d="M582 491 H633" fill="none" stroke="#6f6f8c" stroke-width="1" marker-end="url(#punta)"/>
+<line x1="40" y1="598" x2="860" y2="598" stroke="#d9d9e0"/>
+<text x="40" y="620" fill="#6f6f8c" font-size="8" font-weight="400" font-family="'Geist Mono', monospace" text-anchor="start" letter-spacing="0.14em">LEYENDA SPEM 2.0</text>
+<ellipse cx="246" cy="612" rx="8" ry="6" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M236 630 a10 8 0 0 1 20 0 z" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="266" y="621" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Rol</text>
+<path d="M385 604 h13 l7 7 v19 h-20 z" fill="#fbe3b8" stroke="#c8964b"/>
+<path d="M398 604 v7 h7" fill="none" stroke="#c8964b"/><line x1="388" y1="615" x2="402" y2="615" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="618" x2="402" y2="618" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="621" x2="402" y2="621" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="624" x2="402" y2="624" stroke="#4a72c4" stroke-width="1.4"/><line x1="388" y1="627" x2="402" y2="627" stroke="#4a72c4" stroke-width="1.4"/>
+<text x="416" y="621" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Producto de Trabajo</text>
+<path d="M536 630 v-8 h6 v-6 h6 v-8 h7 v22 z" fill="#9dc6ef" stroke="#4a72c4"/>
+<text x="566" y="621" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Guía / Métrica</text>
+<path d="M702 608 a6 6 0 0 0 -7.4 9.2 l-7.2 7.2 a2.4 2.4 0 0 0 3.4 3.4 l7.2 -7.2 a6 6 0 0 0 9.2 -7.4 l-4 4 -3.4-0.9 -0.9-3.4 z" transform="scale(0.82) translate(150.04, 132.88)" fill="#fbe3b8" stroke="#c8964b"/>
+<text x="716" y="621" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">Herramienta</text>
+<text x="40" y="644" fill="#6f6f8c" font-size="9" font-weight="400" font-family="Geist, sans-serif" text-anchor="start">En negrita, el Rol que ejecuta la Tarea: es quien responde por los Productos de Trabajo que salen de ella.</text>
+</svg>

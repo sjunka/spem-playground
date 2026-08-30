@@ -7,6 +7,7 @@
  * La Entrada no se dibuja aquí: la figura responde «quién hace qué y qué sale de
  * ahí». El traspaso entre Fases lo cuenta la vista Resumen. Ver ADR-0012.
  */
+import { writeFileSync } from "node:fs";
 import fuentes from "../src/fuentes.css?inline";
 import { codigo } from "../src/consolidado";
 import { wrap } from "../src/layout";
@@ -155,8 +156,17 @@ ${T("En negrita, el Rol que ejecuta la Tarea: es quien responde por los Producto
 </svg>`;
 }
 
+// `npm run epf -- --svg` vuelca el SVG sin rasterizar, como `scripts/svg.tsx`
+// hace con la consolidada: es lo que se incrusta en un documento web.
+const soloSvg = process.argv.includes("--svg");
+
 for (const f of seed().fases) {
   const svg = figura(f);
+  if (soloSvg) {
+    writeFileSync(`figuras/epf-${f.id}.svg`, svg);
+    console.log(`figuras/epf-${f.id}.svg`);
+    continue;
+  }
   const [, w, h] = svg.match(/viewBox="0 0 (\d+) ([\d.]+)"/)!;
   const html = `<!doctype html><meta charset="utf-8"><style>${fuentes}body{margin:0;background:#fff}</style>${svg}`;
   capturar(html, `figuras/epf-${f.id}`, +w, Math.ceil(+h));
