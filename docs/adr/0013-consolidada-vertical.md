@@ -17,8 +17,8 @@ las de detalle verticales obliga al lector a girar la cabeza entre una y otra.
 La misma red, girada: **cada Fase es una columna**.
 
 - Las **Fases** 1 a 3 son tres columnas que se leen hacia abajo, y se suceden hacia la
-  derecha. La regla del tiempo pasa de vertical a horizontal, con **SEM 1–3**,
-  **SEM 4–8** y **SEM 9–14** sobre su columna y el rótulo de **Iteración 0** encima.
+  derecha. La regla del tiempo pasa de vertical a horizontal, con **SEM 1–4**,
+  **SEM 5–9** y **SEM 10–22** sobre su columna y el rótulo de **Iteración 0** encima.
 - Entre dos columnas hay un **canal de traspaso**: el conector sube por él cargado con
   los **Productos de Trabajo** que la **Fase** entrega a la siguiente, apilados. Antes
   se mostraban tres de los cinco de la **Fase 1** por falta de ancho; ahora van todos.

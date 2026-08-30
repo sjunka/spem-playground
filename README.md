@@ -153,6 +153,7 @@ por decisión del spec.
 | [0012](docs/adr/0012-tarjeta-vertical-por-fase.md) | La **Fase** en una tarjeta vertical, y la negrita como responsabilidad |
 | [0013](docs/adr/0013-consolidada-vertical.md) | La figura consolidada se pone de pie: una columna por **Fase** |
 | [0014](docs/adr/0014-hardware-sin-plataforma-y-dos-puertas.md) | Fuera el ingeniero de plataforma; puerta agronómica y puerta de especificaciones |
+| [0015](docs/adr/0015-el-ciclo-mide-en-meses.md) | El ciclo se mide en meses: incrementos de 3 a 5, releases por mes de proyecto |
 
 El vocabulario del dominio está en [CONTEXT.md](CONTEXT.md). El spec y los tickets, en
 `.scratch/spem-playground/`.

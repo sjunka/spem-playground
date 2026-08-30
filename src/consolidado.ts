@@ -240,10 +240,10 @@ function panel(titulo: string, bajada: string, x: number, y: number, w: number, 
  * el modelo no lleva, y sin ella la figura no dice cuándo entrega nada.
  */
 export const RELEASES: [string, string, string, string][] = [
-  ["R0", "sem 14", "Prototipo vertical validado en SIL/HIL", "La traza mínima responde de sensor a actuador"],
-  ["R1", "sem 20", "Riego autónomo en el lote piloto", "Un ciclo de riego completo sin intervención"],
-  ["R2", "sem 28", "Clima y coordinación de varios drones", "Dos drones sin conflicto y decisión climática registrada"],
-  ["R3", "sem 36", "Operación asistida por el caficultor", "Manual vigente y auditoría de Constitución sin hallazgos"],
+  ["R0", "mes 5", "Prototipo vertical validado en SIL/HIL", "La traza mínima responde de sensor a actuador"],
+  ["R1", "mes 13", "Riego autónomo en el lote piloto", "Un ciclo de riego completo sin intervención"],
+  ["R2", "mes 21", "Clima y coordinación de varios drones", "Dos drones sin conflicto y decisión climática registrada"],
+  ["R3", "mes 25", "Operación asistida por el caficultor", "Manual vigente y auditoría de especificaciones sin hallazgos"],
 ];
 
 /** La cadena de Spec-Driven Development: el documento manda sobre el código. */
@@ -280,7 +280,7 @@ const COLUMNAS: [string, string, string[]][] = [
   ["FASE 3", "Esqueleto funcional mínimo", ["t3-1", "t3-2", "t3-3", "t3-4", "t3-5"]],
 ];
 
-const SEMANAS = ["SEM 1–3", "SEM 4–8", "SEM 9–14"];
+const SEMANAS = ["SEM 1–4", "SEM 5–9", "SEM 10–22"];
 
 export function consolidado(m: Modelo) {
   const tareas = new Map(m.fases.flatMap((f) => f.tareas.map((t) => [t.id, t] as const)));
@@ -361,7 +361,7 @@ export function consolidado(m: Modelo) {
   // --- la elipse del ciclo: la Fase 4 no termina, se repite.
   fondo.push(
     `<ellipse cx="${ANILLO_CX}" cy="${ANILLO_CY}" rx="${RX}" ry="${RY}" fill="#fdfaf3" stroke="${TAN}" stroke-opacity="0.7" stroke-dasharray="9 6" stroke-width="1.6"/>`,
-    T("SEM 15 →", ANILLO_CX - RX + 40, ANILLO_CY - RY + 46, { fs: 9, fill: GRIS, f: MONO, ls: "0.1em" }),
+    T("MES 6 →", ANILLO_CX - RX + 40, ANILLO_CY - RY + 46, { fs: 9, fill: GRIS, f: MONO, ls: "0.1em" }),
     // El rótulo va en el corredor central, que es lo que el anillo deja libre.
     glifo("iteration", ANILLO_CX - 18, ANILLO_CY - 130, 36, TAN),
     T("FASE 4 · EL ESTADO PERMANENTE DEL PROYECTO", ANILLO_CX, ANILLO_CY - 70, {
@@ -369,9 +369,13 @@ export function consolidado(m: Modelo) {
     }),
     T("Ciclo de crecimiento", ANILLO_CX, ANILLO_CY - 30, { fs: 24, a: "middle", fill: MARRON, f: SERIF }),
     ...lineas(
-      "Un incremento cada 2 a 4 semanas: se construye, se verifica, se despliega, se muestra al caficultor y lo aprendido reordena el backlog del siguiente.",
+      "Un incremento cada 3 a 5 meses: se construye, se verifica, se despliega, se muestra al caficultor y lo aprendido reordena el backlog del siguiente.",
       10, 280,
     ).map((l, j) => T(l, ANILLO_CX, ANILLO_CY - 2 + j * 15, { fs: 10, a: "middle", fill: GRIS })),
+    ...lineas(
+      "Cinco incrementos —monitoreo, dron, riego, clima y multi dron—: entre 15 y 25 meses, sin imprevistos.",
+      9.5, 280,
+    ).map((l, j) => T(l, ANILLO_CX, ANILLO_CY + 46 + j * 14, { fs: 9.5, a: "middle", fill: TAN })),
   );
 
   // --- Fase 1: del arranque a la Constitución.
@@ -521,7 +525,7 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
   // el plan de releases, al lado.
   const rx = 1100, rw = W - M - rx;
   cuerpo.push(
-    panel("PLAN DE RELEASES", "Qué se entrega, cuándo, y con qué criterio se da por bueno.", rx, py0, rw, 250),
+    panel("PLAN DE RELEASES", "Qué se entrega, en qué mes del proyecto, y con qué criterio se da por bueno.", rx, py0, rw, 250),
     ...RELEASES.flatMap(([id, semana, que, criterio], i) => {
       const y = py0 + 86 + i * 40;
       return [
@@ -595,7 +599,7 @@ ${T(texto, x + 17, y, { fs: 7.5, a: "middle", f: MONO, w: ejecuta ? 600 : 400, f
   const H = ly + 104;
   return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-labelledby="cons-t cons-d" xmlns="http://www.w3.org/2000/svg">
 <title id="cons-t">Modelo de procesos consolidado — riego autónomo guiado por drones</title>
-<desc id="cons-d">${esc("Las veintiuna Tareas de las cuatro Fases en una sola red SPEM 2.0, en composición vertical: cada Fase es una columna que se lee hacia abajo, y las Fases se suceden hacia la derecha, con los Productos de Trabajo del traspaso sobre el canal que las une. Cada celda lleva sus Roles arriba —en negrita el que ejecuta la Tarea y responde por sus artefactos—, la Tarea al centro y sus Productos de Trabajo abajo. Las Fases 1 a 3 son la Iteración 0 de arranque; la Fase 4 se repite dentro de la elipse cada dos a cuatro semanas, con review del incremento con el caficultor y retroalimentación al backlog. La figura incluye regla de tiempo en semanas, plan de releases R0 a R3 y la cadena de Spec-Driven Development.")}</desc>
+<desc id="cons-d">${esc("Las veintiuna Tareas de las cuatro Fases en una sola red SPEM 2.0, en composición vertical: cada Fase es una columna que se lee hacia abajo, y las Fases se suceden hacia la derecha, con los Productos de Trabajo del traspaso sobre el canal que las une. Cada celda lleva sus Roles arriba —en negrita el que ejecuta la Tarea y responde por sus artefactos—, la Tarea al centro y sus Productos de Trabajo abajo. Las Fases 1 a 3 son la Iteración 0 de arranque; la Fase 4 se repite dentro de la elipse una vez por incremento, cada tres a cinco meses, con review del incremento con el caficultor y retroalimentación al backlog. La figura incluye regla de tiempo —semanas en el arranque, meses en el ciclo—, plan de releases R0 a R3 y la cadena de Spec-Driven Development.")}</desc>
 ${PUNTA}
 <defs><marker id="punta-azul" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="${AZUL}"/></marker></defs>
 <rect width="100%" height="100%" fill="${PAPEL}"/>

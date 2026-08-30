@@ -69,7 +69,7 @@ describe("las dos versiones del proceso completo", () => {
   it("la figura consolidada trae el tiempo, los releases y la cadena SDD", () => {
     const svg = consolidado(modelo);
     expect(svg).toContain("ITERACIÓN 0");
-    expect(svg).toContain("SEM 9–14");
+    expect(svg).toContain("SEM 10–22");
     for (const [id] of RELEASES) expect([id, svg.includes(`>${id}<`)]).toEqual([id, true]);
     expect(svg).toContain("Constitution.md");
     expect(svg).toContain("SPEC-DRIVEN DEVELOPMENT");
