@@ -10,7 +10,9 @@ en un formulario y se exporta como PNG o PDF para insertarlo de vuelta en el doc
 
 **Fase**:
 Una etapa del proceso de ingeniería, delimitada por sus entradas y salidas. El modelo
-tiene cuatro. Cada Fase produce cinco imágenes, una por **Vista**. Ver ADR-0006 y ADR-0008.
+tiene cinco, de la **Fase 0** de visión y planificación del producto a la **Fase 4** de
+ciclo de crecimiento. Cada Fase produce cinco imágenes, una por **Vista**. Ver ADR-0006,
+ADR-0008 y ADR-0016.
 _Avoid_: Etapa, iteración, sprint, Phase
 
 **Tarea**:

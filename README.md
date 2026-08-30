@@ -7,9 +7,10 @@ Editor web que produce los diagramas SPEM 2.0 del documento *Modelo de procesos*
 formulario, el diagrama se redibuja solo, y cada figura se exporta como PNG o PDF para
 pegarla en el documento.
 
-Las cuatro **Fases** del documento vienen precargadas, y cada una produce **cinco
-vistas** —**Resumen**, **Flujo**, **Roles**, **Descomposición** y **Detalle EPF**—:
-veinte figuras, en la notación de EPF Composer / SPEM Designer.
+Las cinco **Fases** del documento vienen precargadas —**Fase 0** de visión y
+planificación del producto incluida—, y cada una produce **cinco vistas**
+—**Resumen**, **Flujo**, **Roles**, **Descomposición** y **Detalle EPF**—:
+veinticinco figuras, en la notación de EPF Composer / SPEM Designer.
 
 ![Fase 1, Resumen](figuras/fase-1-especificacion-global-de-nivel-cero-resumen.png)
 
@@ -35,10 +36,10 @@ Ver [ADR-0010](docs/adr/0010-figura-consolidada.md), [ADR-0011](docs/adr/0011-ti
 ## La figura general del proceso
 
 Para abrir el documento hace falta lo contrario a una **Vista**: una sola imagen con
-el sistema completo, de la que las veinte figuras por **Fase** sean el desglose. Se
+el sistema completo, de la que las veinticinco figuras por **Fase** sean el desglose. Se
 generan **dos versiones** y se escoge cuál va al *paper*. Ver [ADR-0009](docs/adr/0009-figura-general-del-proceso.md).
 
-**Versión A — cadena de Fases.** Las cuatro **Fases** apiladas con sus **Roles** y sus
+**Versión A — cadena de Fases.** Las cinco **Fases** apiladas con sus **Roles** y sus
 **Tareas**, y entre una y la siguiente los **Productos de Trabajo** del traspaso.
 Responde *qué pasa, en qué orden y qué se entrega entre etapas*.
 
@@ -85,7 +86,7 @@ npm run dev        # editor en http://localhost:5173
 | `npm test` | Los 85 tests (layout, vistas, formas, validación, seed, roles, mover, slug) |
 | `npm run typecheck` | TypeScript sin emitir |
 | `npm run figuras` | Regenera las veinte `figuras/*.png` a 3x con Chrome headless (macOS) |
-| `npm run consolidado` | Genera `figuras/consolidado-modelo-de-procesos.png`: las veintiuna **Tareas** en una sola red |
+| `npm run consolidado` | Genera `figuras/consolidado-modelo-de-procesos.png`: las veintinueve **Tareas** en una sola red |
 | `npm run general` | Genera las dos versiones de la figura general: `figuras/general-a-*.png` y `general-b-*.png` |
 | `npm run epf` | Genera `figuras/epf-fase-*.png`: la tarjeta vertical de cada **Fase**, sin abrir el editor |
 | `npm run fuentes` | Regenera `src/fuentes.css`, las tres tipografías en base64 |
@@ -124,8 +125,8 @@ src/
                   así un deploy que cambie las Fases arranca de ellas.
   exportar.ts     PNG (canvas 3x) y PDF (print), sin dependencias.
   fuentes.css     Las tres caras en base64, para que el PNG no caiga a fuente del sistema.
-  seed.ts         Las cuatro Fases del documento fuente.
-figuras/          Las veinte figuras por Fase y las dos generales, listas para el documento.
+  seed.ts         Las cinco Fases del documento fuente.
+figuras/          Las veinticinco figuras por Fase y las dos generales, listas para el documento.
 ```
 
 Dos dependencias de runtime: `react` y `react-dom`.
@@ -154,6 +155,7 @@ por decisión del spec.
 | [0013](docs/adr/0013-consolidada-vertical.md) | La figura consolidada se pone de pie: una columna por **Fase** |
 | [0014](docs/adr/0014-hardware-sin-plataforma-y-dos-puertas.md) | Fuera el ingeniero de plataforma; puerta agronómica y puerta de especificaciones |
 | [0015](docs/adr/0015-el-ciclo-mide-en-meses.md) | El ciclo se mide en meses: incrementos de 3 a 5, releases por mes de proyecto |
+| [0016](docs/adr/0016-fase-cero-retrospectiva-y-lanzamientos.md) | Fase 0, retrospectiva, un lanzamiento por incremento y los nombres del paper |
 
 El vocabulario del dominio está en [CONTEXT.md](CONTEXT.md). El spec y los tickets, en
 `.scratch/spem-playground/`.

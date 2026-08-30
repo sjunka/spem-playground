@@ -51,7 +51,7 @@ describe("el reparto por Tarea del seed", () => {
   });
 
   it("cuelga la Entrada de la Fase 4 de la Tarea de construcción en paralelo", () => {
-    const fase4 = fases[3];
+    const fase4 = fases.find((f) => f.id === "fase-4")!;
     const paralelo = fase4.tareas.find((t) => t.nombre.includes("paralelo"))!;
     // Los cinco incrementos sucesivos del documento, agrupados en tres entradas.
     const incrementos = fase4.entrada.filter((p) =>
