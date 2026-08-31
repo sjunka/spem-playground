@@ -465,7 +465,7 @@ export function consolidado(m: Modelo) {
     conector([[d2.cx - d2.w / 2, d2.cy], [200, d2.cy], [200, ANILLO_CY + RY + 80], [234, ANILLO_CY + RY + 80]]),
     // La retroalimentación del review: lo aprendido en campo reordena el backlog.
     conector(
-      [der(c["t4-7"]), [CORREDOR_X, c["t4-7"].cy], [CORREDOR_X, c["t4-1"].cy], izq(c["t4-1"])],
+      [der(c["t4-5"]), [CORREDOR_X, c["t4-5"].cy], [CORREDOR_X, c["t4-1"].cy], izq(c["t4-1"])],
       "feedback",
     ),
   );
@@ -475,10 +475,10 @@ export function consolidado(m: Modelo) {
     rotulo("Sí", d1.cx + 34, d1.cy + 90),
     rotulo("No", d2.cx + d2.w / 2 + 60, d2.cy - 12),
     rotulo("Sí", 200, ANILLO_CY + RY + 20),
-    rotulo("retroalimentación al backlog", 1060, c["t4-7"].cy - 26, AZUL),
+    rotulo("retroalimentación al backlog", 1060, c["t4-5"].cy - 8, AZUL),
     // Un lanzamiento por incremento: la publicación es una Tarea del ciclo, y el
     // recuadro del pie solo dice en qué mes cae cada uno.
-    rotulo("R1 → R5, uno por incremento", c["t4-9"].x - 160, c["t4-9"].cy, MARRON),
+    rotulo("R1 → R5, uno por incremento", c["t4-7"].x - 160, c["t4-7"].cy, MARRON),
     hito("FIN", 270, ANILLO_CY + RY + 80),
   );
 

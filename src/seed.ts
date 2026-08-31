@@ -395,26 +395,6 @@ export const seed = (): Modelo => ({
         {
           id: "t4-5",
           icono: "milestone",
-          nombre: "Auditoría de cumplimiento de las especificaciones",
-          descripcion:
-            "Revisar que el incremento no rompa la Constitution.md de la Fase 1 ni se salga del plan.md acordado en la Fase 2.",
-          roles: [...ejecuta(GP), ...asiste(QA)],
-          entrada: [CONSTITUCION, SPECS],
-          salida: [],
-        },
-        {
-          id: "t4-6",
-          icono: "task",
-          nombre: "Elaboración y actualización del manual de operación",
-          descripcion:
-            "Traducir los cambios técnicos de los releases en guías claras para el caficultor.",
-          roles: [...ejecuta(ED), ...asiste(ISA)],
-          entrada: [],
-          salida: [guia("Manual de operación actualizado")],
-        },
-        {
-          id: "t4-7",
-          icono: "milestone",
           nombre: "Review del incremento con el caficultor",
           descripcion:
             "Demostrar el incremento en su terreno y recoger lo aprendido: es lo que reordena el backlog del siguiente.",
@@ -423,7 +403,7 @@ export const seed = (): Modelo => ({
           salida: [LECCIONES],
         },
         {
-          id: "t4-8",
+          id: "t4-6",
           icono: "activity",
           nombre: "Retrospectiva de proceso",
           descripcion:
@@ -433,7 +413,7 @@ export const seed = (): Modelo => ({
           salida: [AJUSTES_PROCESO],
         },
         {
-          id: "t4-9",
+          id: "t4-7",
           icono: "milestone",
           nombre: "Publicación del lanzamiento",
           descripcion:
@@ -441,6 +421,26 @@ export const seed = (): Modelo => ({
           roles: [...ejecuta(GP), ...asiste(QA)],
           entrada: [POLITICA_REL],
           salida: [NOTAS_RELEASE],
+        },
+        {
+          id: "t4-8",
+          icono: "task",
+          nombre: "Elaboración y actualización del manual de operación",
+          descripcion:
+            "Traducir los cambios técnicos del lanzamiento en guías claras para el caficultor.",
+          roles: [...ejecuta(ED), ...asiste(ISA)],
+          entrada: [NOTAS_RELEASE],
+          salida: [guia("Manual de operación actualizado")],
+        },
+        {
+          id: "t4-9",
+          icono: "milestone",
+          nombre: "Auditoría de cumplimiento de las especificaciones",
+          descripcion:
+            "Revisar que el incremento no rompa la Constitution.md de la Fase 1 ni se salga del plan.md acordado en la Fase 2.",
+          roles: [...ejecuta(GP), ...asiste(QA)],
+          entrada: [CONSTITUCION, SPECS],
+          salida: [],
         },
       ],
       entrada: [

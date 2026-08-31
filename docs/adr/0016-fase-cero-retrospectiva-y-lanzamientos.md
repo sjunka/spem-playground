@@ -35,11 +35,14 @@ backlog, el mapa de ruta y la política).
 
 ### Ciclo de crecimiento
 
-- **T4.8 Retrospectiva de proceso**, después del review: entrega *Ajustes al proceso del
+- **T4.6 Retrospectiva de proceso**, después del review: entrega *Ajustes al proceso del
   equipo*. El review mira el producto; la retrospectiva, la forma de trabajar.
-- **T4.9 Publicación del lanzamiento**, antes de la puerta: consume la política de la
-  **Fase 0** y entrega las *Notas del lanzamiento*. El plan deja de ser un recuadro
-  suelto: hay una **Tarea** que lo produce.
+- **T4.7 Publicación del lanzamiento**: consume la política de la **Fase 0** y entrega
+  las *Notas del lanzamiento*. El plan deja de ser un recuadro suelto: hay una **Tarea**
+  que lo produce.
+- El anillo se lee en el orden de los pasos del paper: **T4.4** despliegue, **T4.5**
+  review, **T4.6** retrospectiva, **T4.7** publicación, **T4.8** manual y **T4.9**
+  auditoría, y de ahí a la puerta.
 - **Seis releases**: **R0** cierra el arranque —no es un incremento— y **R1 a R5** son
   uno por incremento, en los meses 10, 14, 18, 22 y 26.
 
